@@ -1,0 +1,61 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Admin.master.cs" Inherits="Project.ADMIN.Admin" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I4P Administratie | Welkom</title>
+    <link rel="stylesheet" href="../CSS/foundation.css" />
+    <link rel="stylesheet" href="../CSS/app.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <div class="title-bar">
+        <span class="title-bar-title">ICT4Partipation - Administratie</span>
+        <span class="title-bar-right">
+            <asp:HyperLink ID="link_Questions" href="#Questions" runat="server">Vragen</asp:HyperLink>
+            --
+            <asp:HyperLink ID="link_Reviews" href="#Reviews" runat="server">Beoordelingen</asp:HyperLink></span>
+    </div>
+    <br />
+    <div class="row">
+        <div class="large-12 columns ">
+            <div class="secondary callout">
+                <h2>Welkom,
+        <asp:Label ID="lbl_Username" runat="server" Text="Gebruiker"></asp:Label>
+                </h2>
+            </div>
+            <br />
+        </div>
+    </div>
+
+    <div>
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>
+    </div>
+            <footer class="footer">
+                <div class="row">
+                    <div class="small-12 columns">
+                        <p class="slogan">Finger-lickin' good</p>
+                        <p class="links">
+                            <a href="#">Home</a>
+                            <a href="#">Blog</a>
+                            <a href="#">Pricing</a>
+                            <a href="#">About</a>
+                            <a href="#">Faq</a>
+                            <a href="#">Contact</a>
+                        </p>
+                        <p class="copywrite">Copywrite not copypwrite © 2015</p>
+                    </div>
+                </div>
+            </footer>
+    <script src="../JS/vendor/jquery.min.js"></script>
+    <script src="../JS/vendor/what-input.min.js"></script>
+    <script src="../JS/foundation.min.js"></script>
+    <script src="../JS/app.js"></script>
+</body>
+</html>

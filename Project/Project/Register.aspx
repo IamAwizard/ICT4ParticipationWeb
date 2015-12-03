@@ -18,7 +18,9 @@
             <asp:HyperLink ID="link_Register" href="Login.aspx" runat="server">Inloggen</asp:HyperLink></span>
     </div>
     <br />
-    
+    <div class="title-bar">
+          
+    </div>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/what-input.min.js"></script>
     <script src="js/foundation.min.js"></script>

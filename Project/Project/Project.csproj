@@ -66,17 +66,19 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CSS\app.css" />
-    <Content Include="CSS\foundation.css" />
-    <Content Include="CSS\foundation.min.css" />
+    <Content Include="admin\Admin.aspx" />
+    <Content Include="css\app.css" />
+    <Content Include="css\foundation.css" />
+    <Content Include="css\foundation.min.css" />
     <Content Include="index.html" />
-    <Content Include="JS\app.js" />
-    <Content Include="JS\foundation.js" />
-    <Content Include="JS\foundation.min.js" />
-    <Content Include="JS\vendor\jquery.min.js" />
-    <Content Include="JS\vendor\what-input.min.js" />
+    <Content Include="js\app.js" />
+    <Content Include="js\foundation.js" />
+    <Content Include="js\foundation.min.js" />
+    <Content Include="js\vendor\jquery.min.js" />
+    <Content Include="js\vendor\what-input.min.js" />
     <Content Include="packages.config" />
     <Content Include="Login.aspx" />
+    <Content Include="admin\Admin.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -89,6 +91,20 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="admin\Admin.Master.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Admin.Master.designer.cs">
+      <DependentUpon>Admin.Master</DependentUpon>
+    </Compile>
+    <Compile Include="admin\Admin.aspx.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="admin\Admin.aspx.designer.cs">
+      <DependentUpon>Admin.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -106,10 +122,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ADMIN\" />
-    <Folder Include="CLIENT\" />
-    <Folder Include="IMG\" />
-    <Folder Include="VOLUNTEER\" />
+    <Folder Include="client\" />
+    <Folder Include="img\" />
+    <Folder Include="volunteer\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
