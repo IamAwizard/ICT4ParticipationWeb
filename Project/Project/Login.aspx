@@ -30,9 +30,14 @@
                     <label for="tbox_Password">
                         Wachtwoord
           <asp:TextBox ID="tbox_Password" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
+                        <div data-alert class="alert-box info radius">
+  This is an info alert with a radius.
+  <a href="#" class="close">&times;</a>
+</div>
+
                     </label>
                     <p>
-                        <asp:Button ID="btn_Login" runat="server" Text="Inloggen" class="button expanded" />
+                        <asp:Button ID="btn_Login" runat="server" Text="Inloggen" class="button expanded" OnClick="btn_Login_Click" />
                     </p>
                     <p class="text-center">
                         <asp:HyperLink ID="link_ForgotPassword" runat="server">Wachtwoord vergeten?</asp:HyperLink>
