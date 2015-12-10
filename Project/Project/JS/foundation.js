@@ -7,25 +7,32 @@ var FOUNDATION_VERSION = '6.0.1';
 // Global Foundation object
 // This is attached to the window, or used as a module for AMD/Browserify
 var Foundation = {
-  version: FOUNDATION_VERSION,
+    version: FOUNDATION_VERSION,
 
-  /**
-   * Stores initialized plugins.
-   */
-  _plugins: {},
+    /**
+     * Stores initialized plugins.
+     */
+    _plugins: {},
 
-  /**
-   * Stores generated unique ids for plugin instances
-   */
-  _uuids: [],
-  /**
-   * Stores currently active plugins.
-   */
-  _activePlugins: {},
+    /**
+     * Stores generated unique ids for plugin instances
+     */
+    _uuids: [],
+    /**
+     * Stores currently active plugins.
+     */
+    _activePlugins: {},
 
-  /**
-   * Returns a boolean for RTL support
-   */
+    /**
+     * Returns a boolean for RTL support
+     */
+
+   
+  
+
+
+
+
   rtl: function(){
     return $('html').attr('dir') === 'rtl';
   },
@@ -7453,9 +7460,25 @@ Foundation.plugin(ResponsiveToggle, 'ResponsiveToggle');
 
     Foundation.unregisterPlugin(this);
   };
+
+
+  $('input[type="checkbox"]').click(function () {
+      if ($(this).attr("value") == "red") {
+          $(".red").toggle();
+      }
+      if ($(this).attr("value") == "green") {
+          $(".green").toggle();
+      }
+      if ($(this).attr("value") == "blue") {
+          $(".blue").toggle();
+      }
+  });
   /**
    * TODO utilize resize event trigger
    */
 
   Foundation.plugin(Tooltip, 'Tooltip');
 }(jQuery, window.document, window.Foundation);
+
+
+    }

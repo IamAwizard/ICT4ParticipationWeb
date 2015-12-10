@@ -130,13 +130,40 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// c_Uitschrijvingsdatum control.
+        /// rb_Volunteer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar c_Uitschrijvingsdatum;
+        protected global::System.Web.UI.WebControls.RadioButton rb_Volunteer;
+        
+        /// <summary>
+        /// lbl_Volunteer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Volunteer;
+        
+        /// <summary>
+        /// rb_Client control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rb_Client;
+        
+        /// <summary>
+        /// lbl_Client control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Client;
         
         /// <summary>
         /// btn_Register control.
@@ -146,5 +173,77 @@ namespace Project {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btn_Register;
+        
+        /// <summary>
+        /// dikkeLAMBORGINIFERRARIPENINI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dikkeLAMBORGINIFERRARIPENINI;
+        
+        /// <summary>
+        /// lbl_Hulpbehoevende control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Hulpbehoevende;
+        
+        /// <summary>
+        /// lbl_OVMogelijk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_OVMogelijk;
+        
+        /// <summary>
+        /// cb_OVMogelijk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cb_OVMogelijk;
+        
+        /// <summary>
+        /// dikkebmw control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dikkebmw;
+        
+        /// <summary>
+        /// lbl_Vrijwilliger control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Vrijwilliger;
+        
+        /// <summary>
+        /// lbl_BirthDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_BirthDate;
+        
+        /// <summary>
+        /// c_BirthDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar c_BirthDate;
     }
 }

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
-<div class="title-bar">
+    <div class="title-bar">
         <span class="title-bar-title">ICT4Partipation</span>
         <span class="title-bar-right">
             <asp:HyperLink ID="link_Register" href="Register.aspx" runat="server">Registreren</asp:HyperLink></span>
@@ -20,22 +20,21 @@
     <br />
     <div class="row">
         <div class="medium-6 medium-centered large-4 large-centered columns callout">
-            <form id="form1" runat="server">
+            <form id="FormLogin" runat="server">
                 <div class="row column log-in-form">
                     <h4 class="text-center">Log in met uw e-mailadres</h4>
                     <label for="tbox_Email">
                         E-mail
+                         </label>
           <asp:TextBox ID="tbox_Email" runat="server" placeholder="somebody@example.com"></asp:TextBox>
-                    </label>
+                   
                     <label for="tbox_Password">
                         Wachtwoord
+                        </label>
           <asp:TextBox ID="tbox_Password" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
-                        <div data-alert class="alert-box info radius">
-  This is an info alert with a radius.
-  <a href="#" class="close">&times;</a>
-</div>
 
-                    </label>
+
+                    
                     <p>
                         <asp:Button ID="btn_Login" runat="server" Text="Inloggen" class="button expanded" OnClick="btn_Login_Click" />
                     </p>
@@ -43,7 +42,11 @@
                         <asp:HyperLink ID="link_ForgotPassword" runat="server">Wachtwoord vergeten?</asp:HyperLink>
                     </p>
                 </div>
-
+                  <ul>
+                   
+           
+                      
+                   </ul>
             </form>
         </div>
     </div>
