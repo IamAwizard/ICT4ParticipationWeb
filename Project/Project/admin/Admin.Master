@@ -14,45 +14,68 @@
     </asp:ContentPlaceHolder>
 </head>
 <body>
-    <div class="title-bar">
-        <span class="title-bar-title">ICT4Partipation - Administratie</span>
-        <span class="title-bar-right">
-            <asp:HyperLink ID="link_Questions" href="#Questions" runat="server">Vragen</asp:HyperLink>
-            --
-            <asp:HyperLink ID="link_Reviews" href="#Reviews" runat="server">Beoordelingen</asp:HyperLink></span>
-    </div>
-    <br />
-    <div class="row">
-        <div class="large-12 columns ">
-            <div class="secondary callout">
-                <h2>Welkom,
-        <asp:Label ID="lbl_Username" runat="server" Text="Gebruiker"></asp:Label>
-                </h2>
+    <div data-sticky-container="">
+        <div class="sticky" data-sticky="" data-margin-top="0" style="width: 100%; z-index: 100">
+            <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+                <div class="title-bar-title">Menu</div>
             </div>
-            <br />
-        </div>
-    </div>
 
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-    </div>
-            <footer class="footer">
-                <div class="row">
-                    <div class="small-12 columns">
-                        <p class="slogan">Finger-lickin' good</p>
-                        <p class="links">
-                            <a href="#">Home</a>
-                            <a href="#">Blog</a>
-                            <a href="#">Pricing</a>
-                            <a href="#">About</a>
-                            <a href="#">Faq</a>
-                            <a href="#">Contact</a>
-                        </p>
-                        <p class="copywrite">Copywrite not copypwrite © 2015</p>
-                    </div>
+
+            <div class="top-bar" id="main-menu">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li class="menu-text">Site Title</li>
+                    </ul>
                 </div>
-            </footer>
+                <div class="top-bar-right">
+                    <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
+                        <li class="has-submenu">
+                            <a href="#">One</a>
+                            <ul class="submenu menu vertical" data-submenu>
+                                <li><a href="#">One</a></li>
+                                <li><a href="#">Two</a></li>
+                                <li><a href="#">Three</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Two</a></li>
+                        <li><a href="#">Three</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="large-12 column secondary callout">
+                    <h2>Welkom,
+        <asp:Label ID="lbl_Username" runat="server" Text="Gebruiker"></asp:Label>
+                    </h2>
+                </div>
+        </div>
+
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <footer class="footer">
+            <div class="row">
+                <div class="small-12 columns">
+                    <p class="slogan">Finger-lickin' good</p>
+                    <p class="links">
+                        <a href="#">Home</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">About</a>
+                        <a href="#">Faq</a>
+                        <a href="#">Contact</a>
+                    </p>
+                    <p class="copywrite">Copywrite not copypwrite © 2015</p>
+                </div>
+            </div>
+        </footer>
+    </div>
     <script src="../JS/vendor/jquery.min.js"></script>
     <script src="../JS/vendor/what-input.min.js"></script>
     <script src="../JS/foundation.min.js"></script>
