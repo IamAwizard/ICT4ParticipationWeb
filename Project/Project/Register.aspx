@@ -21,7 +21,7 @@
         </div>
 
         <br />
-        
+
         <div class="row">
             <div class="medium-6 medium-centered large-4 large-centered columns callout">
                 <asp:TextBox ID="tb_GebruikersNaam" runat="server" placeholder="GebruikersNaam"></asp:TextBox>
@@ -43,7 +43,7 @@
 
                 </ul>
 
-                
+
 
 
                 <asp:RadioButton ID="rb_Volunteer" runat="server" GroupName="typeklant" OnCheckedChanged="rb_Volunteer_CheckedChanged" AutoPostBack="true" />
@@ -55,8 +55,8 @@
             </div>
         </div>
         <div class="row" id="dikkeLAMBORGINIFERRARIPENINI" runat="server">
-        <div class="medium-6 medium-centered large-4 large-centered columns callout">
-         
+            <div class="medium-6 medium-centered large-4 large-centered columns callout">
+
                 <div class="text-center">
                     <asp:Label ID="lbl_Hulpbehoevende" runat="server" Text="Hulpbehoevende" CssClass="medium-text-center" Font-Size="X-Large" Font-Bold="true">
                     </asp:Label>
@@ -69,24 +69,31 @@
                 </div>
             </div>
         </div>
-       
-         <div class="row" id="dikkebmw" runat="server">
-        <div class="medium-6 medium-centered large-4 large-centered columns callout">
-         
+
+        <div class="row" id="dikkebmw" runat="server">
+            <div class="medium-6 medium-centered large-4 large-centered columns callout">
+
                 <div class="text-center">
-                <div class="medium-centered">
-                    <asp:Label ID="lbl_Vrijwilliger" runat="server" Text="Vrijwilliger" CssClass="medium-text-center" Font-Size="X-Large" Font-Bold="true">
-                    </asp:Label>
-                    <br />
-                    <br />
-                    <br />
-                    <asp:Label ID="lbl_BirthDate" runat="server"    Text="GeboorteDatum"  ></asp:Label>
+                    <div class="medium-centered">
+                        <asp:Label ID="lbl_Vrijwilliger" runat="server" Text="Vrijwilliger" CssClass="medium-text-center" Font-Size="X-Large" Font-Bold="true">
+                        </asp:Label>
+                        <br />
+                        <br />
+                        <br />
+                        <asp:Label ID="lbl_BirthDate" runat="server" Text="GeboorteDatum"></asp:Label>
                         <asp:Calendar ID="c_BirthDate" runat="server"></asp:Calendar>
-                  </div>
+                        <asp:FileUpload ID="FU_UploadFoto" runat="server" CssClass="button expanded"  />
+                            <asp:Button ID="btn_UploadFoto" runat="server" Text="Upload foto" Class="button expanded" OnClick="btn_UploadFoto_Click" />
+                            <br />
+                            <asp:Button ID="btn_UploadVOG" runat="server" Text="Upload VOG" Class="button expanded" />
+              
+
+
+                    </div>
                 </div>
             </div>
         </div>
-            
+
         <br />
         <script src="js/vendor/jquery.min.js"></script>
         <script src="js/vendor/what-input.min.js"></script>

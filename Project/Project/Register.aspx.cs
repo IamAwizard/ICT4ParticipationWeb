@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
+using System.IO;
+
 
 
 namespace Project
@@ -51,6 +53,11 @@ namespace Project
                 MaintainScrollPositionOnPostBack = true;
 
             }
+        }
+
+        protected void btn_UploadFoto_Click(object sender, EventArgs e)
+        {
+          
         }
     }
 }
