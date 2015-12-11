@@ -46,12 +46,11 @@
 
 
 
-                <asp:RadioButton ID="rb_Volunteer" runat="server" GroupName="typeklant" OnCheckedChanged="rb_Volunteer_CheckedChanged" AutoPostBack="true" />
+                <asp:RadioButton ID="rb_Volunteer" runat="server" GroupName="AccountType" OnCheckedChanged="rb_Volunteer_CheckedChanged" AutoPostBack="true" />
                 <asp:Label ID="lbl_Volunteer" runat="server" Text="Vrijwilliger"></asp:Label>
                 <br />
-                <asp:RadioButton ID="rb_Client" runat="server" GroupName="typeklant" AutoPostBack="true" OnCheckedChanged="rb_Client_CheckedChanged" />
+                <asp:RadioButton ID="rb_Client" runat="server" GroupName="AccountType" AutoPostBack="true" OnCheckedChanged="rb_Client_CheckedChanged" />
                 <asp:Label ID="lbl_Client" runat="server" Text="Hulpbehoevende"></asp:Label>
-                <asp:Button ID="btn_Register" runat="server" Text="Register" class="button expanded" />
             </div>
         </div>
         <div class="row" id="dikkeLAMBORGINIFERRARIPENINI" runat="server">
@@ -82,18 +81,22 @@
                         <br />
                         <asp:Label ID="lbl_BirthDate" runat="server" Text="GeboorteDatum"></asp:Label>
                         <asp:Calendar ID="c_BirthDate" runat="server"></asp:Calendar>
-                        <asp:FileUpload ID="FU_UploadFoto" runat="server" CssClass="button expanded"  />
-                            <asp:Button ID="btn_UploadFoto" runat="server" Text="Upload foto" Class="button expanded" OnClick="btn_UploadFoto_Click" />
-                            <br />
-                            <asp:Button ID="btn_UploadVOG" runat="server" Text="Upload VOG" Class="button expanded" />
-              
-
-
+                        <asp:Label ID="lbl_UploadFoto" runat="server" Text="Upload Foto"></asp:Label>
+                        <asp:FileUpload ID="FU_UploadFoto" runat="server" CssClass="button expanded" />
+                        <br />
+                        <asp:Label ID="lbl_UploadVog" runat="server" Text="Upload VOG"></asp:Label>
+                        <asp:FileUpload ID="FU_UploadVOG" runat="server" CssClass="button expanded" />
+                        
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+                            <div class="medium-6 medium-centered large-4 large-centered columns callout">
+                                <asp:Button ID="btn_Register" runat="server" Text="Register" class="button expanded" OnClick="btn_Register_Click" />
 
+                            </div>
+                        </div>
         <br />
         <script src="js/vendor/jquery.min.js"></script>
         <script src="js/vendor/what-input.min.js"></script>

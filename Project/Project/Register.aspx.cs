@@ -59,5 +59,94 @@ namespace Project
         {
           
         }
+
+        protected void btn_Register_Click(object sender, EventArgs e)
+        {
+            if (rb_Volunteer.Checked == true)
+
+            {
+                if (FU_UploadFoto.HasFile == false)
+                {
+                    string x;
+                    x = "alert(\"er is geen Foto ingevuld\");";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                    MaintainScrollPositionOnPostBack = true;
+                }
+                else if (FU_UploadVOG.HasFile == false)
+                {
+                    string x;
+                    x = "alert(\"er is geen VOG geupload \");";
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                    MaintainScrollPositionOnPostBack = true;
+
+                }
+            }
+
+            
+            else if (tb_Adres.Text == String.Empty)
+            {
+                string x;
+                x = "alert(\"er is geen adres ingevuld\");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (tb_Email.Text == String.Empty)
+            {
+                string x;
+
+                x = "alert(\"er is geen email ingevuld \");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (tb_GebruikersNaam.Text == String.Empty)
+            {
+                string x;
+
+                x = "alert(\"er is geen gebruikersnaam ingevoerd \");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (tb_Naam.Text == String.Empty)
+            {
+                string x;
+
+                x = "alert(\"er is geen naam ingevoerd \");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (tb_Telefoonnummer.Text == String.Empty)
+            {
+                string x;
+
+                x = "alert(\"er is geen telefoonnummer ingevoerd \");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (tb_Wachtwoord.Text == String.Empty)
+            {
+                string x;
+
+                x = "alert(\"er is geen wachtwoord ingevoerd \");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (tb_Woonplaats.Text == String.Empty)
+            {
+                string x;
+
+                x = "alert(\"er is geen Woonplaats ingevoerd\");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+            else if (rb_Client.Checked == false && rb_Client.Checked == false)
+            {
+                string x;
+
+                x = "alert(\"er is geen type account geselecteerd \");";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+            }
+
+        }
     }
 }

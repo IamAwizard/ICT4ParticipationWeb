@@ -166,15 +166,6 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Client;
         
         /// <summary>
-        /// btn_Register control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Register;
-        
-        /// <summary>
         /// dikkeLAMBORGINIFERRARIPENINI control.
         /// </summary>
         /// <remarks>
@@ -247,6 +238,15 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Calendar c_BirthDate;
         
         /// <summary>
+        /// lbl_UploadFoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_UploadFoto;
+        
+        /// <summary>
         /// FU_UploadFoto control.
         /// </summary>
         /// <remarks>
@@ -256,21 +256,30 @@ namespace Project {
         protected global::System.Web.UI.WebControls.FileUpload FU_UploadFoto;
         
         /// <summary>
-        /// btn_UploadFoto control.
+        /// lbl_UploadVog control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_UploadFoto;
+        protected global::System.Web.UI.WebControls.Label lbl_UploadVog;
         
         /// <summary>
-        /// btn_UploadVOG control.
+        /// FU_UploadVOG control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_UploadVOG;
+        protected global::System.Web.UI.WebControls.FileUpload FU_UploadVOG;
+        
+        /// <summary>
+        /// btn_Register control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Register;
     }
 }

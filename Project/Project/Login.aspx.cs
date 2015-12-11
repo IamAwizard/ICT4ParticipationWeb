@@ -22,6 +22,7 @@ namespace Project
                 string x;
                 x = "alert(\"er is geen email ingevuld\");";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
             }
             else if (tbox_Password.Text == String.Empty)
 
@@ -29,6 +30,8 @@ namespace Project
                 string x;
                 x = "alert(\"er is geen Wachtwoord ingevuld\");";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
+                MaintainScrollPositionOnPostBack = true;
+
             }
 
         }
