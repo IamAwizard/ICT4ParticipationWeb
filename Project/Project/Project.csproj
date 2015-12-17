@@ -66,8 +66,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\Admin.aspx" />
+    <Content Include="admin\Main.aspx" />
     <Content Include="Client.aspx" />
+    <Content Include="client\Main.aspx" />
     <Content Include="css\app.css" />
     <Content Include="css\foundation.css" />
     <Content Include="css\foundation.min.css" />
@@ -80,6 +81,7 @@
     <Content Include="packages.config" />
     <Content Include="Login.aspx" />
     <Content Include="admin\Admin.Master" />
+    <Content Include="client\Client.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -99,12 +101,12 @@
     <Compile Include="admin\Admin.Master.designer.cs">
       <DependentUpon>Admin.Master</DependentUpon>
     </Compile>
-    <Compile Include="admin\Admin.aspx.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="admin\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\Admin.aspx.designer.cs">
-      <DependentUpon>Admin.aspx</DependentUpon>
+    <Compile Include="admin\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Client.aspx.cs">
       <DependentUpon>Client.aspx</DependentUpon>
@@ -112,6 +114,20 @@
     </Compile>
     <Compile Include="Client.aspx.designer.cs">
       <DependentUpon>Client.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="client\Client.Master.cs">
+      <DependentUpon>Client.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="client\Client.Master.designer.cs">
+      <DependentUpon>Client.Master</DependentUpon>
+    </Compile>
+    <Compile Include="client\Main.aspx.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="client\Main.aspx.designer.cs">
+      <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">
@@ -130,7 +146,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="client\" />
     <Folder Include="img\" />
     <Folder Include="volunteer\" />
   </ItemGroup>
