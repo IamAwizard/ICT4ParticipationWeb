@@ -4,17 +4,29 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Volunteer mainpage</title>
+     <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I4P Administratie | Welkom</title>
+    <link rel="stylesheet" href="../CSS/foundation.css" />
+    <link rel="stylesheet" href="../CSS/app.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
+        <asp:ContentPlaceHolder ID="Body" runat="server">
+        <div class="large-8 column secondary callout">
+            <div class =" large-4 column secondary callout"
+            </div>
         </asp:ContentPlaceHolder>
     </div>
     </form>
+     <script src="../JS/vendor/jquery.min.js"></script>
+    <script src="../JS/vendor/what-input.min.js"></script>
+    <script src="../JS/foundation.min.js"></script>
+    <script src="../JS/app.js"></script>
 </body>
 </html>
