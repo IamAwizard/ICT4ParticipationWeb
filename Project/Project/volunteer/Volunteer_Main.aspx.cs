@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace Project.volunteer
 {
-    public partial class Volunteer : System.Web.UI.Page
+    public partial class Volunteer_Main : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {

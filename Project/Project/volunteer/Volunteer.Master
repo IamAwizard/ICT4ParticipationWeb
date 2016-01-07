@@ -8,7 +8,7 @@
      <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>I4P Administratie | Welkom</title>
+   
     <link rel="stylesheet" href="../CSS/foundation.css" />
     <link rel="stylesheet" href="../CSS/app.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -16,13 +16,66 @@
 </head>
 <body>
     <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="Body" runat="server">
-        <div class="large-8 column secondary callout">
-            <div class =" large-4 column secondary callout"
+    <div data-sticky-container="">
+        <div class="sticky" data-sticky="" data-margin-top="0" style="width: 100%; z-index: 100">
+            <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle></button>
+                <div class="title-bar-title">Menu</div>
             </div>
+
+
+            <div class="top-bar" id="main-menu">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu>
+                        <li class="menu-text">ICT 4 Participation</li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
+                        <li><a href="Main.aspx">Vragen</a></li>
+                        <li><a href="Afspraken.aspx">Afspraken</a></li>
+                        <li><a href="Beoordeling.aspx">Beoordelingen</a></li>
+                        <li><a href="Chats.aspx">Chats</a></li>
+                        <li><a href="#">Log uit</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="large-12 column secondary callout">
+                <h2>Welkom,
+        <asp:Label ID="lbl_Username" runat="server" Text="Gebruiker"></asp:Label>
+                </h2>
+            </div>
+        </div>
+      
+
+
+        <asp:ContentPlaceHolder ID="Body" runat="server">
+        
+
         </asp:ContentPlaceHolder>
-    </div>
+        <footer class="footer">
+            <div class="row">
+                <div class="small-12 columns">
+                    <p class="slogan">Finger-lickin' good</p>
+                    <p class="links">
+                        <a href="#">Home</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Pricing</a>
+                        <a href="#">About</a>
+                        <a href="#">Faq</a>
+                        <a href="#">Contact</a>
+                    </p>
+                    <p class="copywrite">Copywrite not copypwrite © 2015</p>
+                </div>
+            </div>
+        </footer>
+
+    </>
     </form>
      <script src="../JS/vendor/jquery.min.js"></script>
     <script src="../JS/vendor/what-input.min.js"></script>

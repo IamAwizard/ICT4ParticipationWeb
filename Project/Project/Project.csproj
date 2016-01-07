@@ -84,7 +84,6 @@
     <Content Include="Login.aspx" />
     <Content Include="admin\Admin.Master" />
     <Content Include="client\Client.Master" />
-    <Content Include="volunteer\Volunteer.aspx" />
     <Content Include="volunteer\Volunteer.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -95,6 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Register.aspx" />
+    <Content Include="volunteer\Volunteer_Main.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -166,17 +166,19 @@
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
     <Compile Include="User.cs" />
-    <Compile Include="volunteer\Volunteer.aspx.cs">
-      <DependentUpon>Volunteer.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="volunteer\Volunteer.aspx.designer.cs">
-      <DependentUpon>Volunteer.aspx</DependentUpon>
-    </Compile>
     <Compile Include="volunteer\Volunteer.Master.cs">
       <DependentUpon>Volunteer.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="volunteer\Volunteer.Master.designer.cs">
       <DependentUpon>Volunteer.Master</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Main.aspx.cs">
+      <DependentUpon>Volunteer_Main.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Main.aspx.designer.cs">
+      <DependentUpon>Volunteer_Main.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

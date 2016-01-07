@@ -31,6 +31,15 @@ namespace Project.volunteer {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
+        /// lbl_Username control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Username;
+        
+        /// <summary>
         /// Body control.
         /// </summary>
         /// <remarks>
