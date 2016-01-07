@@ -67,7 +67,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin\Main.aspx" />
-    <Content Include="Client.aspx" />
+    <Content Include="client\Afspraken.aspx" />
+    <Content Include="client\Beoordeling.aspx" />
+    <Content Include="client\Chats.aspx" />
     <Content Include="client\Main.aspx" />
     <Content Include="css\app.css" />
     <Content Include="css\foundation.css" />
@@ -108,12 +110,26 @@
     <Compile Include="admin\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Client.aspx.cs">
-      <DependentUpon>Client.aspx</DependentUpon>
+    <Compile Include="client\Afspraken.aspx.cs">
+      <DependentUpon>Afspraken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Client.aspx.designer.cs">
-      <DependentUpon>Client.aspx</DependentUpon>
+    <Compile Include="client\Afspraken.aspx.designer.cs">
+      <DependentUpon>Afspraken.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="client\Beoordeling.aspx.cs">
+      <DependentUpon>Beoordeling.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="client\Beoordeling.aspx.designer.cs">
+      <DependentUpon>Beoordeling.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="client\Chats.aspx.cs">
+      <DependentUpon>Chats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="client\Chats.aspx.designer.cs">
+      <DependentUpon>Chats.aspx</DependentUpon>
     </Compile>
     <Compile Include="client\Client.Master.cs">
       <DependentUpon>Client.Master</DependentUpon>

@@ -30,10 +30,10 @@
                 </div>
                 <div class="top-bar-right">
                     <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
-                        <li><a href="#">Vragen</a></li>
-                        <li><a href="#">Afspraken</a></li>
-                        <li><a href="#">Beoordelingen</a></li>
-                        <li><a href="#">Chats</a></li>
+                        <li><a href="Main.aspx">Vragen</a></li>
+                        <li><a href="Afspraken.aspx">Afspraken</a></li>
+                        <li><a href="Beoordeling.aspx">Beoordelingen</a></li>
+                        <li><a href="Chats.aspx">Chats</a></li>
                         <li><a href="#">Log uit</a></li>
                     </ul>
                 </div>
