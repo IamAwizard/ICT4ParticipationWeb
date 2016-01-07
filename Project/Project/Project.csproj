@@ -160,9 +160,11 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
+    <Compile Include="User.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
+    <Folder Include="objects\" />
     <Folder Include="volunteer\" />
   </ItemGroup>
   <PropertyGroup>
