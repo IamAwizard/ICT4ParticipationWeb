@@ -98,8 +98,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Account.cs" />
-    <Compile Include="Admin.cs" />
+    <Compile Include="objects\Account.cs" />
+    <Compile Include="objects\Admin.cs" />
     <Compile Include="admin\Admin.Master.cs">
       <DependentUpon>Admin.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -114,7 +114,9 @@
     <Compile Include="admin\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Client.cs" />
+    <Compile Include="objects\Availability.cs" />
+    <Compile Include="objects\Chat.cs" />
+    <Compile Include="objects\Client.cs" />
     <Compile Include="client\Afspraken.aspx.cs">
       <DependentUpon>Afspraken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -150,6 +152,7 @@
     <Compile Include="client\Main.aspx.designer.cs">
       <DependentUpon>Main.aspx</DependentUpon>
     </Compile>
+    <Compile Include="objects\Meeting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -158,6 +161,7 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="objects\Question.cs" />
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -165,7 +169,11 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="User.cs" />
+    <Compile Include="objects\Review.cs" />
+    <Compile Include="objects\Skill.cs" />
+    <Compile Include="objects\Transport.cs" />
+    <Compile Include="objects\User.cs" />
+    <Compile Include="objects\Volunteer.cs" />
     <Compile Include="volunteer\Volunteer.Master.cs">
       <DependentUpon>Volunteer.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -183,7 +191,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
-    <Folder Include="objects\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
