@@ -8,8 +8,9 @@ using System.Windows.Forms;
 using Oracle;
 using Oracle.DataAccess;
 using Oracle.DataAccess.Client;
+using Project;
 
-namespace ICT4Participation
+namespace Project
 {
     static class DatabaseHandler
     {
@@ -158,7 +159,7 @@ namespace ICT4Participation
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                 MessageBox.Show(ex.Message);
                 return null;
             }
 
