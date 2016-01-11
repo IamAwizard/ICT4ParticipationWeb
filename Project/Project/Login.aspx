@@ -19,19 +19,19 @@
     </div>
     <br />
     <div class="row">
-        <div class="medium-6 medium-centered large-4 large-centered columns callout">
+        <div class="large-4 large-centered columns callout">
             <form id="FormLogin" runat="server">
                 <div class="row column log-in-form">
                     <h4 class="text-center">Log in met uw e-mailadres</h4>
                     <label for="tbox_Email">
                         E-mail
                          </label>
-          <asp:TextBox ID="tbox_Email" runat="server" placeholder="somebody@example.com"></asp:TextBox>
+          <asp:TextBox ID="tbox_Email" runat="server" placeholder="somebody@example.com" required="required"></asp:TextBox>
                    
                     <label for="tbox_Password">
                         Wachtwoord
                         </label>
-          <asp:TextBox ID="tbox_Password" runat="server" placeholder="Password" TextMode="Password"></asp:TextBox>
+          <asp:TextBox ID="tbox_Password" runat="server" placeholder="Password" TextMode="Password" required="required"></asp:TextBox>
 
 
                     

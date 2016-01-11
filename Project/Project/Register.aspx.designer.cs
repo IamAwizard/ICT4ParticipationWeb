@@ -130,24 +130,6 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// rb_Volunteer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rb_Volunteer;
-        
-        /// <summary>
-        /// lbl_Volunteer control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Volunteer;
-        
-        /// <summary>
         /// rb_Client control.
         /// </summary>
         /// <remarks>
@@ -166,49 +148,31 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Client;
         
         /// <summary>
-        /// dikkeLAMBORGINIFERRARIPENINI control.
+        /// rb_Volunteer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dikkeLAMBORGINIFERRARIPENINI;
+        protected global::System.Web.UI.WebControls.RadioButton rb_Volunteer;
         
         /// <summary>
-        /// lbl_Hulpbehoevende control.
+        /// lbl_Volunteer control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Hulpbehoevende;
+        protected global::System.Web.UI.WebControls.Label lbl_Volunteer;
         
         /// <summary>
-        /// lbl_OVMogelijk control.
+        /// Register_Client control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_OVMogelijk;
-        
-        /// <summary>
-        /// cb_OVMogelijk control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox cb_OVMogelijk;
-        
-        /// <summary>
-        /// dikkebmw control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dikkebmw;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Register_Client;
         
         /// <summary>
         /// lbl_Vrijwilliger control.
@@ -274,12 +238,57 @@ namespace Project {
         protected global::System.Web.UI.WebControls.FileUpload FU_UploadVOG;
         
         /// <summary>
-        /// btn_Register control.
+        /// btn_Register_Client control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Register;
+        protected global::System.Web.UI.WebControls.Button btn_Register_Client;
+        
+        /// <summary>
+        /// Register_Volunteer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Register_Volunteer;
+        
+        /// <summary>
+        /// lbl_Hulpbehoevende control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_Hulpbehoevende;
+        
+        /// <summary>
+        /// lbl_OVMogelijk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbl_OVMogelijk;
+        
+        /// <summary>
+        /// cb_OVMogelijk control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cb_OVMogelijk;
+        
+        /// <summary>
+        /// btn_Register_Volunteer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btn_Register_Volunteer;
     }
 }

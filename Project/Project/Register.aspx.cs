@@ -15,44 +15,19 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            dikkebmw.Visible = false;
-            dikkeLAMBORGINIFERRARIPENINI.Visible = false;
-        }
+            //Register_Client.Visible = false;
+            //Register_Volunteer.Visible = false;
 
+        }
        
         protected void rb_Volunteer_CheckedChanged(object sender, EventArgs e)
         {
-            if(dikkebmw.Visible == true)
-            {
-                dikkebmw.Visible = false;
-                MaintainScrollPositionOnPostBack = true;
-            }
-            else
-            {
-                dikkebmw.Visible = true;
-                MaintainScrollPositionOnPostBack = true;
-
-            }
-
-
 
         }
 
         protected void rb_Client_CheckedChanged(object sender, EventArgs e)
         {
-            
-                 if (dikkeLAMBORGINIFERRARIPENINI.Visible == true)
-            {
-                dikkeLAMBORGINIFERRARIPENINI.Visible = false;
-                MaintainScrollPositionOnPostBack = true;
 
-            }
-            else
-            {
-                dikkeLAMBORGINIFERRARIPENINI.Visible = true;
-                MaintainScrollPositionOnPostBack = true;
-
-            }
         }
 
         protected void btn_UploadFoto_Click(object sender, EventArgs e)

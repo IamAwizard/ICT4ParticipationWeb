@@ -181,7 +181,7 @@
     <Compile Include="client\Client_Vragen.aspx.designer.cs">
       <DependentUpon>Client_Vragen.aspx</DependentUpon>
     </Compile>
-    <Compile Include="tier_logic\DatabaseHandler.cs" />
+    <Compile Include="tier_data\DatabaseHandler.cs" />
     <Compile Include="tier_logic\LoginHandler.cs" />
     <Compile Include="tier_objects\Meeting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -260,7 +260,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
-    <Folder Include="tier_data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
