@@ -10,60 +10,42 @@
 namespace Project {
     
     
-    public partial class Login {
+    public partial class Client_Beoordelingen {
         
         /// <summary>
-        /// link_Register control.
+        /// lbl_Beoordelingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_Register;
+        protected global::System.Web.UI.WebControls.Label lbl_Beoordelingen;
         
         /// <summary>
-        /// FormLogin control.
+        /// lbox_Beoordelingen control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormLogin;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Beoordelingen;
         
         /// <summary>
-        /// tbox_Email control.
+        /// btn_LoadBeoordeling control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Email;
+        protected global::System.Web.UI.WebControls.Button btn_LoadBeoordeling;
         
         /// <summary>
-        /// tbox_Password control.
+        /// tbox_Beoordeling control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Password;
-        
-        /// <summary>
-        /// btn_Login control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Login;
-        
-        /// <summary>
-        /// link_ForgotPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_ForgotPassword;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Beoordeling;
     }
 }

@@ -10,60 +10,69 @@
 namespace Project {
     
     
-    public partial class Login {
+    public partial class Client_Vragen {
         
         /// <summary>
-        /// link_Register control.
+        /// lbl_Questions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_Register;
+        protected global::System.Web.UI.WebControls.Label lbl_Questions;
         
         /// <summary>
-        /// FormLogin control.
+        /// lbox_Questions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormLogin;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Questions;
         
         /// <summary>
-        /// tbox_Email control.
+        /// lbl_AddQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Email;
+        protected global::System.Web.UI.WebControls.Label lbl_AddQuestion;
         
         /// <summary>
-        /// tbox_Password control.
+        /// tbox_AddQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Password;
+        protected global::System.Web.UI.WebControls.TextBox tbox_AddQuestion;
         
         /// <summary>
-        /// btn_Login control.
+        /// btn_AddQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Login;
+        protected global::System.Web.UI.WebControls.Button btn_AddQuestion;
         
         /// <summary>
-        /// link_ForgotPassword control.
+        /// btn_LoadQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_ForgotPassword;
+        protected global::System.Web.UI.WebControls.Button btn_LoadQuestion;
+        
+        /// <summary>
+        /// tbox_Question control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbox_Question;
     }
 }

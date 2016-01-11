@@ -33,6 +33,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,15 +69,17 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="admin\Main.aspx" />
-    <Content Include="client\Afspraken.aspx" />
-    <Content Include="client\Beoordeling.aspx" />
-    <Content Include="client\Chats.aspx" />
-    <Content Include="client\Main.aspx" />
+    <Content Include="admin\Admin_Main.aspx" />
+    <Content Include="client\Client_Afspraken.aspx" />
+    <Content Include="client\Client_Beoordelingen.aspx" />
+    <Content Include="client\Client_Chats.aspx" />
+    <Content Include="client\Client_Vragen.aspx" />
+    <Content Include="client\Client_VraagDetails.aspx" />
     <Content Include="css\app.css" />
     <Content Include="css\foundation.css" />
     <Content Include="css\foundation.min.css" />
-    <Content Include="index.html" />
+    <Content Include="aboutfoundation.html" />
+    <Content Include="Default.aspx" />
     <Content Include="js\app.js" />
     <Content Include="js\foundation.js" />
     <Content Include="js\foundation.min.js" />
@@ -84,9 +87,9 @@
     <Content Include="js\vendor\what-input.min.js" />
     <Content Include="packages.config" />
     <Content Include="Login.aspx" />
-    <Content Include="admin\Admin.Master" />
-    <Content Include="client\Client.Master" />
-    <Content Include="volunteer\Volunteer.Master" />
+    <Content Include="admin\Admin_Master.Master" />
+    <Content Include="client\Client_Master.Master" />
+    <Content Include="volunteer\Volunteer_Master.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -96,67 +99,91 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Register.aspx" />
-    <Content Include="volunteer\Volunteer_Main.aspx" />
+    <Content Include="volunteer\Volunteer_Vragen.aspx" />
+    <Content Include="volunteer\Volunteer_Afspraken.aspx" />
+    <Content Include="volunteer\Volunteer_Beoordelingen.aspx" />
+    <Content Include="volunteer\Volunteer_Chats.aspx" />
+    <Content Include="volunteer\Volunteer_Profiel.aspx" />
+    <Content Include="volunteer\Volunteer_VraagDetails.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="objects\Account.cs" />
-    <Compile Include="objects\Admin.cs" />
-    <Compile Include="admin\Admin.Master.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
+    <Compile Include="client\Client_VraagDetails.aspx.cs">
+      <DependentUpon>Client_VraagDetails.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\Admin.Master.designer.cs">
-      <DependentUpon>Admin.Master</DependentUpon>
+    <Compile Include="client\Client_VraagDetails.aspx.designer.cs">
+      <DependentUpon>Client_VraagDetails.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin\Main.aspx.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="admin\Main.aspx.designer.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
-    <Compile Include="objects\Availability.cs" />
-    <Compile Include="objects\Chat.cs" />
-    <Compile Include="objects\Client.cs" />
-    <Compile Include="client\Afspraken.aspx.cs">
-      <DependentUpon>Afspraken.aspx</DependentUpon>
+    <Compile Include="tier_logic\AccountHandler.cs" />
+    <Compile Include="tier_logic\AdminHandler.cs" />
+    <Compile Include="tier_logic\ChatHandler.cs" />
+    <Compile Include="tier_logic\Chats.cs" />
+    <Compile Include="tier_logic\ClientHandler.cs" />
+    <Compile Include="tier_objects\Account.cs" />
+    <Compile Include="tier_objects\Admin.cs" />
+    <Compile Include="admin\Admin_Master.Master.cs">
+      <DependentUpon>Admin_Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="client\Afspraken.aspx.designer.cs">
-      <DependentUpon>Afspraken.aspx</DependentUpon>
+    <Compile Include="admin\Admin_Master.Master.designer.cs">
+      <DependentUpon>Admin_Master.Master</DependentUpon>
     </Compile>
-    <Compile Include="client\Beoordeling.aspx.cs">
-      <DependentUpon>Beoordeling.aspx</DependentUpon>
+    <Compile Include="admin\Admin_Main.aspx.cs">
+      <DependentUpon>Admin_Main.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="client\Beoordeling.aspx.designer.cs">
-      <DependentUpon>Beoordeling.aspx</DependentUpon>
+    <Compile Include="admin\Admin_Main.aspx.designer.cs">
+      <DependentUpon>Admin_Main.aspx</DependentUpon>
     </Compile>
-    <Compile Include="client\Chats.aspx.cs">
-      <DependentUpon>Chats.aspx</DependentUpon>
+    <Compile Include="tier_objects\Availability.cs" />
+    <Compile Include="tier_objects\Chat.cs" />
+    <Compile Include="tier_objects\Client.cs" />
+    <Compile Include="client\Client_Afspraken.aspx.cs">
+      <DependentUpon>Client_Afspraken.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="client\Chats.aspx.designer.cs">
-      <DependentUpon>Chats.aspx</DependentUpon>
+    <Compile Include="client\Client_Afspraken.aspx.designer.cs">
+      <DependentUpon>Client_Afspraken.aspx</DependentUpon>
     </Compile>
-    <Compile Include="client\Client.Master.cs">
-      <DependentUpon>Client.Master</DependentUpon>
+    <Compile Include="client\Client_Beoordelingen.aspx.cs">
+      <DependentUpon>Client_Beoordelingen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="client\Client.Master.designer.cs">
-      <DependentUpon>Client.Master</DependentUpon>
+    <Compile Include="client\Client_Beoordelingen.aspx.designer.cs">
+      <DependentUpon>Client_Beoordelingen.aspx</DependentUpon>
     </Compile>
-    <Compile Include="client\Main.aspx.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
+    <Compile Include="client\Client_Chats.aspx.cs">
+      <DependentUpon>Client_Chats.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="client\Main.aspx.designer.cs">
-      <DependentUpon>Main.aspx</DependentUpon>
+    <Compile Include="client\Client_Chats.aspx.designer.cs">
+      <DependentUpon>Client_Chats.aspx</DependentUpon>
     </Compile>
-    <Compile Include="objects\DatabaseHandler.cs" />
-    <Compile Include="objects\Meeting.cs" />
-    <Compile Include="objects\UserCache.cs" />
+    <Compile Include="client\Client_Master.Master.cs">
+      <DependentUpon>Client_Master.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="client\Client_Master.Master.designer.cs">
+      <DependentUpon>Client_Master.Master</DependentUpon>
+    </Compile>
+    <Compile Include="client\Client_Vragen.aspx.cs">
+      <DependentUpon>Client_Vragen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="client\Client_Vragen.aspx.designer.cs">
+      <DependentUpon>Client_Vragen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="tier_logic\DatabaseHandler.cs" />
+    <Compile Include="tier_logic\LoginHandler.cs" />
+    <Compile Include="tier_objects\Meeting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
@@ -165,7 +192,8 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="objects\Question.cs" />
+    <Compile Include="tier_objects\Question.cs" />
+    <Compile Include="tier_logic\QuestionHandler.cs" />
     <Compile Include="Register.aspx.cs">
       <DependentUpon>Register.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -173,28 +201,66 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="objects\Review.cs" />
-    <Compile Include="objects\Skill.cs" />
-    <Compile Include="objects\Transport.cs" />
-    <Compile Include="objects\User.cs" />
-    <Compile Include="objects\Volunteer.cs" />
-    <Compile Include="volunteer\Volunteer.Master.cs">
-      <DependentUpon>Volunteer.Master</DependentUpon>
+    <Compile Include="tier_objects\Review.cs" />
+    <Compile Include="tier_objects\Skill.cs" />
+    <Compile Include="tier_objects\Transport.cs" />
+    <Compile Include="tier_objects\User.cs" />
+    <Compile Include="tier_objects\Volunteer.cs" />
+    <Compile Include="tier_logic\ReviewHandler.cs" />
+    <Compile Include="tier_logic\VolunteerHandler.cs" />
+    <Compile Include="volunteer\Volunteer_Master.Master.cs">
+      <DependentUpon>Volunteer_Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="volunteer\Volunteer.Master.designer.cs">
-      <DependentUpon>Volunteer.Master</DependentUpon>
+    <Compile Include="volunteer\Volunteer_Master.Master.designer.cs">
+      <DependentUpon>Volunteer_Master.Master</DependentUpon>
     </Compile>
-    <Compile Include="volunteer\Volunteer_Main.aspx.cs">
-      <DependentUpon>Volunteer_Main.aspx</DependentUpon>
+    <Compile Include="volunteer\Volunteer_Vragen.aspx.cs">
+      <DependentUpon>Volunteer_Vragen.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="volunteer\Volunteer_Main.aspx.designer.cs">
-      <DependentUpon>Volunteer_Main.aspx</DependentUpon>
+    <Compile Include="volunteer\Volunteer_Vragen.aspx.designer.cs">
+      <DependentUpon>Volunteer_Vragen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Afspraken.aspx.cs">
+      <DependentUpon>Volunteer_Afspraken.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Afspraken.aspx.designer.cs">
+      <DependentUpon>Volunteer_Afspraken.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Beoordelingen.aspx.cs">
+      <DependentUpon>Volunteer_Beoordelingen.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Beoordelingen.aspx.designer.cs">
+      <DependentUpon>Volunteer_Beoordelingen.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Chats.aspx.cs">
+      <DependentUpon>Volunteer_Chats.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Chats.aspx.designer.cs">
+      <DependentUpon>Volunteer_Chats.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Profiel.aspx.cs">
+      <DependentUpon>Volunteer_Profiel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_Profiel.aspx.designer.cs">
+      <DependentUpon>Volunteer_Profiel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_VraagDetails.aspx.cs">
+      <DependentUpon>Volunteer_VraagDetails.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="volunteer\Volunteer_VraagDetails.aspx.designer.cs">
+      <DependentUpon>Volunteer_VraagDetails.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
+    <Folder Include="tier_data\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

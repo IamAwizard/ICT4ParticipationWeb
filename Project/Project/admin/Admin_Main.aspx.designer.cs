@@ -10,60 +10,60 @@
 namespace Project {
     
     
-    public partial class Login {
+    public partial class Admin_Main {
         
         /// <summary>
-        /// link_Register control.
+        /// lbl_Questions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_Register;
+        protected global::System.Web.UI.WebControls.Label lbl_Questions;
         
         /// <summary>
-        /// FormLogin control.
+        /// lbox_Questions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormLogin;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Questions;
         
         /// <summary>
-        /// tbox_Email control.
+        /// btn_DeleteQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Email;
+        protected global::System.Web.UI.WebControls.Button btn_DeleteQuestion;
         
         /// <summary>
-        /// tbox_Password control.
+        /// lbl_Reviews control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Password;
+        protected global::System.Web.UI.WebControls.Label lbl_Reviews;
         
         /// <summary>
-        /// btn_Login control.
+        /// lbox_Reviews control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Login;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Reviews;
         
         /// <summary>
-        /// link_ForgotPassword control.
+        /// btn_DeleteReview control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_ForgotPassword;
+        protected global::System.Web.UI.WebControls.Button btn_DeleteReview;
     }
 }

@@ -10,60 +10,51 @@
 namespace Project {
     
     
-    public partial class Login {
+    public partial class Client_Chats {
         
         /// <summary>
-        /// link_Register control.
+        /// TextBox1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_Register;
+        protected global::System.Web.UI.WebControls.TextBox TextBox1;
         
         /// <summary>
-        /// FormLogin control.
+        /// lbl_chatbox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm FormLogin;
+        protected global::System.Web.UI.WebControls.Label lbl_chatbox;
         
         /// <summary>
-        /// tbox_Email control.
+        /// lbox_chat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Email;
+        protected global::System.Web.UI.WebControls.ListBox lbox_chat;
         
         /// <summary>
-        /// tbox_Password control.
+        /// tbox_Bericht control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Password;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Bericht;
         
         /// <summary>
-        /// btn_Login control.
+        /// btn_Loadbericht control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Login;
-        
-        /// <summary>
-        /// link_ForgotPassword control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink link_ForgotPassword;
+        protected global::System.Web.UI.WebControls.Button btn_Loadbericht;
     }
 }
