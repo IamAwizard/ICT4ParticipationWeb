@@ -18,5 +18,10 @@ namespace Project
         }
         public int ClientID { get; set; }
         public string OVpossible { get; set; }
+        public DateTime DateofBirth { get; set; }
+        public string City { get; set; }
+        public string Email { get; set; }
+        public string Gender { get; set; }
+        public string Password { get; set; }
     }
 }

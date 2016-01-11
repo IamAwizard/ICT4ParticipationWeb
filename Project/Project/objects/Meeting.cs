@@ -7,6 +7,8 @@ namespace Project
 {
     public class Meeting
     {
+        private DateTime dateTime;
+
         public Meeting(DateTime date, string location, Client client, Volunteer volunteer)
         {
             this.Date = date;
@@ -23,6 +25,15 @@ namespace Project
             this.Client = client;
             this.Volunteer = volunteer;
         }
+
+        public Meeting(Client client, Volunteer volunteer, DateTime dateTime, string location)
+        {
+            Client = client;
+            Volunteer = volunteer;
+            this.dateTime = dateTime;
+            Location = location;
+        }
+
         public int ID { get; set; }
         public DateTime Date { get; set; }
         public string Location { get; set; }

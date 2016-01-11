@@ -19,7 +19,7 @@ namespace Project
             this.Comments = comments;
         }
 
-        public Review(int id, int rating, string comments, decimal volunteerid, decimal clientid)
+        public Review(int id, int rating, string comments, int volunteerid, int clientid)
         {
             this.ID = id;
             this.Rating = rating;
@@ -27,11 +27,13 @@ namespace Project
             this.ClientID = clientid;
             this.VolunteerID = volunteerid;
         }
+
+
         public int ID { get; set; }
         public int Rating { get; set; }
         public string Comments { get; set; }
-        public decimal VolunteerID { get; set; }
-        public decimal ClientID { get; set; }
+        public int VolunteerID { get; set; }
+        public int ClientID { get; set; }
         
         
     }

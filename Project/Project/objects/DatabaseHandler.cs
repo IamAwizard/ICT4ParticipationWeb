@@ -101,140 +101,147 @@ namespace Project
             }
         }
 
-        public static List<Question> GetAllQuestions()
-        {
-            List<Question> questionlist = new List<Question>();
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT H.ID, H.OMSCHRIJVING, H.LOCATIE , H.REISTIJD, H.STARTDATUM, H.EINDDATUM, H.URGENT, H.AANTALVRIJWILLIGERS, H.VERVOERTYPE, TVAARDIGHEID.ID as vaardigheidID, TVRIJWILLIGER.ID as vrijwilligerID FROM THULPVRAAG H, TVAARDIGHEID, TVRIJWILLIGER, THULPVRAAG_VAARDIGHEID, THULPVRAAG_VRIJWILLIGER WHERE (H.ID = THULPVRAAG_VRIJWILLIGER.hulpvraagID AND THULPVRAAG_VRIJWILLIGER.vrijwilligerid = TVRIJWILLIGER.id) AND (H.ID = THULPVRAAG_VAARDIGHEID.hulpvraagID AND THULPVRAAG_VAARDIGHEID.vaardigheidID = TVAARDIGHEID.id)"; // QUERY
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-                Disconnect();
-                return null;
-            }
-
-            try
-            {
-                while (dr.Read())
-                {
-                    // Read from DB
-                    int hulpvraagid = dr.GetInt32(0);
-                    var omschrijving = dr.GetInt32(1);
-                    var locatie = SafeReadString(dr, 2);
-                    var reistijd = SafeReadString(dr, 3);
-                    DateTime startdatum = dr.GetDateTime(4);
-                    DateTime einddatum = dr.GetDateTime(5);
-                    var urgentie = SafeReadString(dr, 6);
-                    int aantalvrijwilligers = SafeReadInt(dr, 7);
-                    int vervoertype = SafeReadInt(dr, 8);
-                    int vaardigheidid = SafeReadInt(dr, 9);
-                    int vrijwilligerid = SafeReadInt(dr, (10));
-
-                    //Question toadd;
-                    //toadd = new Question(null, auteur, locatie, vervoer, afstand, bijzonderheid, vraag, datum, opgelost);
-                    //toadd.ID = hulpvraagid;
-                    //toadd.VolunteerID = vrijwilligerid;
-                    //questionlist.Add(toadd);
-                }
-                foreach (Question q in questionlist)
-                {
-                    q.Client = (Client)GetUser(q.Auteur);
-                }
-
-                foreach (Question q in questionlist)
-                {
-                    if (q.VolunteerID != -1)
-                    {
-                        q.Volunteer = (Volunteer)GetUser(q.VolunteerID);
-                    }
-                }
-                return questionlist;
-            }
-            catch (Exception ex)
-            {
-                 MessageBox.Show(ex.Message);
-                return null;
-            }
-
-        }
-
-        public static User GetUser(int ids)
-        {
-            User toadd = null;
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT USERID, NAAM, GEBOORTEDATUM, GESLACHT, WOONPLAATS, ADRES, EMAIL, WACHTWOORD, TYPE FROM TUSER WHERE USERID = " + ids; // QUERY
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-                Disconnect();
-                return null;
-            }
-
-            try
-            {
-                while (dr.Read())
-                {
-                    // Read from DB
-                    var id = dr.GetInt32(0);
-                    var name = dr.GetString(1);
-                    var dateOfBirth = dr.GetDateTime(2);
-                    var gender = dr.GetString(3);
-                    var city = dr.GetString(4);
-                    var adress = dr.GetString(5);
-                    var email = dr.GetString(6);
-                    var password = dr.GetString(7);
-
-                    var type = dr.GetString(8);
+        // KLOPT NIET
 
 
-                    switch (type)
-                    {
-                        case "CLIENT":
-                            Client newClient = new Client(name, dateOfBirth, gender, city, adress, email, password);
-                            toadd = newClient;
-                            toadd.UserID = id;
-                            break;
-                        case "VOLUNTEER":
-                            toadd = null;
-                            Volunteer newUser = new Volunteer(name, dateOfBirth, gender, city, adress, email, password, false, "Niet Opgegeven", "ONBEKEND", "ONBEKEND");
-                            toadd = newUser;
-                            toadd.UserID = id;
-                            break;
-                        case "ADMIN":
-                            Admin newAdmin = new Admin(name, dateOfBirth, gender, city, adress, email, password);
-                            toadd = newAdmin;
-                            toadd.UserID = id;
-                            break;
-                        default:
-                            toadd = null;
-                            break;
-                    }
+        //public static List<Question> GetAllQuestions()
+        //{
+        //    List<Question> questionlist = new List<Question>();
+        //    try
+        //    {
+        //        Connect();
+        //        cmd = new OracleCommand();
+        //        cmd.Connection = con;
+        //        cmd.CommandText = "SELECT H.ID, H.OMSCHRIJVING, H.LOCATIE , H.REISTIJD, H.STARTDATUM, H.EINDDATUM, H.URGENT, H.AANTALVRIJWILLIGERS, H.VERVOERTYPE, TVAARDIGHEID.ID as vaardigheidID, TVRIJWILLIGER.ID as vrijwilligerID FROM THULPVRAAG H, TVAARDIGHEID, TVRIJWILLIGER, THULPVRAAG_VAARDIGHEID, THULPVRAAG_VRIJWILLIGER WHERE (H.ID = THULPVRAAG_VRIJWILLIGER.hulpvraagID AND THULPVRAAG_VRIJWILLIGER.vrijwilligerid = TVRIJWILLIGER.id) AND (H.ID = THULPVRAAG_VAARDIGHEID.hulpvraagID AND THULPVRAAG_VAARDIGHEID.vaardigheidID = TVAARDIGHEID.id)"; // QUERY
+        //        cmd.CommandType = CommandType.Text;
+        //        dr = cmd.ExecuteReader();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.ToString());
+        //        Disconnect();
+        //        return null;
+        //    }
 
-                }
-                Disconnect();
-                return toadd;
-            }
-            catch (InvalidCastException ex)
-            {
-                Disconnect();
-                MessageBox.Show(ex.ToString());
-                return null;
-            }
-        }
+        //    try
+        //    {
+        //        while (dr.Read())
+        //        {
+        //            // Read from DB
+        //            int hulpvraagid = dr.GetInt32(0);
+        //            var omschrijving = dr.GetInt32(1);
+        //            var locatie = SafeReadString(dr, 2);
+        //            var reistijd = SafeReadString(dr, 3);
+        //            DateTime startdatum = dr.GetDateTime(4);
+        //            DateTime einddatum = dr.GetDateTime(5);
+        //            var urgentie = SafeReadString(dr, 6);
+        //            int aantalvrijwilligers = SafeReadInt(dr, 7);
+        //            int vervoertype = SafeReadInt(dr, 8);
+        //            int vaardigheidid = SafeReadInt(dr, 9);
+        //            int vrijwilligerid = SafeReadInt(dr, (10));
+
+        //            //Question toadd;
+        //            //toadd = new Question(null, auteur, locatie, vervoer, afstand, bijzonderheid, vraag, datum, opgelost);
+        //            //toadd.ID = hulpvraagid;
+        //            //toadd.VolunteerID = vrijwilligerid;
+        //            //questionlist.Add(toadd);
+        //        }
+        //        foreach (Question q in questionlist)
+        //        {
+                    
+        //            q.Client = (Client)GetUser(q.Auteur);
+        //        }
+
+        //        foreach (Question q in questionlist)
+        //        {
+        //            if (q. != -1)
+        //            {
+        //                q.Volunteer = (Volunteer)GetUser(q.VolunteerID);
+        //            }
+        //        }
+        //        return questionlist;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //         MessageBox.Show(ex.Message);
+        //        return null;
+        //    }
+
+        //}
+
+
+            // MOET OPNIEUW GEMAAKT WORDEN
+
+        //public static User GetUser(int ids)
+        //{
+        //    User toadd = null;
+        //    try
+        //    {
+        //        Connect();
+        //        cmd = new OracleCommand();
+        //        cmd.Connection = con;
+        //        cmd.CommandText = "SELECT USERID, NAAM, GEBOORTEDATUM, GESLACHT, WOONPLAATS, ADRES, EMAIL, WACHTWOORD, TYPE FROM TUSER WHERE USERID = " + ids; // QUERY
+        //        cmd.CommandType = CommandType.Text;
+        //        dr = cmd.ExecuteReader();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        MessageBox.Show(e.ToString());
+        //        Disconnect();
+        //        return null;
+        //    }
+
+        //    try
+        //    {
+        //        while (dr.Read())
+        //        {
+        //            // Read from DB
+        //            var id = dr.GetInt32(0);
+        //            var name = dr.GetString(1);
+        //            var dateOfBirth = dr.GetDateTime(2);
+        //            var gender = dr.GetString(3);
+        //            var city = dr.GetString(4);
+        //            var adress = dr.GetString(5);
+        //            var email = dr.GetString(6);
+        //            var password = dr.GetString(7);
+
+        //            var type = dr.GetString(8);
+
+
+        //            switch (type)
+        //            {
+        //                case "CLIENT":
+        //                    Client newClient = new Client(name, dateOfBirth, gender, city, adress, email, password);
+        //                    toadd = newClient;
+        //                    toadd.UserID = id;
+        //                    break;
+        //                case "VOLUNTEER":
+        //                    toadd = null;
+        //                    Volunteer newUser = new Volunteer(name, dateOfBirth, gender, city, adress, email, password, false, "Niet Opgegeven", "ONBEKEND", "ONBEKEND");
+        //                    toadd = newUser;
+        //                    toadd.UserID = id;
+        //                    break;
+        //                case "ADMIN":
+        //                    Admin newAdmin = new Admin(name, dateOfBirth, gender, city, adress, email, password);
+        //                    toadd = newAdmin;
+        //                    toadd.UserID = id;
+        //                    break;
+        //                default:
+        //                    toadd = null;
+        //                    break;
+        //            }
+
+        //        }
+        //        Disconnect();
+        //        return toadd;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Disconnect();
+        //        MessageBox.Show(ex.ToString());
+        //        return null;
+        //    }
+        //}
 
         static User GetUserNoConnect(int ids)
         {
@@ -396,45 +403,45 @@ namespace Project
             }
         }
 
-        public static void AddUser(User newuser)
-        {
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                    "Insert into TUSER(NAAM, GEBOORTEDATUM, GESLACHT, WOONPLAATS, ADRES, EMAIL, WACHTWOORD, TYPE) VALUES (:NewNAAM, :NewGEBOORTEDATUM, :NewGESLACHT, :NewWOONPLAATS, :NewADRES, :NewEMAIL, :NewWACHTWOORD, :NewTYPE)";
+        //MOET HELEMAAL OPNIEUW GEMAAKT WORDEN
 
-                cmd.Parameters.Add("NewNAAM", OracleDbType.Varchar2).Value = newuser.Name;
-                cmd.Parameters.Add("NewGEBOORTEDATUM", OracleDbType.Date).Value = newuser.DateOfBirth;
-                cmd.Parameters.Add("NewGESLACHT", OracleDbType.Varchar2).Value = newuser.Gender; ;
-                cmd.Parameters.Add("NewWOONPLAATS", OracleDbType.Varchar2).Value = newuser.City; ;
-                cmd.Parameters.Add("NewADRES", OracleDbType.Varchar2).Value = newuser.Adress; ;
-                cmd.Parameters.Add("NewEMAIL", OracleDbType.Varchar2).Value = newuser.Email; ;
-                cmd.Parameters.Add("NewWACHTWOORD", OracleDbType.Varchar2).Value = newuser.Password;
-                if (newuser is Client)
-                    cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "CLIENT";
-                if (newuser is Volunteer)
-                    cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "VOLUNTEER";
-                if (newuser is Admin)
-                    cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "ADMIN";
-                cmd.ExecuteNonQuery();
+        //public static void AddUser(User newuser)
+        //{
+        //    try
+        //    {
+        //        Connect();
+        //        cmd = new OracleCommand();
+        //        cmd.Connection = con;
+        //        cmd.CommandText =
+        //            "Insert into TUSER(NAAM, WOONPLAATS, ADRES, EMAIL, WACHTWOORD, TYPE) VALUES (:NewNAAM, :NewWOONPLAATS, :NewADRES, :NewEMAIL, :NewWACHTWOORD, :NewTYPE)";
 
-                if(newuser is Volunteer)
-                {
-                    ExtendVolunteer(GetUserID(newuser.Email));
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
+        //        cmd.Parameters.Add("NewNAAM", OracleDbType.Varchar2).Value = newuser.Name;
+        //        cmd.Parameters.Add("NewWOONPLAATS", OracleDbType.Varchar2).Value = newuser.Location; 
+        //        cmd.Parameters.Add("NewADRES", OracleDbType.Varchar2).Value = newuser.Adress; 
+
+        //        cmd.Parameters.Add("NewWACHTWOORD", OracleDbType.Varchar2).Value = newuser.Password;
+        //        if (newuser is Client)
+        //            cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "CLIENT";
+        //        if (newuser is Volunteer)
+        //            cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "VOLUNTEER";
+        //        if (newuser is Admin)
+        //            cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "ADMIN";
+        //        cmd.ExecuteNonQuery();
+
+        //        if(newuser is Volunteer)
+        //        {
+        //            ExtendVolunteer(GetUserID(newuser.Email));
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        Disconnect();
+        //    }
+        //}
 
         public static void AddAvatar()
         {
@@ -451,14 +458,14 @@ namespace Project
                 cmd.CommandText =
                     "Insert into THULPVRAAG(OMSCHRIJVING, LOCATIE, REISTIJD, STARTDATUM, EINDDATUM, URGENT, AANTALVRIJWILLIGERS, VERVOERTYPE) VALUES (:NewOMSCHRIJVING, :NewLOCATIE, :NewREISTIJD, :NewSTARTDATUM, :NewEINDDATUM, :NewURGENT, :NewAANTALVRIJWILLIGERS, :NewVERVOERTYPE)";
 
-                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Omschrijving;
-                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = newquestion.Content.Locatie;
-                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = newquestion.Reistijd;
-                cmd.Parameters.Add("NewSTARTDATUM", OracleDbType.Varchar2).Value = newquestion.Startdatum.ToString("dd-mm-yyyy");
-                cmd.Parameters.Add("NewEINDDATUM", OracleDbType.Varchar2).Value = newquestion.Einddatum.ToString("dd-mm-yyyy");
-                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = newquestion.Urgent;
-                cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.Aantalvrijwilligers;
-                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Vervoertype;
+                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
+                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = newquestion.Location;
+                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = newquestion.TravelTime;
+                cmd.Parameters.Add("NewSTARTDATUM", OracleDbType.Date).Value = newquestion.DateBegin;
+                cmd.Parameters.Add("NewEINDDATUM", OracleDbType.Date).Value = newquestion.DateEnd;
+                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = newquestion.Critical;
+                cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.VolunteersNeeded;
+                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Transport;
 
                 cmd.ExecuteNonQuery();
                 return true;
@@ -485,15 +492,12 @@ namespace Project
                 cmd.CommandText =
                    "UPDATE THULPVRAAG SET OMSCHRIJVING = :NewOMSCHRIJVING, LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE id = :newIDvalue";
 
-                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Omschrijving;
-                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = newquestion.Content.Locatie;
-                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = newquestion.Reistijd;
-                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = newquestion.Urgent;
-                cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.Aantalvrijwilligers;
-                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Vervoertype;
-
-                cmd.Parameters.Add("newIDvalue", OracleDbType.Int32).Value = question.ID;
-
+                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = question.Description;
+                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = question.Location;
+                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = question.TravelTime;
+                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = question.Critical;
+                //cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = question.; wat is dit?
+                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = question.Transport;
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -516,13 +520,12 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandText =
-                    "Insert into TREVIEW(DATUM, VOLUNTEER, CLIENT, RATING, TEKST) VALUES (:NewDATUM, :NewVOLUNTEER, :NewCLIENT, :NewRATING, :NewTEKST)";
+                    "Insert into TREVIEW(VOLUNTEER, CLIENT, RATING) VALUES ( :NewVOLUNTEER, :NewCLIENT, :NewRATING)";
 
-                cmd.Parameters.Add("NewDATUM", OracleDbType.Date).Value = newreview.Date.ToString("dd-MMM-yy");
-                cmd.Parameters.Add("NewVOLUNTEER", OracleDbType.Int32).Value = newreview.Targetuser.UserID;
-                cmd.Parameters.Add("NewCLIENT", OracleDbType.Int32).Value = newreview.Client.UserID;
+                cmd.Parameters.Add("NewVOLUNTEER", OracleDbType.Int32).Value = newreview.VolunteerID;
+                cmd.Parameters.Add("NewCLIENT", OracleDbType.Int32).Value = newreview.ClientID;
                 cmd.Parameters.Add("NewRATING", OracleDbType.Int32).Value = newreview.Rating;
-                cmd.Parameters.Add("NewTEKST", OracleDbType.Varchar2).Value = newreview.Content;
+
 
                 cmd.ExecuteNonQuery();
                 return true;
@@ -652,25 +655,24 @@ namespace Project
             }
         }
 
-        public static List<Message> GetChat(Client client, Volunteer volunteer)
+        public static List<Chat> GetChat(Client client, Volunteer volunteer)
         {
-            List<Message> chatmessages = new List<Message>();
+            List<Chat> chatmessages = new List<Chat>();
             try
             {
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT CHATID, BERICHT, HULPBEHOEVENDEID, VRIJWILLIGERID FROM TCHAT WHERE HULPBEHOEVENDEID = " + client.UserID + " AND VRIJWILLIGERID = " + volunteer.UserID;
+                cmd.CommandText = "SELECT CHATID, BERICHT,tijdstip FROM TCHAT WHERE HULPBEHOEVENDEID = " + client.UserID + " AND VRIJWILLIGERID = " + volunteer.UserID;
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
                     var id = dr.GetInt32(0);
-                    var bericht = dr.GetInt32(1);
-                    var hulpbehoevendeid = dr.GetInt32(2);
-                    var vrijwilligerid = dr.GetDateTime(3);
+                    var bericht = dr.GetString(1);
+                    var tijdstip = dr.GetDateTime(2);
 
-                    chatmessages.Add(new Message(id, bericht, hulpbehoevendeid, vrijwilligerid));
+                    chatmessages.Add(new Chat(id,bericht,tijdstip ,client, volunteer));
                 }
 
                 return chatmessages;
@@ -708,8 +710,7 @@ namespace Project
                    
 
                     returnlist.Add(new Review(id, beoordeling,opmerkingen,vrijwilligerid,hulpvraagid));
-                
-                    returnlist[returnlist.Count - 1].ReviewID = id;
+ 
                 }
 
                 return returnlist;
@@ -860,7 +861,7 @@ namespace Project
 
         public static Volunteer GetVolunteerDetails(Volunteer volun)
         {
-            Volunteer toget = volun;
+          
             try
             {
                 Connect();
@@ -877,28 +878,16 @@ namespace Project
                     var photo = SafeReadString(dr, 2);
                     var vog = SafeReadString(dr, 3);
                     var gebruikerid = SafeReadInt(dr, 4);
-      
+
 
                     // Fill
-                    toget.PathToPhoto = photo;
-                    toget.PathToVOG = vog;
+                    volun.Photo = photo;
+                    volun.VOG = vog;
 
                 }
 
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT ROUND(SUM(beoordeling)/COUNT(beoordeling)*2, 1) FROM TREVIEW WHERE vrijwilligerid = " + toget.UserID;
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    // Read from DB
-                    var rating = SafeReadDecimal(dr, 0);
-
-                    // Fill
-                    toget.Rating = rating;
-                }
-                return toget;
+             
+                return volun;
             }
             catch (InvalidCastException ex)
             {
@@ -911,54 +900,53 @@ namespace Project
             }
         }
 
-        public static bool UpdateVolunteer(Volunteer volun)
-        {
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "UPDATE TVOLUNTEER SET RIJBEWIJS = :newRIJBEWIJS, BIOGRAFIE = :newBIOGRAFIE, VOG = :newVOG, FOTO = :newFOTO WHERE USERID = " + volun.UserID;
+        //NOG WAT VAAG
 
-                if(volun.DrivingLicense)
-                    cmd.Parameters.Add("newRIJBEWIJS", OracleDbType.Varchar2).Value = "JA";
-                else
-                    cmd.Parameters.Add("newRIJBEWIJS", OracleDbType.Varchar2).Value = "NEE";
+        //public static bool UpdateVolunteer(Volunteer volun)
+        //{
+        //    try
+        //    {
+        //        Connect();
+        //        cmd = new OracleCommand();
+        //        cmd.Connection = con;
+        //        cmd.CommandText =
+        //           "UPDATE TVOLUNTEER SET RIJBEWIJS = :newRIJBEWIJS,  VOG = :newVOG, FOTO = :newFOTO WHERE USERID = " + volun.UserID;
 
-                cmd.Parameters.Add("newBIOGRAFIE", OracleDbType.Varchar2).Value = volun.Biogragphy;
-                cmd.Parameters.Add("newVOG", OracleDbType.Varchar2).Value = volun.PathToVOG;
-                cmd.Parameters.Add("newFOTO", OracleDbType.Varchar2).Value = volun.PathToPhoto;
-                cmd.ExecuteNonQuery();
+        //        if(volun.License == "true")
+        //            cmd.Parameters.Add("newRIJBEWIJS", OracleDbType.Varchar2).Value = "JA";
+        //        else
+        //            cmd.Parameters.Add("newRIJBEWIJS", OracleDbType.Varchar2).Value = "NEE";
 
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "UPDATE TROOSTER SET MAANDAG = :newMAANDAG, DINSDAG = :newDINSDAG, WOENSDAG = :newWOENSDAG, DONDERDAG = :newDONDERDAG, VRIJDAG = :newVRIJDAG, ZATERDAG = :newZATERDAG, ZONDAG = :newZONDAG WHERE USERID = " + volun.UserID;
+        //        cmd.Parameters.Add("newVOG", OracleDbType.Varchar2).Value = volun.VOG;
+        //        cmd.Parameters.Add("newFOTO", OracleDbType.Varchar2).Value = volun.Photo;
+        //        cmd.ExecuteNonQuery();
 
-                cmd.Parameters.Add("newMAANDAG", OracleDbType.Varchar2).Value = volun.Schedule.Monday;
-                cmd.Parameters.Add("newDINSDAG", OracleDbType.Varchar2).Value = volun.Schedule.Tuesday;
-                cmd.Parameters.Add("newWOENSDAG", OracleDbType.Varchar2).Value = volun.Schedule.Wednesday;
-                cmd.Parameters.Add("newDONDERDAG", OracleDbType.Varchar2).Value = volun.Schedule.Thursday;
-                cmd.Parameters.Add("newVRIJDAG", OracleDbType.Varchar2).Value = volun.Schedule.Friday;
-                cmd.Parameters.Add("newZATERDAG", OracleDbType.Varchar2).Value = volun.Schedule.Saturday;
-                cmd.Parameters.Add("newZONDAG", OracleDbType.Varchar2).Value = volun.Schedule.Sunday;
+        //        cmd = new OracleCommand();
+        //        cmd.Connection = con;
+        //        cmd.CommandText =
+        //           "INSERT INTO TBESCHIKBAARHEID (dagnaam,dagdeel,vrijwilligerid) VALUES(:Newdagnaam,:Newdagdeel,:Newvrijwilligerid)";
 
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
+        //        cmd.Parameters.Add("dagnaam", OracleDbType.Varchar2).Value = 
+        //        cmd.Parameters.Add("dagdeel", OracleDbType.Varchar2).Value = volun.
+        //        cmd.Parameters.Add("vrijwilligerid", OracleDbType.Int32).Value = volun.ID
 
-        public static bool AddAppointment(Appointment meeting)
+              
+              
+        //        cmd.ExecuteNonQuery();
+        //        return true;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //        return false;
+        //    }
+        //    finally
+        //    {
+        //        Disconnect();
+        //    }
+        //}
+
+        public static bool AddAppointment(Meeting meeting)
         {
             try
             {
@@ -970,7 +958,7 @@ namespace Project
 
                 cmd.Parameters.Add("NewCLIENT", OracleDbType.Int32).Value = meeting.Client.UserID;
                 cmd.Parameters.Add("NewVOLUNTEER", OracleDbType.Int32).Value = meeting.Volunteer.UserID;
-                cmd.Parameters.Add("NewDATUMTIJD", OracleDbType.Varchar2).Value = meeting.DateString;
+                cmd.Parameters.Add("NewDATUMTIJD", OracleDbType.Varchar2).Value = meeting.Date;
                 cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = meeting.Location;
 
                 cmd.ExecuteNonQuery();
@@ -1037,9 +1025,9 @@ namespace Project
             }
         }
 
-        public static List<Appointment> GetMyAppointments(Client client)
+        public static List<Meeting> GetMyAppointments(Client client)
         {
-            List<Appointment> returnlist = new List<Appointment>();
+            List<Meeting> returnlist = new List<Meeting>();
             try
             {
                 Connect();
@@ -1055,7 +1043,7 @@ namespace Project
                     var datetime = dr.GetString(1);
                     var location = dr.GetString(2);
 
-                    returnlist.Add(new Appointment(client, GetUserNoConnect(volunid) as Volunteer, Convert.ToDateTime(datetime), location));
+                    returnlist.Add(new Meeting(client, GetUserNoConnect(volunid) as Volunteer, Convert.ToDateTime(datetime), location));
                 }
                 return returnlist;
             }
@@ -1070,9 +1058,9 @@ namespace Project
             }
         }
 
-        public static List<Appointment> GetMyAppointments(Volunteer volun)
+        public static List<Meeting> GetMyAppointments(Volunteer volun)
         {
-            List<Appointment> returnlist = new List<Appointment>();
+            List<Meeting> returnlist = new List<Meeting>();
             try
             {
                 Connect();
@@ -1088,7 +1076,7 @@ namespace Project
                     var datetime = dr.GetString(1);
                     var location = dr.GetString(2);
 
-                    returnlist.Add(new Appointment(GetUserNoConnect(clientid) as Client, volun as Volunteer, Convert.ToDateTime(datetime), location));
+                    returnlist.Add(new Meeting(GetUserNoConnect(clientid) as Client, volun as Volunteer, Convert.ToDateTime(datetime), location));
                 }
                 return returnlist;
             }
@@ -1111,18 +1099,17 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT VOLUNTEER, DATUM, RATING, TEKST FROM TREVIEW WHERE CLIENT = :newUSERID";
+                cmd.CommandText = "SELECT ID, Opmerkingen,beoordeling, FROM TREVIEW WHERE CLIENT ='"+client+"'";
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add("newUSERID", OracleDbType.Varchar2).Value = client.UserID;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
                     var volunid = dr.GetInt32(0);
-                    var datetime = dr.GetDateTime(1);
+                    var opmerkingen = dr.GetString(1);
                     var rating = dr.GetInt32(2);
-                    var content = dr.GetString(3);
 
-                    returnlist.Add(new Review(datetime, client, GetUserNoConnect(volunid) as Volunteer, rating, content));
+
+                    returnlist.Add(new Review(volunid, rating, opmerkingen));
                 }
                 return returnlist;
             }
@@ -1137,6 +1124,8 @@ namespace Project
             }
         }
 
+
+        //WERKT NOG NIET GOED
         public static List<Review> GetMyReviews(Volunteer volun)
         {
             List<Review> returnlist = new List<Review>();
@@ -1145,18 +1134,16 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT CLIENT, DATUM, RATING, TEKST FROM TREVIEW WHERE VOLUNTEER = :newUSERID";
+                cmd.CommandText = "SELECT beoordeling,  opmerkingen FROM TREVIEW WHERE vrijwilligerid='"+volun.ID+"'";
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add("newUSERID", OracleDbType.Varchar2).Value = volun.UserID;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    var clientid = dr.GetInt32(0);
-                    var datetime = dr.GetDateTime(1);
-                    var rating = dr.GetInt32(2);
-                    var content = dr.GetString(3);
 
-                    returnlist.Add(new Review(datetime, GetUserNoConnect(clientid) as Client, volun , rating, content));
+                    var rating = dr.GetInt32(0);
+                    var comment = dr.GetString(1);
+
+                    returnlist.Add(new Review(rating, comment));
                 }
                 return returnlist;
             }
