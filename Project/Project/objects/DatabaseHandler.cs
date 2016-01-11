@@ -12,7 +12,7 @@ using Project;
 
 namespace Project
 {
-    static class DatabaseHandler
+   public  class DatabaseHandler
     {
         // Fields
 
@@ -480,6 +480,73 @@ namespace Project
                 Disconnect();
             }
 
+        }
+        public bool AuthenticateUser(string Email, string Pass)
+        {
+            try
+            {
+                Connect();
+
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM TACCOUNT WHERE email =:NewEmail AND Wachtwoord =:NewWachtwoord";
+                cmd.Parameters.Add("NewEmail", Email);
+                cmd.Parameters.Add("NewWachtwoord", Pass);
+                cmd.CommandType = System.Data.CommandType.Text;
+                dr = cmd.ExecuteReader();
+
+                // ik gebruik hier de Hasrows methode. Als de waardes kloppen, dan zijn er rijen. 
+                // Deze bool is dus handig om te gebruiken als je een overeenkomst wil weten of
+                // er een overeenkomst is tussen de ingevulde waardes en de gebruiker.
+                if (dr.HasRows)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch
+            {
+
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+        public List<Account> GetUserCache()
+        {
+            try
+            {
+                Connect();
+                List<Account> requiredList = new List<Account>();
+                cmd = new OracleCommand();
+                cmd.CommandText =
+                    "SELECT  email gebruikersnaam wachtwoord FROM TACCOUNT ";
+                cmd.CommandType = System.Data.CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while(dr.Read())
+                {
+                   
+                    var email = SafeReadString(dr, 0);
+                    var gebruikersnaam = SafeReadString(dr, 1);
+                    var wachtwoord = SafeReadString(dr, 2);
+                    Account user = new Account(gebruikersnaam, wachtwoord, email);
+                }
+                return requiredList;
+
+            } catch(Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
         }
 
         public static bool UpdateQuestion(Question question)

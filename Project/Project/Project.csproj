@@ -156,6 +156,7 @@
     </Compile>
     <Compile Include="objects\DatabaseHandler.cs" />
     <Compile Include="objects\Meeting.cs" />
+    <Compile Include="objects\UserCache.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>

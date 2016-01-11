@@ -11,7 +11,7 @@
     <div class="row">
         <div class="large-8 column secondary callout">
 
-            <asp:Button ID="btn_Profiel" runat="server" Text="Mijn Profiel" CssClass="expanded button" />
+            <asp:Button ID="btn_Profiel" runat="server" Text="Mijn Profiel" CssClass="expanded button" OnClick="btn_Profiel_Click" />
 
             <asp:Label ID="lbl_Vragen" runat="server" Text="Vragen"></asp:Label>
             <asp:ListBox ID="lbox_Questions" runat="server"></asp:ListBox>
