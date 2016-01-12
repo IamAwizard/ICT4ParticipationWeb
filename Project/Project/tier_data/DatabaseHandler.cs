@@ -515,7 +515,7 @@ namespace Project
             {
                 Disconnect();
             }
-            
+
         }
 
 
@@ -928,27 +928,28 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "select omschrijving , reistijd, startdatum,einddatum,urgent,aantalvrijwilligers,auteur,vervoertype, ID, locatie from THULPVRAAG";
+                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID";
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
+                    var questionid = SafeReadInt(dr, 0);
+                    var description = SafeReadString(dr, 1);
+                    var location = SafeReadString(dr, 2);
+                    var traveltime = SafeReadString(dr, 3);
+                    var startdate = SafeReadDateTime(dr, 4);
+                    var enddate = SafeReadDateTime(dr, 5);
+                    var critical = SafeReadString(dr, 6);
+                    var volunteers = SafeReadInt(dr, 7);
+                    var clientid = SafeReadInt(dr, 8);
+                    var trash = SafeReadInt(dr, 9);
+                    var transportid = SafeReadInt(dr, 10);
+                    var transportdescription = SafeReadString(dr, 11);
 
-                    string discription = SafeReadString(dr, 0);
-                    string traveltime = SafeReadString(dr, 1);
-                    DateTime startdate = SafeReadDateTime(dr, 2);
-                    DateTime enddate = SafeReadDateTime(dr, 3);
-                    string critical = SafeReadString(dr, 4);
-                    int volunteersneeded = SafeReadInt(dr, 5);
-                    int author = SafeReadInt(dr, 6);
-                    int transport = SafeReadInt(dr, 7);
-                    int questionID = SafeReadInt(dr, 8);
-                    string location = SafeReadString(dr, 9);
-
-                    allquestions.Add(new Question(author, discription, startdate, enddate, volunteersneeded, questionID, location, traveltime, transport));
+                    allquestions.Add(new Question(questionid, description, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription));
                 }
 
-                    return allquestions;
+                return allquestions;
             }
             catch (Exception ex)
             {

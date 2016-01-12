@@ -28,7 +28,6 @@ namespace Project
         public void Synchronize()
         {
             questions = databasehandler.getquestions();
-            throw new NotImplementedException();
         }
 
         public bool AddQuestion(Question question)
@@ -56,12 +55,12 @@ namespace Project
                 return false;
         }
 
-        public List<Question> GetQuestionsByAuthor(Account author)
+        public List<Question> GetQuestionsByAuthor(Client author)
         {
             Synchronize();
             try
             {
-                return questions.FindAll(x => x.AuthorID == author.AccountID);
+                return questions.FindAll(x => x.AuthorID == ((Client)author).ClientID);
             }
             catch (NullReferenceException ex)
             {

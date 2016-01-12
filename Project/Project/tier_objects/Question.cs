@@ -21,17 +21,18 @@ namespace Project
             this.DateBegin = datebegin;
             this.VolunteersNeeded = volunteersneeded;
         }
-        public Question(int authorid, string description, DateTime datebegin, DateTime enddate,int volunteersneeded, int id ,string location,string traveltime, int transportid)
+        public Question(int questionid, string description, string location, string traveltime, DateTime datebegin, DateTime enddate, string critical, int volunteersneeded, int authorid, int transportid, string transportdescription)
         {
+            this.Critical = bool.Parse(critical);
             this.AuthorID = authorid;
             this.Description = description;
             this.DateBegin = datebegin;
             this.VolunteersNeeded = volunteersneeded;
             this.DateEnd = enddate;
-            this.ID = id;
+            this.ID = questionid;
             this.Location = location;
             this.TravelTime = traveltime;
-            this.Transport.ID = transportid;
+            this.Transport = new Transport(transportid, transportdescription);
         }
 
 
