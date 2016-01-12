@@ -15,6 +15,7 @@ namespace Project
 
             if (Session["currentUser"] != null)
             {
+                lbox_Questions.Items.Clear();
                 Client currentuser = (Client)Session["currentUser"];
                 List<Question> questions = new List<Question>();
                 questions = questionhandler.GetQuestionsByAuthor(currentuser);
@@ -24,8 +25,8 @@ namespace Project
                     {
                         string date = Q.DateBegin.ToShortDateString();
                         string discription = Q.Description;
-                        lbox_getquestion.Items.Add(date);
-                        lbox_getquestion.Items.Add(discription);
+                        lbox_Questions.Items.Add(date);
+                        lbox_Questions.Items.Add(discription);
                     }
                 }     
             }
@@ -46,15 +47,17 @@ namespace Project
                     lbl_errormsg.ForeColor = System.Drawing.Color.Green;
                     questionhandler.AddQuestion(question);
                     lbl_errormsg.Text = "Vraag gemaakt";
+                    Response.Redirect("Client_vragen.aspx");
+             
                 }
                 
             }
             else
             {
+                lbl_errormsg.ForeColor = System.Drawing.Color.Red;
                 lbl_errormsg.Text = "Inhoud van de vraag is tekort";
             }
-            
-  
+         
         }
 
         protected void btn_LoadQuestion_Click(object sender, EventArgs e)
