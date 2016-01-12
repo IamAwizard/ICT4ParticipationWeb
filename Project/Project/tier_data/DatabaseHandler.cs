@@ -996,83 +996,23 @@ namespace Project
             try
             {
                 Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TUSER WHERE USERID = :deleteIDvalue";
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = con;
+                this.cmd.CommandText = "UPDATE TGEBRUIKER SET uitschrijvingsdatum='"+DateTime.Now+"'where id="+usertodelete.UserID+"";
+                this.cmd.CommandType = CommandType.Text;
+                dr = this.cmd.ExecuteReader();
 
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TAFSPRAAK WHERE VOLUNTEER = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TAFSPRAAK WHERE CLIENT = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TCLIENT WHERE CLIENTID = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TQUESTION WHERE AUTEUR = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TREVIEW WHERE CLIENT = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TREVIEW WHERE VOLUNTEER = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TROOSTER WHERE VOLUNTEERID = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "DELETE FROM TVOLUNTEER WHERE VOLUNTEERID = :deleteIDvalue";
-
-                cmd.Parameters.Add("deleteIDvalue", OracleDbType.Varchar2).Value = usertodelete.UserID;
-                cmd.ExecuteNonQuery();
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = con;
+                this.cmd.CommandText = "DELETE FROM THULPVRAAG WHERE auteur='"+usertodelete.UserID+"'";
+                this.cmd.CommandType = CommandType.Text;
+                dr = this.cmd.ExecuteReader();
                 return true;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                return true;
+                return false;
 
             }
         }
