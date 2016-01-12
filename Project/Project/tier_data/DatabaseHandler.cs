@@ -872,7 +872,7 @@ namespace Project
 
 
                 cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
-                cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = newquestion.AuthorID;
+                cmd.Parameters.Add("NewAuteur", OracleDbType.Int32).Value = newquestion.AuthorID;
                 cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = DateTime.Now;
                 cmd.Parameters.Add("NewAantalvrijwilligers", OracleDbType.Int32).Value = newquestion.VolunteersNeeded;
                 cmd.ExecuteNonQuery();
@@ -913,6 +913,47 @@ namespace Project
             {
                 MessageBox.Show(ex.Message);
                 return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        public List<Question> getquestions()
+        {
+            List<Question> allquestions = new List<Question>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "select omschrijving , reistijd, startdatum,einddatum,urgent,aantalvrijwilligers,auteur,vervoertype, ID, locatie from THULPVRAAG";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+
+                    string discription = SafeReadString(dr, 0);
+                    string traveltime = SafeReadString(dr, 1);
+                    DateTime startdate = SafeReadDateTime(dr, 2);
+                    DateTime enddate = SafeReadDateTime(dr, 3);
+                    string critical = SafeReadString(dr, 4);
+                    int volunteersneeded = SafeReadInt(dr, 5);
+                    int author = SafeReadInt(dr, 6);
+                    int transport = SafeReadInt(dr, 7);
+                    int questionID = SafeReadInt(dr, 8);
+                    string location = SafeReadString(dr, 9);
+
+                    allquestions.Add(new Question(author, discription, startdate, enddate, volunteersneeded, questionID, location, traveltime, transport));
+                }
+
+                    return allquestions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
             }
             finally
             {

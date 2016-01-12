@@ -13,18 +13,41 @@ namespace Project
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Session["currentUser"] != null)
+            {
+                Client currentuser = (Client)Session["currentUser"];
+                List<Question> questions = new List<Question>();
+                questions = questionhandler.GetQuestionsByAuthor(currentuser);
+                if(questions.Count != 0)
+                {
+                    foreach (Question Q in questions)
+                    {
+                        string date = Q.DateBegin.ToShortDateString();
+                        string discription = Q.Description;
+                        lbox_getquestion.Items.Add(date);
+                        lbox_getquestion.Items.Add(discription);
+                    }
+                }     
+            }
         }
 
         protected void btn_AddQuestion_Click(object sender, EventArgs e)
         {
-            if(tbox_AddQuestion.Text.Length > 10)
+           
+            if (tbox_AddQuestion.Text.Length > 10)
             {
-                string content = tbox_AddQuestion.Text;
-                int id = Convert.ToInt32(Session["currentUser"]);
-                Question question = new Question(id, content, DateTime.Now, 1);
-               
-                questionhandler.AddQuestion(question);
-                lbl_errormsg.Text = "Vraag gemaakt";
+                if (Session["currentUser"] != null)
+                {
+                    Client currentuser = (Client)Session["currentUser"];
+                    string content = tbox_AddQuestion.Text;
+                    int id = currentuser.ClientID;
+                    Question question = new Question(id, content, DateTime.Now, 1);
+
+                    lbl_errormsg.ForeColor = System.Drawing.Color.Green;
+                    questionhandler.AddQuestion(question);
+                    lbl_errormsg.Text = "Vraag gemaakt";
+                }
+                
             }
             else
             {

@@ -27,7 +27,7 @@ namespace Project
         // Methods
         public void Synchronize()
         {
-            // get all questions
+            questions = databasehandler.getquestions();
             throw new NotImplementedException();
         }
 
@@ -61,7 +61,7 @@ namespace Project
             Synchronize();
             try
             {
-                return questions.FindAll(x => x.ID == author.AccountID);
+                return questions.FindAll(x => x.AuthorID == author.AccountID);
             }
             catch (NullReferenceException ex)
             {

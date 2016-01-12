@@ -14,13 +14,28 @@ namespace Project
             this.Critical = critical;
             this.VolunteersNeeded = volunteersneeded;
         }
-        public Question(int id, string description, DateTime datebegin,int volunteersneeded)
+        public Question(int authorid, string description, DateTime datebegin,int volunteersneeded)
         {
-            this.ID = id;
+            this.AuthorID = authorid;
             this.Description = description;
             this.DateBegin = datebegin;
             this.VolunteersNeeded = volunteersneeded;
         }
+        public Question(int authorid, string description, DateTime datebegin, DateTime enddate,int volunteersneeded, int id ,string location,string traveltime, int transportid)
+        {
+            this.AuthorID = authorid;
+            this.Description = description;
+            this.DateBegin = datebegin;
+            this.VolunteersNeeded = volunteersneeded;
+            this.DateEnd = enddate;
+            this.ID = id;
+            this.Location = location;
+            this.TravelTime = traveltime;
+            this.Transport.ID = transportid;
+        }
+
+
+
 
         public int ID { get; set; }
         public string Description { get; set; }
