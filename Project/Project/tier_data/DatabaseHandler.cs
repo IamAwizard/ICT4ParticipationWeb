@@ -995,18 +995,36 @@ namespace Project
         {
             try
             {
+             
                 Connect();
                 this.cmd = new OracleCommand();
                 this.cmd.Connection = con;
-                this.cmd.CommandText = "UPDATE TGEBRUIKER SET uitschrijvingsdatum='"+DateTime.Now+"'where id="+usertodelete.UserID+"";
+                this.cmd.CommandText = "UPDATE TGEBRUIKER SET uitschrijvingsdatum=':newUnsubscribedDate'where id="+usertodelete.UserID+"";
                 this.cmd.CommandType = CommandType.Text;
                 dr = this.cmd.ExecuteReader();
+                cmd.Parameters.Add("newUnsubscribedDate", usertodelete.UnsubscribedDate);
 
                 this.cmd = new OracleCommand();
                 this.cmd.Connection = con;
-                this.cmd.CommandText = "DELETE FROM THULPVRAAG WHERE auteur='"+usertodelete.UserID+"'";
+                this.cmd.CommandText = "DELETE FROM TAFSPRAAK WHERE auteur='" + usertodelete.UserID + "'";
                 this.cmd.CommandType = CommandType.Text;
                 dr = this.cmd.ExecuteReader();
+            
+
+                this.cmd = new OracleCommand();
+                this.cmd.Connection = con;
+                this.cmd.CommandText = "DELETE FROM TREVIEW WHERE auteur='" + usertodelete.UserID + "'";
+                this.cmd.CommandType = CommandType.Text;
+                dr = this.cmd.ExecuteReader();
+
+                if (usertodelete is Client)
+                {
+                    this.cmd = new OracleCommand();
+                    this.cmd.Connection = con;
+                    this.cmd.CommandText = "DELETE FROM THULPVRAAG WHERE auteur='" + usertodelete.UserID + "'";
+                    this.cmd.CommandType = CommandType.Text;
+                    dr = this.cmd.ExecuteReader();
+                }
                 return true;
             }
             catch (Exception ex)
