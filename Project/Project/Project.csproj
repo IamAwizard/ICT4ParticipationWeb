@@ -78,13 +78,14 @@
     <Content Include="css\app.css" />
     <Content Include="css\foundation.css" />
     <Content Include="css\foundation.min.css" />
-    <Content Include="aboutfoundation.html" />
+    <Content Include="Foundation.html" />
     <Content Include="Default.aspx" />
     <Content Include="js\app.js" />
     <Content Include="js\foundation.js" />
     <Content Include="js\foundation.min.js" />
     <Content Include="js\vendor\jquery.min.js" />
     <Content Include="js\vendor\what-input.min.js" />
+    <Content Include="Logout.aspx" />
     <Content Include="packages.config" />
     <Content Include="Login.aspx" />
     <Content Include="admin\Admin_Master.Master" />
@@ -121,6 +122,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Logout.aspx.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Logout.aspx.designer.cs">
+      <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="tier_logic\AccountHandler.cs" />
     <Compile Include="tier_logic\AdminHandler.cs" />
@@ -260,6 +268,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="img\" />
+    <Folder Include="profileimg\" />
     <Folder Include="vog\" />
   </ItemGroup>
   <PropertyGroup>

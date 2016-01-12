@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>I4P Administratie | Welkom</title>
+     <title>Administratie - ICT4particpation</title>
     <link rel="stylesheet" href="../CSS/foundation.css" />
     <link rel="stylesheet" href="../CSS/app.css" />
     <asp:ContentPlaceHolder ID="head" runat="server">
@@ -20,8 +20,6 @@
                 <button class="menu-icon" type="button" data-toggle></button>
                 <div class="title-bar-title">Menu</div>
             </div>
-
-
             <div class="top-bar" id="main-menu">
                 <div class="top-bar-left">
                     <ul class="dropdown menu" data-dropdown-menu>

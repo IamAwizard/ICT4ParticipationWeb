@@ -7,14 +7,14 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
+     <title>Registreren - ICT4particpation</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
     <form id="FormRegister" runat="server">
         <div class="title-bar">
-            <span class="title-bar-title">ICT4Partipation</span>
+            <span class="title-bar-title"><a href="Login.aspx" style="color:white">ICT4Partipation</a></span>
             <span class="title-bar-right">
                 <asp:HyperLink ID="link_Register" href="Login.aspx" runat="server">Inloggen</asp:HyperLink></span>
         </div>
@@ -71,7 +71,7 @@
                     <asp:CheckBox ID="cbox_OVPossible" runat="server" />
                     <asp:Label ID="lbl_OVPossible" runat="server" Text="Reizen met ov mogelijk" AssociatedControlID="cbox_OVPossible"></asp:Label>
                     <hr />
-                    <asp:Button ID="btn_Register_Client" runat="server" Text="Registeren" class="expanded success button" OnClick="btn_Register_Client_Click" />
+                    <asp:Button ID="btn_Register_Client" runat="server" Text="Registeren" CssClass="expanded success button" OnClick="btn_Register_Client_Click" />
                 </div>
                 <div id="div_Register_Volunteer" runat="server">
                     <asp:Label ID="lbl_BirthDate" runat="server" Text="Geboortedatum:"></asp:Label>
@@ -109,7 +109,7 @@
                     <asp:Label ID="lbl_UploadVogError" runat="server" Text="Label" Visible="False" CssClass="warning label"></asp:Label>
                     <asp:FileUpload ID="FU_UploadVog" runat="server" CssClass="" />
                     <hr />
-                    <asp:Button ID="btn_Register_Volunteer" runat="server" Text="Registreren" class="expanded success button" OnClick="btn_Register_Volunteer_Click" />
+                    <asp:Button ID="btn_Register_Volunteer" runat="server" Text="Registreren" CssClass="expanded success button" OnClick="btn_Register_Volunteer_Click" />
                 </div>
             </div>
         </div>

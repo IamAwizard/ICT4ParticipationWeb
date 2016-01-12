@@ -110,8 +110,7 @@ namespace Project
         /// Email for account has to be unique
         /// </summary>
         /// <param name="newaccount">Account to be added</param>
-        /// <param name="returnid">returns the userid of the volunteer or client</param>
-        /// <returns></returns>
+        /// <returns>true if success, otherwise false</returns>
         public bool AddAccount(Account newaccount)
         {
             try
@@ -196,7 +195,7 @@ namespace Project
                         }
                         if (userid != -1)
                         {
-                            
+
                             // Client
                             if (newuser is Client)
                             {
@@ -247,11 +246,6 @@ namespace Project
             {
                 Disconnect();
             }
-        }
-
-        public bool AddFilePathsToVolunteer(int volunteerid)
-        {
-            return false;
         }
 
         /// <summary>
@@ -325,6 +319,205 @@ namespace Project
                 Disconnect();
             }
         }
+
+        /// <summary>
+        /// Finds a admin ID by email
+        /// </summary>
+        /// <param name="email">email to look for</param>
+        /// <returns>-1 if not found otherwise admin id</returns>
+        public int GetAdminIdByEmail(string email)
+        {
+            try
+            {
+                Connect();
+                int returnid = -1;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT B.ID FROM TBEHEERDER B, TACCOUNT A WHERE B.ACCOUNTID = A.ID AND LOWER(EMAIL) = LOWER(:email)";
+                    cmd.Parameters.Add("email", email);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnid = SafeReadInt(dr, 0);
+                    }
+                    return returnid;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Checks if a account exists with given email and password
+        /// </summary>
+        /// <param name="email">email to login with</param>
+        /// <param name="password">password to login with</param>
+        /// <returns>true is exists, else false</returns>
+        public bool ValidateCredentials(string email, string password)
+        {
+            try
+            {
+                Connect();
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM TACCOUNT WHERE LOWER(EMAIL) = LOWER(:Email) AND WACHTWOORD =:Password";
+                    cmd.Parameters.Add("Email", email);
+                    cmd.Parameters.Add("Password", password);
+                    dr = cmd.ExecuteReader();
+
+                    if (dr.HasRows)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch
+            {
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Gets a account from the database
+        /// </summary>
+        /// <param name="email">email to login with</param>
+        /// <returns></returns>
+        public Account GetAccount(string email)
+        {
+            try
+            {
+                int someid = -1;
+                someid = GetClientIdByEmail(email);
+                if (someid != -1)
+                {
+                    Connect();
+                    Client returnclient = null;
+                    using (cmd = new OracleCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM TACCOUNT A, TGEBRUIKER G, THULPBEHOEVENDE H WHERE A.ID = G.ACCOUNTID AND H.GEBRUIKERID = G.ID AND LOWER(A.EMAIL) =  LOWER(:email)";
+                        cmd.Parameters.Add("email", email);
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            var accountid = SafeReadInt(dr, 0);
+                            var username = SafeReadString(dr, 1);
+                            var password = SafeReadString(dr, 2);
+                            var clientemail = SafeReadString(dr, 3);
+                            var userid = SafeReadInt(dr, 4);
+                            var name = SafeReadString(dr, 5);
+                            var adress = SafeReadString(dr, 6);
+                            var location = SafeReadString(dr, 7);
+                            var phonenumber = SafeReadString(dr, 8);
+                            var haslicense = SafeReadString(dr, 9);
+                            var hascar = SafeReadString(dr, 10);
+                            var unsubscribedate = SafeReadDateTime(dr, 11);
+                            var trash1 = SafeReadInt(dr, 12);
+                            var clientid = SafeReadInt(dr, 13);
+                            var ovpossible = SafeReadString(dr, 14);
+                            var thrash2 = SafeReadInt(dr, 15);
+                            // Create
+                            returnclient = new Client(accountid, username, password, email, userid, name, adress, location, phonenumber, haslicense, hascar, clientid, ovpossible, unsubscribedate);
+                        }
+                        return returnclient;
+                    }
+                }
+                someid = GetVolunteerIdByEmail(email);
+                if (someid != -1)
+                {
+                    Connect();
+                    Volunteer returnvolunteer = null;
+                    using (cmd = new OracleCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT * FROM TACCOUNT A, TGEBRUIKER G, TVRIJWILLIGER V WHERE A.ID = G.ACCOUNTID AND G.ID = V.GEBRUIKERID AND LOWER(A.EMAIL) = LOWER(:email)";
+                        cmd.Parameters.Add("email", email);
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            var accountid = SafeReadInt(dr, 0);
+                            var username = SafeReadString(dr, 1);
+                            var password = SafeReadString(dr, 2);
+                            var volunteeremail = SafeReadString(dr, 3);
+                            var userid = SafeReadInt(dr, 4);
+                            var name = SafeReadString(dr, 5);
+                            var adress = SafeReadString(dr, 6);
+                            var location = SafeReadString(dr, 7);
+                            var phonenumber = SafeReadString(dr, 8);
+                            var haslicense = SafeReadString(dr, 9);
+                            var hascar = SafeReadString(dr, 10);
+                            var unsubscribedate = SafeReadDateTime(dr, 11);
+                            var trash1 = SafeReadInt(dr, 12);
+                            var volunteerid = SafeReadInt(dr, 13);
+                            var dateofbirth = SafeReadDateTime(dr, 14);
+                            var pathtophoto = SafeReadString(dr, 15);
+                            var pathtovog = SafeReadString(dr, 16);
+                            var thrash2 = SafeReadInt(dr, 17);
+                            // Create
+                            returnvolunteer = new Volunteer(accountid, username, password, volunteeremail, userid, name, adress, location, phonenumber, haslicense, hascar, unsubscribedate, volunteerid, dateofbirth, pathtophoto, pathtovog);
+                        }
+                        return returnvolunteer;
+                    }
+                }
+                someid = GetAdminIdByEmail(email);
+                if (someid != -1)
+                {
+                    Connect();
+                    Admin returnadmin = null;
+                    using (cmd = new OracleCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT A.ID, A.GEBRUIKERSNAAM, A.WACHTWOORD, A.EMAIL, B.ID FROM TACCOUNT A, TBEHEERDER B WHERE A.ID = B.ACCOUNTID AND LOWER(A.EMAIL) = LOWER(:email)";
+                        cmd.Parameters.Add("email", email);
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            var accountid = SafeReadInt(dr, 0);
+                            var username = SafeReadString(dr, 1);
+                            var password = SafeReadString(dr, 2);
+                            var adminemail = SafeReadString(dr, 3);
+                            var adminid = SafeReadInt(dr, 4);
+                            // Create
+                            returnadmin = new Admin(accountid, username, password, adminemail, adminid);
+                        }
+                        return returnadmin;
+                    }
+                }
+                else // Nothing found with that email
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+            
+        }
+
 
         // KLOPT NIET
 
@@ -695,44 +888,6 @@ namespace Project
                 Disconnect();
             }
 
-        }
-
-
-        public bool AuthenticateUser(string Email, string Pass)
-        {
-            try
-            {
-                Connect();
-
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM TACCOUNT WHERE email =:NewEmail AND Wachtwoord =:NewWachtwoord";
-                cmd.Parameters.Add("NewEmail", Email);
-                cmd.Parameters.Add("NewWachtwoord", Pass);
-                cmd.CommandType = System.Data.CommandType.Text;
-                dr = cmd.ExecuteReader();
-
-                // ik gebruik hier de Hasrows methode. Als de waardes kloppen, dan zijn er rijen. 
-                // Deze bool is dus handig om te gebruiken als je een overeenkomst wil weten of
-                // er een overeenkomst is tussen de ingevulde waardes en de gebruiker.
-                if (dr.HasRows)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
-            }
-            catch
-            {
-
-                return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
         }
 
         public bool UpdateQuestion(Question question)

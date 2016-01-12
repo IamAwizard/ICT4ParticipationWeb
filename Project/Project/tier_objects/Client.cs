@@ -7,7 +7,7 @@ namespace Project
 {
     public class Client : User
     {
-        public Client(int accountid, string username, string password, string email, string name, int userid, string adress, string location, string phonenumber, string license, string hascar, int clientid, string ovpossible, DateTime unsubscribeddate)
+        public Client(int accountid, string username, string password, string email, int userid, string name, string adress, string location, string phonenumber, string license, string hascar, int clientid, string ovpossible, DateTime unsubscribeddate)
     : base(accountid, username, password, email, userid, name, adress, location, phonenumber, license, hascar, unsubscribeddate)
         {
             this.ClientID = clientid;

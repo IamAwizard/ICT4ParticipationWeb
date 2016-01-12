@@ -18,46 +18,35 @@ namespace Project
         // Properties
 
         // Methods
-        public bool Authenticate(string email, string password)
+        /// <summary>
+        ///  Checks if a account exists in the database
+        /// </summary>
+        /// <param name="email">email to authenticate with</param>
+        /// <param name="password">password to authenticate with</param>
+        /// <returns>true if exists</returns>
+        public bool ValidateCredentials(string email, string password)
         {
-            Account foo = accm.FindAccountByEmail(email);
-            if (foo != null)
-            {
-                if (foo.Password == password)
-                {
-                    return true;
-                }
-                else
-                {
-                    System.Windows.Forms.MessageBox.Show(@"Foute email/wachtwoord combinatie");
-                    return false;
-                }
-            }
-            else
-            {
-                System.Windows.Forms.MessageBox.Show(@"Email niet gevonden");
-                return false;
-            }
+            return accm.ValidateCredentials(email, password);
         }
 
-        public Account GetUser(string email)
+        /// <summary>
+        /// Gets the account associated with the given email
+        /// </summary>
+        /// <param name="email">email of account to get</param>
+        /// <returns>account if found, otherwise null</returns>
+        public Account GetAccount(string email)
         {
-            return accm.FindAccountByEmail(email);
+            return accm.GetAccount(email);
         }
 
+        /// <summary>
+        /// Add a account, not compatible with admins
+        /// </summary>
+        /// <param name="newaccount">account to add</param>
+        /// <returns></returns>
         public bool AddAccount(Account newaccount)
         {
             return accm.AddAccount(newaccount);
-        }
-
-        public int GetVolunteerIdByEmail(string email)
-        {
-            return accm.GetVolunteerIdByEmail(email);
-        }
-
-        public bool AddVolunteerFilePaths(int volunteerid, string photopath, string vogpath)
-        {
-            return false;
         }
     }
 }

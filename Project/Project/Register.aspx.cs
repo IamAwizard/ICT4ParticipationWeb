@@ -1,26 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.HtmlControls;
-using System.Web.UI.WebControls;
 using System.IO;
-
-
 
 namespace Project
 {
     public partial class Register : System.Web.UI.Page
     {
+        // Max file sizes for upload in KB
+        const int MaxVOGFileSize = 3072; // 3MB
+        const int MaxPhotoFileSize = 1024; // 1MB
+
+        // Login handler
         private LoginHandler loginhandler = new LoginHandler();
+
+        // Page load event
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
             ShowExtendedForm();
         }
 
+        /// <summary>
+        /// Type of user selection changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void rb_Volunteer_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtn_Volunteer.Checked)
@@ -37,6 +41,11 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Type of user selection changed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void rb_Client_CheckedChanged(object sender, EventArgs e)
         {
             if (rbtn_Client.Checked)
@@ -63,7 +72,7 @@ namespace Project
             if (CheckUserInput())
             {
                 DateTime dateofbirth;
-                if(CheckVolunteerInput(out dateofbirth))
+                if (CheckVolunteerInput(out dateofbirth))
                 {
                     string username = tbox_Username.Text;
                     string password = tbox_Password.Text;
@@ -74,14 +83,24 @@ namespace Project
                     string phonenumber = tbox_PhoneNumber.Text;
                     string haslicense = cbox_HasLicense.Checked.ToString();
                     string hascar = cbox_HasCar.Checked.ToString();
+                    string photofilename = DateTime.Now.ToString("yyyyMMddmmss") + Path.GetFileName(FU_UploadPhoto.FileName);
+                    string vogfilename = DateTime.Now.ToString("yyyyMMddmmss") + Path.GetFileName(FU_UploadVog.FileName);
 
-                    Volunteer newvolunteer = new Volunteer(username, password, email, givenname,adress, location, phonenumber, haslicense, hascar, dateofbirth, "IN PROGRESS", "IN PROGRESS");
-                    loginhandler.AddAccount(newvolunteer);
-                    int accountid = loginhandler.GetVolunteerIdByEmail(email);
+                    Volunteer newvolunteer = new Volunteer(username, password, email, givenname, adress, location, phonenumber, haslicense, hascar, dateofbirth, photofilename, vogfilename);
 
-                    //string filename = Path.GetFileName(FU_UploadPhoto.FileName);
-                    //FU_UploadPhoto.SaveAs(Server.MapPath("~/img") + filename);
-                    //lbl_UploadPhotoError.Text = "Upload status: File uploaded!";
+                    if (loginhandler.AddAccount(newvolunteer))
+                    {
+                        FU_UploadPhoto.SaveAs(Server.MapPath("~/profileimg/") + photofilename);
+                        lbl_UploadPhotoError.Text = "SUCCESS";
+                        FU_UploadVog.SaveAs(Server.MapPath("~/vog/") + vogfilename);
+                        lbl_UploadPhotoError.Text = "SUCCESS";
+
+                        Response.Redirect("login.aspx");
+                    }
+                    else
+                    {
+
+                    }
                 }
 
             }
@@ -107,8 +126,11 @@ namespace Project
                 string hascar = cbox_HasCar.Checked.ToString();
                 string ovpossible = cbox_OVPossible.Checked.ToString();
                 Client newclient = new Client(username, password, email, givenname, adress, location, phonenumber, haslicense, hascar, ovpossible);
-                // TODO SEND TO DB
-                Response.Redirect("login.aspx");
+
+                if (loginhandler.AddAccount(newclient))
+                {
+                    Response.Redirect("login.aspx");
+                }
             }
         }
 
@@ -264,13 +286,13 @@ namespace Project
                 {
                     if (FU_UploadPhoto.PostedFile.ContentType == "image/jpeg" || FU_UploadPhoto.PostedFile.ContentType == "image/png")
                     {
-                        if (FU_UploadPhoto.PostedFile.ContentLength < 3072000)
+                        if (FU_UploadPhoto.PostedFile.ContentLength < (MaxPhotoFileSize*1000))
                         {
                             lbl_UploadPhotoError.Visible = false;
                         }
                         else
                         {
-                            lbl_UploadPhotoError.Text = "Upload mislukt: bestand moet kleiner zijn dan 3072 kb!";
+                            lbl_UploadPhotoError.Text = $"Upload mislukt: bestand moet kleiner zijn dan {MaxPhotoFileSize} kB!";
                             lbl_UploadPhotoError.Visible = true;
                             check = false;
                         }
@@ -302,23 +324,20 @@ namespace Project
                 {
                     if (FU_UploadVog.PostedFile.ContentType == "application/pdf")
                     {
-                        if (FU_UploadVog.PostedFile.ContentLength < 3072000)
+                        if (FU_UploadVog.PostedFile.ContentLength < (MaxVOGFileSize*1000))
                         {
-                            //string filename = Path.GetFileName(FU_UploadPhoto.FileName);
-                            //FU_UploadPhoto.SaveAs(Server.MapPath("~/") + filename);
-                            //lbl_UploadPhotoError.Text = "Upload status: File uploaded!";
                             lbl_UploadVogError.Visible = false;
                         }
                         else
                         {
-                            lbl_UploadVogError.Text = "Upload mislukt: bestand moet kleiner zijn dan 3072 kb!";
+                            lbl_UploadVogError.Text = $"Upload mislukt: bestand moet kleiner zijn dan {MaxVOGFileSize} kB!";
                             lbl_UploadVogError.Visible = true;
                             check = false;
                         }
                     }
                     else
                     {
-                        lbl_UploadVogError.Text = "Upload mislukt: Alleen PDF bestanden toegestaan!";
+                        lbl_UploadVogError.Text = $"Upload mislukt: Alleen PDF bestanden toegestaan!";
                         lbl_UploadVogError.Visible = true;
                         check = false;
                     }
@@ -336,7 +355,6 @@ namespace Project
                 lbl_UploadVogError.Visible = true;
                 check = false;
             }
-
             return check;
         }
     }

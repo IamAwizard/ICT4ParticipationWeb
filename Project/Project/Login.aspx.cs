@@ -9,7 +9,7 @@ namespace Project
 {
     public partial class Login : System.Web.UI.Page
     {
-        private DatabaseHandler db = new DatabaseHandler();
+        private LoginHandler loginhandler = new LoginHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -17,27 +17,37 @@ namespace Project
 
         protected void btn_Login_Click(object sender, EventArgs e)
         {
-            if (tbox_Email.Text == String.Empty)
+            if(loginhandler.ValidateCredentials(tbox_Email.Text, tbox_Password.Text))
             {
-                string x;
-                x = "alert(\"er is geen username ingevuld\");";
-                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
-                MaintainScrollPositionOnPostBack = true;
+                Account loggedinuser = loginhandler.GetAccount(tbox_Email.Text);
+                if(loggedinuser != null)
+                {
+                    Session["isLoggedIn"] = true;
+                    Session["currentUser"] = loggedinuser;
+                    Session.Timeout = 1440;
+                    lbl_LoginError.Visible = false;
+                    if(loggedinuser is Client)
+                    {
+                        Response.Redirect("~/client/Client_Vragen.aspx");
+                    }
+                    if(loggedinuser is Volunteer)
+                    {
+                        Response.Redirect("~/volunteer/Volunteer_Vragen.aspx");
+                    }
+                    if (loggedinuser is Admin)
+                    {
+                        Response.Redirect("~/admin/Admin_Main.aspx");
+                    }
+
+                }
+                else
+                {
+                    lbl_LoginError.Visible = true;
+                }
             }
-            else if (tbox_Password.Text == String.Empty)
-
+            else
             {
-                string x;
-                x = "alert(\"er is geen Wachtwoord ingevuld\");";
-                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", x, true);
-                MaintainScrollPositionOnPostBack = true;
-
-            }
-
-            if (db.AuthenticateUser(tbox_Email.Text, tbox_Password.Text))
-            {
-                // inloggne
-                Response.Redirect("Main.aspx");
+                lbl_LoginError.Visible = true;
             }
         }
     }

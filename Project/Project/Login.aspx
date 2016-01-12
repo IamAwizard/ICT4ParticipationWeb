@@ -7,15 +7,15 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Foundation | Welcome</title>
+    <title>Inloggen - ICT4particpation</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
     <div class="title-bar">
-        <span class="title-bar-title">ICT4Partipation</span>
+        <span class="title-bar-title"><a href="Login.aspx" style="color:white">ICT4Partipation</a></span>
         <span class="title-bar-right">
-            <asp:HyperLink ID="link_Register" href="Register.aspx" runat="server">Registreren</asp:HyperLink></span>
+            <asp:HyperLink ID="link_Register" runat="server" NavigateUrl="Register.aspx">Registreren</asp:HyperLink></span>
     </div>
     <br />
     <div class="row">
@@ -32,9 +32,7 @@
                         Wachtwoord
                         </label>
           <asp:TextBox ID="tbox_Password" runat="server" placeholder="Password" TextMode="Password" required="required"></asp:TextBox>
-
-
-                    
+                    <asp:Label ID="lbl_LoginError" runat="server" Text="Combinatie email en wachtwoord niet gevonden!" Visible="False" CssClass="alert expanded button label"></asp:Label>
                     <p>
                         <asp:Button ID="btn_Login" runat="server" Text="Inloggen" class="button expanded" OnClick="btn_Login_Click" />
                     </p>

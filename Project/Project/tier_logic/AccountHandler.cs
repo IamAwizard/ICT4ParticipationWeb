@@ -8,28 +8,47 @@ namespace Project
     public class AccountHandler
     {
         // Fields
-        private List<Account> accounts;
         private DatabaseHandler dbm;
 
 
         // Constructor
         public AccountHandler()
         {
-            accounts = new List<Account>();
             dbm = new DatabaseHandler();
         }
 
         // Properties
-        public List<Account> Accounts
-        {
-            get { return accounts; }
-            set { accounts = value; }
-        }
 
         // Methods
-        public Account FindAccountByName(string name)
+        /// <summary>
+        /// Adds an account to the DB
+        /// </summary>
+        /// <param name="account">account to add</param>
+        /// <returns>true if success</returns>
+        public bool AddAccount(Account account)
         {
-            throw new NotImplementedException();
+            return dbm.AddAccount(account);
+        }
+
+        /// <summary>
+        /// Checks if a account exists in the database
+        /// </summary>
+        /// <param name="email">email to authenticate with</param>
+        /// <param name="password">password to authenticate with</param>
+        /// <returns>true is exists, otherwise false</returns>
+        public bool ValidateCredentials(string email, string password)
+        {
+            return dbm.ValidateCredentials(email, password);
+        }
+
+        /// <summary>
+        /// Gets a complete account from the database by email
+        /// </summary>
+        /// <param name="email">email of account to fetch</param>
+        /// <returns>account, or null if none found</returns>
+        public Account GetAccount(string email)
+        {
+            return dbm.GetAccount(email);
         }
 
         public Account FindAccountByEmail(string email)
@@ -37,22 +56,7 @@ namespace Project
             throw new NotImplementedException();
         }
 
-        public bool AddAccount(Account account)
-        {
-            return dbm.AddAccount(account);
-        }
-
-        public int GetVolunteerIdByEmail(string email)
-        {
-            return dbm.GetVolunteerIdByEmail(email);
-        }
-
         public bool DeleteAccount(Account account)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Synchronize()
         {
             throw new NotImplementedException();
         }

@@ -7,9 +7,10 @@ namespace Project
 {
     public class Volunteer : User
     {
-        public Volunteer(int accountid, string username, string password, string email, string name, int userid, string adress, string location, string phonenumber, string license, string hascar, DateTime unsubscribeddate, DateTime dateofbirth, string photo, string vog)
+        public Volunteer(int accountid, string username, string password, string email, int userid, string name, string adress, string location, string phonenumber, string license, string hascar, DateTime unsubscribeddate, int volunteerid, DateTime dateofbirth, string photo, string vog)
     : base(accountid, username, password, email, userid, name, adress, location, phonenumber, license, hascar, unsubscribeddate)
         {
+            this.VolunteerID = volunteerid;
             this.DateOfBirth = dateofbirth;
             this.Photo = photo;
             this.VOG = vog;
