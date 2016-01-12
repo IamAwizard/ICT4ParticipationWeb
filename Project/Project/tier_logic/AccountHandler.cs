@@ -9,11 +9,14 @@ namespace Project
     {
         // Fields
         private List<Account> accounts;
+        private DatabaseHandler dbm;
+
 
         // Constructor
         public AccountHandler()
         {
-
+            accounts = new List<Account>();
+            dbm = new DatabaseHandler();
         }
 
         // Properties
@@ -36,7 +39,12 @@ namespace Project
 
         public bool AddAccount(Account account)
         {
-            throw new NotImplementedException();
+            return dbm.AddAccount(account);
+        }
+
+        public int GetVolunteerIdByEmail(string email)
+        {
+            return dbm.GetVolunteerIdByEmail(email);
         }
 
         public bool DeleteAccount(Account account)

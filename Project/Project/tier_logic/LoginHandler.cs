@@ -8,11 +8,11 @@ namespace Project
     class LoginHandler
     {
         // Fields
-        AccountHandler accounthandler;
+        private AccountHandler accm;
         // Constructor   
         public LoginHandler()
         {
-            accounthandler = new AccountHandler();
+            accm = new AccountHandler();
         }
 
         // Properties
@@ -20,7 +20,7 @@ namespace Project
         // Methods
         public bool Authenticate(string email, string password)
         {
-            Account foo = accounthandler.FindAccountByEmail(email);
+            Account foo = accm.FindAccountByEmail(email);
             if (foo != null)
             {
                 if (foo.Password == password)
@@ -42,15 +42,20 @@ namespace Project
 
         public Account GetUser(string email)
         {
-            return accounthandler.FindAccountByEmail(email);
+            return accm.FindAccountByEmail(email);
         }
 
-        public bool AddClient(Client newclient)
+        public bool AddAccount(Account newaccount)
         {
-            return false;
+            return accm.AddAccount(newaccount);
         }
 
-        public bool AddVolunteer(Volunteer newvolunteer)
+        public int GetVolunteerIdByEmail(string email)
+        {
+            return accm.GetVolunteerIdByEmail(email);
+        }
+
+        public bool AddVolunteerFilePaths(int volunteerid, string photopath, string vogpath)
         {
             return false;
         }

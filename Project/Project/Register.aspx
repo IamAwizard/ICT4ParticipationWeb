@@ -22,11 +22,11 @@
         <div class="row">
             <div class="large-4 large-centered columns callout">
                 <h4 class="text-center">Registreren</h4>
-                
+
                 <div class="text-center">
                     <div class="large-12 large-centered column">
                         <h6>Registreren als:</h6>
-                <asp:RadioButton ID="rbtn_Client" runat="server" GroupName="AccountType" AutoPostBack="True" OnCheckedChanged="rb_Client_CheckedChanged" Style="display: none" />
+                        <asp:RadioButton ID="rbtn_Client" runat="server" GroupName="AccountType" AutoPostBack="True" OnCheckedChanged="rb_Client_CheckedChanged" Style="display: none" />
                         <asp:Label ID="lbl_Client" runat="server" Text="Hulpbehoevende" AssociatedControlID="rbtn_Client" CssClass="expanded secondary button"></asp:Label>
                         <asp:RadioButton ID="rbtn_Volunteer" runat="server" GroupName="AccountType" AutoPostBack="True" OnCheckedChanged="rb_Volunteer_CheckedChanged" Style="display: none" />
                         <asp:Label ID="lbl_Volunteer" runat="server" Text="Vrijwilliger" AssociatedControlID="rbtn_Volunteer" CssClass="expanded secondary button"></asp:Label>
@@ -75,14 +75,39 @@
                 </div>
                 <div id="div_Register_Volunteer" runat="server">
                     <asp:Label ID="lbl_BirthDate" runat="server" Text="Geboortedatum:"></asp:Label>
-                    <asp:Calendar ID="calendar_BirthDate" runat="server" Style="margin-left: auto; margin-right: auto;">
-                        <TodayDayStyle BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
-                    </asp:Calendar>
-                    <asp:Label ID="lbl_UploadPhoto" runat="server" Text="Profielfoto uploaden" AssociatedControlID="FU_UploadFoto"></asp:Label>
-                    <asp:FileUpload ID="FU_UploadFoto" runat="server" CssClass="" />
                     <br />
-                    <asp:Label ID="lbl_UploadVog" runat="server" Text="V.O.G. Uploaden (?)" AssociatedControlID="FU_UploadVOG" ToolTip="Verklaring Omtrent Gedrag"></asp:Label>
-                    <asp:FileUpload ID="FU_UploadVOG" runat="server" CssClass="" />
+                    <asp:Label ID="lbl_BirthDateError" runat="server" Text="Ongeldige datum opgegeven" Visible="False" CssClass="warning label"></asp:Label>
+                    <div class="row">
+                        <div class="large-3 column">
+                            <asp:TextBox ID="tbox_Day" runat="server" placeholder="21" MaxLength="2"></asp:TextBox>
+                        </div>
+                        <div class="large-5 column">
+                            <asp:DropDownList ID="ddl_Month" runat="server">
+                                <asp:ListItem Selected="True" Value="1">januari</asp:ListItem>
+                                <asp:ListItem Value="2">februari</asp:ListItem>
+                                <asp:ListItem Value="3">maart</asp:ListItem>
+                                <asp:ListItem Value="4">april</asp:ListItem>
+                                <asp:ListItem Value="5">mei</asp:ListItem>
+                                <asp:ListItem Value="6">juni</asp:ListItem>
+                                <asp:ListItem Value="7">juli</asp:ListItem>
+                                <asp:ListItem Value="8">augustus</asp:ListItem>
+                                <asp:ListItem Value="9">september</asp:ListItem>
+                                <asp:ListItem Value="10">oktober</asp:ListItem>
+                                <asp:ListItem Value="11">november</asp:ListItem>
+                                <asp:ListItem Value="12">december</asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                        <div class="large-4 column">
+                            <asp:TextBox ID="tbox_Year" runat="server" placeholder="1979" MaxLength="4"></asp:TextBox>
+                        </div>
+                    </div>
+                    <asp:Label ID="lbl_UploadPhoto" runat="server" Text="Profielfoto uploaden" AssociatedControlID="FU_UploadPhoto"></asp:Label>
+                    <asp:Label ID="lbl_UploadPhotoError" runat="server" Text="Label" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:FileUpload ID="FU_UploadPhoto" runat="server" CssClass="" />
+                    <br />
+                    <asp:Label ID="lbl_UploadVog" runat="server" Text="V.O.G. Uploaden (?)" AssociatedControlID="FU_UploadVog" ToolTip="Verklaring Omtrent Gedrag"></asp:Label>
+                    <asp:Label ID="lbl_UploadVogError" runat="server" Text="Label" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:FileUpload ID="FU_UploadVog" runat="server" CssClass="" />
                     <hr />
                     <asp:Button ID="btn_Register_Volunteer" runat="server" Text="Registreren" class="expanded success button" OnClick="btn_Register_Volunteer_Click" />
                 </div>

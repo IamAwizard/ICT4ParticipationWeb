@@ -14,6 +14,7 @@ namespace Project
 {
     public partial class Register : System.Web.UI.Page
     {
+        private LoginHandler loginhandler = new LoginHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
@@ -22,7 +23,7 @@ namespace Project
 
         protected void rb_Volunteer_CheckedChanged(object sender, EventArgs e)
         {
-            if(rbtn_Volunteer.Checked)
+            if (rbtn_Volunteer.Checked)
             {
                 lbl_RegisteringAs.Text = "<h4 class=\"text-center\">Vrijwilliger</h4>";
                 lbl_Volunteer.CssClass = "expanded button";
@@ -52,14 +53,45 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Button click to register a volunteer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btn_Register_Volunteer_Click(object sender, EventArgs e)
         {
-            if(CheckUserInput())
+            if (CheckUserInput())
             {
+                DateTime dateofbirth;
+                if(CheckVolunteerInput(out dateofbirth))
+                {
+                    string username = tbox_Username.Text;
+                    string password = tbox_Password.Text;
+                    string email = tbox_Email.Text;
+                    string givenname = tbox_Email.Text;
+                    string adress = tbox_GivenName.Text;
+                    string location = tbox_Location.Text;
+                    string phonenumber = tbox_PhoneNumber.Text;
+                    string haslicense = cbox_HasLicense.Checked.ToString();
+                    string hascar = cbox_HasCar.Checked.ToString();
+
+                    Volunteer newvolunteer = new Volunteer(username, password, email, givenname,adress, location, phonenumber, haslicense, hascar, dateofbirth, "IN PROGRESS", "IN PROGRESS");
+                    loginhandler.AddAccount(newvolunteer);
+                    int accountid = loginhandler.GetVolunteerIdByEmail(email);
+
+                    //string filename = Path.GetFileName(FU_UploadPhoto.FileName);
+                    //FU_UploadPhoto.SaveAs(Server.MapPath("~/img") + filename);
+                    //lbl_UploadPhotoError.Text = "Upload status: File uploaded!";
+                }
 
             }
         }
 
+        /// <summary>
+        /// Buttonclick to register a client
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btn_Register_Client_Click(object sender, EventArgs e)
         {
             if (CheckUserInput())
@@ -76,9 +108,13 @@ namespace Project
                 string ovpossible = cbox_OVPossible.Checked.ToString();
                 Client newclient = new Client(username, password, email, givenname, adress, location, phonenumber, haslicense, hascar, ovpossible);
                 // TODO SEND TO DB
+                Response.Redirect("login.aspx");
             }
         }
 
+        /// <summary>
+        /// Tries to not accidently close forms when a postback occurs.
+        /// </summary>
         private void ShowExtendedForm()
         {
             if (!rbtn_Volunteer.Checked)
@@ -89,26 +125,36 @@ namespace Project
             {
                 div_Register_Client.Visible = false;
             }
-            if(!rbtn_Client.Checked && !rbtn_Volunteer.Checked)
+            if (!rbtn_Client.Checked && !rbtn_Volunteer.Checked)
             {
                 div_UserInformation.Visible = false;
             }
         }
 
+        /// <summary>
+        /// Compares passwords.
+        /// </summary>
+        /// <param name="password">given password</param>
+        /// <param name="passwordrepeat">password confirmation</param>
+        /// <returns>true if the same</returns>
         private bool CheckIfPasswordsMatch(string password, string passwordrepeat)
         {
-            if(password == passwordrepeat)
+            if (password == passwordrepeat)
             {
                 return true;
             }
             return false;
         }
 
+        /// <summary>
+        ///  Checks general user input
+        /// </summary>
+        /// <returns>true if all valid</returns>
         private bool CheckUserInput()
         {
             bool check = true;
             // Username
-            if(tbox_Username.Text.Length > 2 && tbox_Username.Text.Length <= 30)
+            if (tbox_Username.Text.Length > 2 && tbox_Username.Text.Length <= 30)
             {
                 lbl_UsernameError.Visible = false;
             }
@@ -131,7 +177,7 @@ namespace Project
             }
             // Email
             var emailchecker = new EmailAddressAttribute();
-            if(emailchecker.IsValid(tbox_Email.Text) && tbox_Email.Text.Length <= 50)
+            if (emailchecker.IsValid(tbox_Email.Text) && tbox_Email.Text.Length <= 50)
             {
                 lbl_EmailError.Visible = false;
             }
@@ -183,10 +229,115 @@ namespace Project
             return check;
         }
 
-        private void CheckVolunteerInput()
+        /// <summary>
+        /// Checks for file uploads and date
+        /// </summary>
+        private bool CheckVolunteerInput(out DateTime dateofbirth)
         {
+            bool check = true;
+            dateofbirth = DateTime.MinValue;
+            // Date of birth
+            if (tbox_Year.Text.Length < 4)
+            {
+                lbl_BirthDateError.Visible = true;
+                return false;
+            }
+            string day = tbox_Day.Text;
+            string month = ddl_Month.SelectedValue;
+            string year = tbox_Year.Text;
+            string date = $"{day}-{month}-{year}";
+            string dateformat = "d-m-yyyy";
+            ;
+            if (!DateTime.TryParseExact(date, dateformat, System.Globalization.CultureInfo.CurrentCulture, System.Globalization.DateTimeStyles.None, out dateofbirth))
+            {
+                lbl_BirthDateError.Visible = true;
+                check = false;
+            }
+            else
+            {
+                lbl_BirthDateError.Visible = false;
+            }
+            // Photo
+            if (FU_UploadPhoto.HasFile)
+            {
+                try
+                {
+                    if (FU_UploadPhoto.PostedFile.ContentType == "image/jpeg" || FU_UploadPhoto.PostedFile.ContentType == "image/png")
+                    {
+                        if (FU_UploadPhoto.PostedFile.ContentLength < 3072000)
+                        {
+                            lbl_UploadPhotoError.Visible = false;
+                        }
+                        else
+                        {
+                            lbl_UploadPhotoError.Text = "Upload mislukt: bestand moet kleiner zijn dan 3072 kb!";
+                            lbl_UploadPhotoError.Visible = true;
+                            check = false;
+                        }
+                    }
+                    else
+                    {
+                        lbl_UploadPhotoError.Text = "Upload mislukt: Alleen JPEG of PNG bestanden toegestaan!";
+                        lbl_UploadPhotoError.Visible = true;
+                        check = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lbl_UploadPhotoError.Text = "Iets ging fout. " + ex.Message;
+                    lbl_UploadPhotoError.Visible = true;
+                    check = false;
+                }
+            }
+            else
+            {
+                lbl_UploadPhotoError.Text = "Geen bestand gevonden";
+                lbl_UploadPhotoError.Visible = true;
+                check = false;
+            }
+            // VOG
+            if (FU_UploadVog.HasFile)
+            {
+                try
+                {
+                    if (FU_UploadVog.PostedFile.ContentType == "application/pdf")
+                    {
+                        if (FU_UploadVog.PostedFile.ContentLength < 3072000)
+                        {
+                            //string filename = Path.GetFileName(FU_UploadPhoto.FileName);
+                            //FU_UploadPhoto.SaveAs(Server.MapPath("~/") + filename);
+                            //lbl_UploadPhotoError.Text = "Upload status: File uploaded!";
+                            lbl_UploadVogError.Visible = false;
+                        }
+                        else
+                        {
+                            lbl_UploadVogError.Text = "Upload mislukt: bestand moet kleiner zijn dan 3072 kb!";
+                            lbl_UploadVogError.Visible = true;
+                            check = false;
+                        }
+                    }
+                    else
+                    {
+                        lbl_UploadVogError.Text = "Upload mislukt: Alleen PDF bestanden toegestaan!";
+                        lbl_UploadVogError.Visible = true;
+                        check = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    lbl_UploadVogError.Text = "Iets ging fout. " + ex.Message;
+                    lbl_UploadVogError.Visible = true;
+                    check = false;
+                }
+            }
+            else
+            {
+                lbl_UploadVogError.Text = "Geen bestand gevonden";
+                lbl_UploadVogError.Visible = true;
+                check = false;
+            }
 
+            return check;
         }
-
     }
 }

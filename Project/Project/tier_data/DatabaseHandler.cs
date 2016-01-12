@@ -12,15 +12,15 @@ using Project;
 
 namespace Project
 {
-   public  class DatabaseHandler
+    class DatabaseHandler
     {
         // Fields
 
         // connectionstring = "User Id=loginname; Password=password;Data Source=localhost";
-        static string connectionstring = "User Id=dbi259530;Password=ZBEB4DKxvr;Data Source=192.168.15.50/fhictora";
-        static private OracleConnection con;
-        static private OracleCommand cmd;
-        static private OracleDataReader dr;
+        private string connectionstring = "User Id=dbi259530;Password=ZBEB4DKxvr;Data Source=192.168.15.50/fhictora";
+        private OracleConnection con;
+        private OracleCommand cmd;
+        private OracleDataReader dr;
 
         // Properties
 
@@ -37,7 +37,6 @@ namespace Project
             con.ConnectionString = connectionstring;
             con.Open();
             Console.WriteLine("CONNECTION SUCCESFULL");
-
         }
 
         /// <summary>
@@ -50,59 +49,284 @@ namespace Project
         }
 
         /// <summary>
-        ///  Used to replace null values with string "NULL" values
-        ///  not in use as of 5-11-2015
+        /// Safely get string values from the oracledatareader if they are null
         /// </summary>
-        /// <param name="cmd"></param>
-         void PopulateNullParameters(OracleCommand cmd)
+        /// <param name="odr">oracle datareader</param>
+        /// <param name="colindex">column index</param>
+        /// <returns>empty string otherwise value from DB</returns>
+        string SafeReadString(OracleDataReader odr, int colindex)
         {
-            foreach (OracleParameter p in cmd.Parameters)
+            if (!odr.IsDBNull(colindex))
+                return odr.GetString(colindex);
+            else
+                return string.Empty;
+        }
+
+        /// <summary>
+        /// Safely reads int values from the database if they are null
+        /// </summary>
+        /// <param name="odr">oracle datareader</param>
+        /// <param name="colindex">column index</param>
+        /// <returns>-1 if null otherwise value from DB</returns>
+        int SafeReadInt(OracleDataReader odr, int colindex)
+        {
+            if (!odr.IsDBNull(colindex))
+                return odr.GetInt32(colindex);
+            else
+                return -1;
+        }
+
+        /// <summary>
+        /// Safely reads decimal values from the database if they are null
+        /// </summary>
+        /// <param name="odr">oracle datareader</param>
+        /// <param name="colindex">column index</param>
+        /// <returns>0 if null otherwise value from DB</returns>
+        decimal SafeReadDecimal(OracleDataReader odr, int colindex)
+        {
+            if (!odr.IsDBNull(colindex))
+                return odr.GetDecimal(colindex);
+            else
+                return 0;
+        }
+
+        /// <summary>
+        /// Safely reads datetime values from the database if they are null
+        /// </summary>
+        /// <param name="odr">oracle datareader</param>
+        /// <param name="colindex">column index</param>
+        /// <returns>datetime minimimvalue if null otherwise value from DB</returns>
+        DateTime SafeReadDateTime(OracleDataReader odr, int colindex)
+        {
+            if (!odr.IsDBNull(colindex))
+                return odr.GetDateTime(colindex);
+            else
+                return DateTime.MinValue;
+        }
+
+        /// <summary>
+        /// Adds a new account to the database.
+        /// Adding of admins is not support this way.
+        /// Email for account has to be unique
+        /// </summary>
+        /// <param name="newaccount">Account to be added</param>
+        /// <param name="returnid">returns the userid of the volunteer or client</param>
+        /// <returns></returns>
+        public bool AddAccount(Account newaccount)
+        {
+            try
             {
-                if (p.Value == null)
+                Connect();
+                using (cmd = new OracleCommand())
                 {
-                    p.Value = "NULL";
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT EMAIL FROM TACCOUNT WHERE LOWER(EMAIL) = LOWER(:newEmail)";
+                    cmd.Parameters.Add("newEmail", newaccount.Email);
+                    dr = cmd.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        return false;
+                    }
                 }
+                // Account
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO TACCOUNT(EMAIL, WACHTWOORD, GEBRUIKERSNAAM) VALUES(lower(:newEmail), :newPassword, :newUserName)";
+                    cmd.Parameters.Add("newEmail", newaccount.Email);
+                    cmd.Parameters.Add("newPassword", newaccount.Password);
+                    cmd.Parameters.Add("newUserName", newaccount.Username);
+                    cmd.ExecuteNonQuery();
+                }
+
+                // User
+                if (newaccount is User)
+                {
+                    User newuser = newaccount as User;
+                    int accountid = -1;
+                    using (cmd = new OracleCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "SELECT ID FROM TACCOUNT WHERE LOWER(EMAIL) = LOWER(:newEmail)";
+                        cmd.Parameters.Add("newEmail", newuser.Email);
+                        dr = cmd.ExecuteReader();
+
+                        while (dr.Read())
+                        {
+                            accountid = SafeReadInt(dr, 0);
+                        }
+                    }
+                    if (accountid != -1)
+                    {
+                        using (cmd = new OracleCommand())
+                        {
+                            cmd.Connection = con;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "INSERT INTO TGEBRUIKER(NAAM,ADRES,WOONPLAATS,TELEFOONNUMMER,HEEFTRIJBEWIJS,HEEFTAUTO,UITSCHRIJVINGSDATUM,ACCOUNTID) VALUES (:newName, :newAdress, :newLocation, :newPhoneNr, :newLicense, :newCar,NULL,:newAccountID)";
+                            cmd.Parameters.Add("newName", newuser.Name);
+                            cmd.Parameters.Add("newAdress", newuser.Adress);
+                            cmd.Parameters.Add("newLocation", newuser.Location);
+                            cmd.Parameters.Add("newPhoneNr", newuser.Phonenumber);
+                            cmd.Parameters.Add("newLicense", newuser.License);
+                            cmd.Parameters.Add("newCar", newuser.Hascar);
+                            cmd.Parameters.Add("newAccountID", accountid);
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Fetch UserID
+                        int userid = -1;
+                        using (cmd = new OracleCommand())
+                        {
+                            cmd.Connection = con;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = "SELECT ID FROM TGEBRUIKER WHERE NAAM = :Name AND ADRES = :Adress AND WOONPLAATS = :Location AND TELEFOONNUMMER = :Phonenumber AND ROWNUM = 1";
+                            cmd.Parameters.Add("Name", newuser.Name);
+                            cmd.Parameters.Add("Adress", newuser.Adress);
+                            cmd.Parameters.Add("Location", newuser.Location);
+                            cmd.Parameters.Add("Phonenumber", newuser.Phonenumber);
+                            dr = cmd.ExecuteReader();
+
+                            while (dr.Read())
+                            {
+                                userid = SafeReadInt(dr, 0);
+                            }
+                        }
+                        if (userid != -1)
+                        {
+                            
+                            // Client
+                            if (newuser is Client)
+                            {
+                                Client newclient = newuser as Client;
+                                using (cmd = new OracleCommand())
+                                {
+                                    cmd.Connection = con;
+                                    cmd.CommandType = CommandType.Text;
+                                    cmd.CommandText = "INSERT INTO THULPBEHOEVENDE(OVMOGELIJK,GEBRUIKERID) VALUES (:newOvPossible,:newUserID)";
+                                    cmd.Parameters.Add("newOvPossible", newclient.OVpossible);
+                                    cmd.Parameters.Add("newUserID", userid);
+                                    cmd.ExecuteNonQuery();
+
+                                    return true;
+                                }
+                            }
+                            // Volunteer
+                            if (newuser is Volunteer)
+                            {
+                                Volunteer newvoluntuur = newuser as Volunteer;
+                                using (cmd = new OracleCommand())
+                                {
+                                    cmd.Connection = con;
+                                    cmd.CommandType = CommandType.Text;
+                                    cmd.CommandText = "INSERT INTO TVRIJWILLIGER(GEBOORTEDATUM, FOTO, VOG, GEBRUIKERID) VALUES(:newDoB, :newPhoto, :newVOG, :newUserID)";
+                                    cmd.Parameters.Add("newDoB", newvoluntuur.DateOfBirth);
+                                    cmd.Parameters.Add("newPhoto", newvoluntuur.Photo);
+                                    cmd.Parameters.Add("newVOG", newvoluntuur.VOG);
+                                    cmd.Parameters.Add("newUserID", userid);
+                                    cmd.ExecuteNonQuery();
+                                    return true;
+                                }
+                            }
+                            return false;
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        public bool AddFilePathsToVolunteer(int volunteerid)
+        {
+            return false;
+        }
+
+        /// <summary>
+        /// Finds a volunteer ID by email
+        /// </summary>
+        /// <param name="email">email to look for</param>
+        /// <returns>-1 if not found otherwise volunteer id</returns>
+        public int GetVolunteerIdByEmail(string email)
+        {
+            try
+            {
+                Connect();
+                int returnid = -1;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT V.ID FROM TVRIJWILLIGER V, TGEBRUIKER G, TACCOUNT A WHERE V.GEBRUIKERID = G.ID AND G.ACCOUNTID = A.ID AND LOWER(A.EMAIL) = LOWER(:email)";
+                    cmd.Parameters.Add("email", email);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnid = SafeReadInt(dr, 0);
+                    }
+                    return returnid;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return -1;
+            }
+            finally
+            {
+                Disconnect();
             }
         }
 
         /// <summary>
-        /// Safely get string values from the oracledatareader if they are null
+        /// Finds a client ID by email
         /// </summary>
-        /// <param name="odr"></param>
-        /// <param name="ColIndex"></param>
-        /// <returns></returns>
-         string SafeReadString(OracleDataReader odr, int ColIndex)
+        /// <param name="email">email to look for</param>
+        /// <returns>-1 if not found otherwise client id</returns>
+        public int GetClientIdByEmail(string email)
         {
+            try
             {
-                if (!odr.IsDBNull(ColIndex))
-                    return odr.GetString(ColIndex);
-                else
-                    return string.Empty;
+                Connect();
+                int returnid = -1;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT H.ID FROM THULPBEHOEVENDE H, TGEBRUIKER G, TACCOUNT A WHERE H.GEBRUIKERID = G.ID AND G.ACCOUNTID = A.ID AND LOWER(A.EMAIL) = LOWER(:email)";
+                    cmd.Parameters.Add("email", email);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        returnid = SafeReadInt(dr, 0);
+                    }
+                    return returnid;
+                }
             }
-        }
-
-         int SafeReadInt(OracleDataReader odr, int ColIndex)
-        {
+            catch (Exception ex)
             {
-                if (!odr.IsDBNull(ColIndex))
-                    return odr.GetInt32(ColIndex);
-                else
-                    return -1;
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return -1;
             }
-        }
-
-         decimal SafeReadDecimal(OracleDataReader odr, int ColIndex)
-        {
+            finally
             {
-                if (!odr.IsDBNull(ColIndex))
-                    return odr.GetDecimal(ColIndex);
-                else
-                    return 0;
+                Disconnect();
             }
         }
 
         // KLOPT NIET
-
 
         //public static List<Question> GetAllQuestions()
         //{
@@ -148,7 +372,7 @@ namespace Project
         //        }
         //        foreach (Question q in questionlist)
         //        {
-                    
+
         //            q.Client = (Client)GetUser(q.Auteur);
         //        }
 
@@ -170,7 +394,7 @@ namespace Project
         //}
 
 
-            // MOET OPNIEUW GEMAAKT WORDEN
+        // MOET OPNIEUW GEMAAKT WORDEN
 
         //public static User GetUser(int ids)
         //{
@@ -404,46 +628,6 @@ namespace Project
             }
         }
 
-        //MOET HELEMAAL OPNIEUW GEMAAKT WORDEN
-
-        //public static void AddUser(User newuser)
-        //{
-        //    try
-        //    {
-        //        Connect();
-        //        cmd = new OracleCommand();
-        //        cmd.Connection = con;
-        //        cmd.CommandText =
-        //            "Insert into TUSER(NAAM, WOONPLAATS, ADRES, EMAIL, WACHTWOORD, TYPE) VALUES (:NewNAAM, :NewWOONPLAATS, :NewADRES, :NewEMAIL, :NewWACHTWOORD, :NewTYPE)";
-
-        //        cmd.Parameters.Add("NewNAAM", OracleDbType.Varchar2).Value = newuser.Name;
-        //        cmd.Parameters.Add("NewWOONPLAATS", OracleDbType.Varchar2).Value = newuser.Location; 
-        //        cmd.Parameters.Add("NewADRES", OracleDbType.Varchar2).Value = newuser.Adress; 
-
-        //        cmd.Parameters.Add("NewWACHTWOORD", OracleDbType.Varchar2).Value = newuser.Password;
-        //        if (newuser is Client)
-        //            cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "CLIENT";
-        //        if (newuser is Volunteer)
-        //            cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "VOLUNTEER";
-        //        if (newuser is Admin)
-        //            cmd.Parameters.Add("NewTYPE", OracleDbType.Varchar2).Value = "ADMIN";
-        //        cmd.ExecuteNonQuery();
-
-        //        if(newuser is Volunteer)
-        //        {
-        //            ExtendVolunteer(GetUserID(newuser.Email));
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //    }
-        //    finally
-        //    {
-        //        Disconnect();
-        //    }
-        //}
-
         public void AddAvatar()
         {
 
@@ -493,7 +677,7 @@ namespace Project
                 cmd.CommandText =
                     "Insert into THULPVRAAG(OMSCHRIJVING,auteur,startdatum,aantalvrijwilligers) VALUES (:NewOMSCHRIJVING,:NewAuteur,:NewStartdatum,:NewAantalvrijwilligers)";
 
-              
+
                 cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
                 cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = newquestion.AuthorID;
                 cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = DateTime.Now;
@@ -513,7 +697,7 @@ namespace Project
 
         }
 
-       
+
         public bool AuthenticateUser(string Email, string Pass)
         {
             try
@@ -544,37 +728,6 @@ namespace Project
             {
 
                 return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
-        public List<Account> GetUserCache()
-        {
-            try
-            {
-                Connect();
-                List<Account> requiredList = new List<Account>();
-                cmd = new OracleCommand();
-                cmd.CommandText =
-                    "SELECT  email gebruikersnaam wachtwoord FROM TACCOUNT ";
-                cmd.CommandType = System.Data.CommandType.Text;
-                dr = cmd.ExecuteReader();
-                while(dr.Read())
-                {
-                   
-                    var email = SafeReadString(dr, 0);
-                    var gebruikersnaam = SafeReadString(dr, 1);
-                    var wachtwoord = SafeReadString(dr, 2);
-                    Account user = new Account(gebruikersnaam, wachtwoord, email);
-                }
-                return requiredList;
-
-            } catch(Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message);
-                return null;
             }
             finally
             {
@@ -772,7 +925,7 @@ namespace Project
                     var bericht = dr.GetString(1);
                     var tijdstip = dr.GetDateTime(2);
 
-                    chatmessages.Add(new Chat(id,bericht,tijdstip ,client, volunteer));
+                    chatmessages.Add(new Chat(id, bericht, tijdstip, client, volunteer));
                 }
 
                 return chatmessages;
@@ -807,10 +960,10 @@ namespace Project
                     var opmerkingen = dr.GetString(2);
                     var vrijwilligerid = dr.GetInt32(3);
                     var hulpvraagid = dr.GetInt32(4);
-                   
 
-                    returnlist.Add(new Review(id, beoordeling,opmerkingen,vrijwilligerid,hulpvraagid));
- 
+
+                    returnlist.Add(new Review(id, beoordeling, opmerkingen, vrijwilligerid, hulpvraagid));
+
                 }
 
                 return returnlist;
@@ -848,7 +1001,7 @@ namespace Project
             {
                 Disconnect();
             }
-         }
+        }
 
         public bool DeleteQuestion(int QuestionID)
         {
@@ -961,7 +1114,7 @@ namespace Project
 
         public Volunteer GetVolunteerDetails(Volunteer volun)
         {
-          
+
             try
             {
                 Connect();
@@ -986,7 +1139,7 @@ namespace Project
 
                 }
 
-             
+
                 return volun;
             }
             catch (InvalidCastException ex)
@@ -1030,8 +1183,8 @@ namespace Project
         //        cmd.Parameters.Add("dagdeel", OracleDbType.Varchar2).Value = volun.
         //        cmd.Parameters.Add("vrijwilligerid", OracleDbType.Int32).Value = volun.ID
 
-              
-              
+
+
         //        cmd.ExecuteNonQuery();
         //        return true;
         //    }
@@ -1199,7 +1352,7 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT ID, Opmerkingen,beoordeling, FROM TREVIEW WHERE CLIENT ='"+client+"'";
+                cmd.CommandText = "SELECT ID, Opmerkingen,beoordeling, FROM TREVIEW WHERE CLIENT ='" + client + "'";
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())

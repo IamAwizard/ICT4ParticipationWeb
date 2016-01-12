@@ -310,13 +310,40 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_BirthDate;
         
         /// <summary>
-        /// calendar_BirthDate control.
+        /// lbl_BirthDateError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar calendar_BirthDate;
+        protected global::System.Web.UI.WebControls.Label lbl_BirthDateError;
+        
+        /// <summary>
+        /// tbox_Day control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbox_Day;
+        
+        /// <summary>
+        /// ddl_Month control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddl_Month;
+        
+        /// <summary>
+        /// tbox_Year control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbox_Year;
         
         /// <summary>
         /// lbl_UploadPhoto control.
@@ -328,13 +355,22 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_UploadPhoto;
         
         /// <summary>
-        /// FU_UploadFoto control.
+        /// lbl_UploadPhotoError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FU_UploadFoto;
+        protected global::System.Web.UI.WebControls.Label lbl_UploadPhotoError;
+        
+        /// <summary>
+        /// FU_UploadPhoto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FU_UploadPhoto;
         
         /// <summary>
         /// lbl_UploadVog control.
@@ -346,13 +382,22 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_UploadVog;
         
         /// <summary>
-        /// FU_UploadVOG control.
+        /// lbl_UploadVogError control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload FU_UploadVOG;
+        protected global::System.Web.UI.WebControls.Label lbl_UploadVogError;
+        
+        /// <summary>
+        /// FU_UploadVog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.FileUpload FU_UploadVog;
         
         /// <summary>
         /// btn_Register_Volunteer control.
