@@ -47,6 +47,7 @@
         <br />
         <div class="row">
             <div class="large-12 column callout">
+                <asp:HyperLink ID="link_DeleteAccount" runat="server" CssClass="alert button label float-right small" NavigateUrl="~/Uitschrijven.aspx?sender=client">Account Verwijderen</asp:HyperLink>
                 <h2>Welkom,
         <asp:Label ID="lbl_Username" runat="server" Text="Gebruiker"></asp:Label>
                 </h2>

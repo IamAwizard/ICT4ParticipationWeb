@@ -90,6 +90,7 @@
     <Content Include="Login.aspx" />
     <Content Include="admin\Admin_Master.Master" />
     <Content Include="client\Client_Master.Master" />
+    <Content Include="Uitschrijven.aspx" />
     <Content Include="volunteer\Volunteer_Master.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -216,6 +217,13 @@
     <Compile Include="tier_objects\Volunteer.cs" />
     <Compile Include="tier_logic\ReviewHandler.cs" />
     <Compile Include="tier_logic\VolunteerHandler.cs" />
+    <Compile Include="Uitschrijven.aspx.cs">
+      <DependentUpon>Uitschrijven.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Uitschrijven.aspx.designer.cs">
+      <DependentUpon>Uitschrijven.aspx</DependentUpon>
+    </Compile>
     <Compile Include="volunteer\Volunteer_Master.Master.cs">
       <DependentUpon>Volunteer_Master.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

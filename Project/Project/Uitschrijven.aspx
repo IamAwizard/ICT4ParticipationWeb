@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Volunteer_Master.Master.cs" Inherits="Project.Volunteer_Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Uitschrijven.aspx.cs" Inherits="Project.Uitschrijven" %>
 
 <!DOCTYPE html>
 
@@ -7,11 +7,9 @@
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vrijwilliger - ICT4particpation</title>
     <link rel="stylesheet" href="../CSS/foundation.css" />
     <link rel="stylesheet" href="../CSS/app.css" />
-    <asp:ContentPlaceHolder ID="head" runat="server">
-    </asp:ContentPlaceHolder>
+    <title>UITSCHRIJVEN - ICT 4 Participation</title>
 </head>
 <body>
     <div data-sticky-container="">
@@ -29,16 +27,6 @@
                 <div class="top-bar-right">
                     <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
                         <li>
-                            <asp:HyperLink ID="link_Questions" runat="server" NavigateUrl="~/volunteer/Volunteer_Vragen.aspx">Vragen</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="link_Meetings" runat="server" NavigateUrl="~/volunteer/Volunteer_Afspraken.aspx">Afspraken</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="link_Reviews" runat="server" NavigateUrl="~/volunteer/Volunteer_Beoordelingen.aspx">Beoordelingen</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="link_Chats" runat="server" NavigateUrl="~/volunteer/Volunteer_Chats.aspx">Chatten</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="link_Profile" runat="server" NavigateUrl="~/volunteer/Volunteer_Profiel.aspx">Mijn Profiel</asp:HyperLink></li>
-                        <li>
                             <asp:HyperLink ID="link_Logout" runat="server" NavigateUrl="~/Logout.aspx">Uitloggen</asp:HyperLink></li>
                     </ul>
                 </div>
@@ -47,19 +35,26 @@
         <br />
         <br />
         <br />
-        <div class="row">
-            <div class="large-12 column callout">
-                <asp:HyperLink ID="link_DeleteAccount" runat="server" CssClass ="alert  button label float-right small" NavigateUrl="~/Uitschrijven.aspx?sender=volunteer">Account Verwijderen</asp:HyperLink>
-                <h2>Welkom,
-        <asp:Label ID="lbl_Username" runat="server" Text="Vrijwilliger"></asp:Label>
-                </h2>
-                
+        <form id="form1" runat="server">
+            <div class="row">
+                <div class="large-6 large-centered column callout">
+                    <div class="row">
+                        <div class="large-12 column">
+                            <h2 class="text-center">Uitschrijven?</h2>
+                            <p>Je account wordt uitgeschakeld en je kunt de applicatie niet meer gebruiken!</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="large-6 columns">
+                            <asp:Button ID="btn_Cancel" runat="server" Text="Haal me hier vandaan!" CssClass="expanded button" />
+                        </div>
+                        <div class="large-6 columns">
+                            <asp:Button ID="btn_Ok" runat="server" Text="Ja, Uitschrijven" CssClass="expanded alert button" />
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-
+        </form>
     </div>
     <script src="../JS/vendor/jquery.min.js"></script>
     <script src="../JS/vendor/what-input.min.js"></script>

@@ -67,6 +67,15 @@ namespace Project {
         protected global::System.Web.UI.WebControls.HyperLink link_Logout;
         
         /// <summary>
+        /// link_DeleteAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink link_DeleteAccount;
+        
+        /// <summary>
         /// lbl_Username control.
         /// </summary>
         /// <remarks>
