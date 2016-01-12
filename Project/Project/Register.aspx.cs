@@ -78,8 +78,8 @@ namespace Project
                     string username = tbox_Username.Text;
                     string password = tbox_Password.Text;
                     string email = tbox_Email.Text;
-                    string givenname = tbox_Email.Text;
-                    string adress = tbox_GivenName.Text;
+                    string givenname = tbox_GivenName.Text;
+                    string adress = tbox_Adress.Text;
                     string location = tbox_Location.Text;
                     string phonenumber = tbox_PhoneNumber.Text;
                     string haslicense = cbox_HasLicense.Checked.ToString();
@@ -119,8 +119,8 @@ namespace Project
                 string username = tbox_Username.Text;
                 string password = tbox_Password.Text;
                 string email = tbox_Email.Text;
-                string givenname = tbox_Email.Text;
-                string adress = tbox_GivenName.Text;
+                string givenname = tbox_GivenName.Text;
+                string adress = tbox_Adress.Text;
                 string location = tbox_Location.Text;
                 string phonenumber = tbox_PhoneNumber.Text;
                 string haslicense = cbox_HasLicense.Checked.ToString();
