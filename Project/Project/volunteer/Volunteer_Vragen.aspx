@@ -3,25 +3,34 @@
 
 <asp:Content ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
-        <div class="row">
-            <div class="large-8 column secondary callout">
+        <div class="row" id="Questions">
+            <div class="large-12 column callout">
+                <div class="large-12 columns">
+                    <asp:Label ID="lbl_Questions" runat="server" Text="Openstaande Vragen:"></asp:Label>
+                    <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="10"></asp:ListBox>
+                     <asp:Label runat="server" ID="lbl_errormsg" Text="errormessage"></asp:Label>
+                    <br />
+                    <asp:Button ID="btn_LoadQuestion" runat="server" Text="Vraag bekijken" CssClass="button" />
 
-                <asp:Button ID="btn_Profiel" runat="server" Text="Mijn Profiel" CssClass="expanded button" OnClick="btn_Profiel_Click" />
-
-                <asp:Label ID="lbl_Vragen" runat="server" Text="Vragen"></asp:Label>
-                <asp:ListBox ID="lbox_Questions" runat="server"></asp:ListBox>
-
-                <asp:Label ID="lbl_Afspraken" runat="server" Text="Mijn Afspraken"></asp:Label>
-                <asp:Button ID="btn_Reageer" runat="server" Text="Reageer" CssClass="expanded button" />
-                <asp:Label ID="lbl_beoordelingen" runat="server" Text="Mijn Beoordelingen"></asp:Label>
-                <asp:Label ID="lbl_Reviews" runat="server" Text="Mijn Reviews"></asp:Label>
-                <asp:ListBox ID="lbox_Appointments" runat="server"></asp:ListBox>
-
-                <asp:ListBox ID="lbox_Reviews" runat="server"></asp:ListBox>
-            </div>
-            <div class=" large-4 column secondary callout">
-                <asp:Label ID="lbl_chats" runat="server" Text="Chats"></asp:Label>
-                <asp:ListBox ID="lbox_Clients" runat="server"></asp:ListBox>
+                </div>
+                <div class="large-12 columns">
+                    <div class="large-12 columns callout">
+                        <div class="large-10 columns">
+                            Vraag van hulpbehoevende:
+                        </div>
+                        <div class="large-2 columns">
+                            <asp:Button ID="btn_AnswerQuestion" runat="server" Text="Reageren" CssClass="expanded button" />
+                        </div>
+                        <div class="large-8 columns">
+                            <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getquestion"></asp:ListBox>
+                        </div>
+                        <div class="large-4 columns">
+                            <asp:Label ID="lbl_Date" runat="server" Text="Datum: "></asp:Label><br />
+                            <asp:Label ID="lbl_Location" runat="server" Text="Locatie:"></asp:Label><br />
+                            <asp:Label ID="lbl_VolunteersNeeder" runat="server" Text="Vrijwilligers nodig:"></asp:Label>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </form>

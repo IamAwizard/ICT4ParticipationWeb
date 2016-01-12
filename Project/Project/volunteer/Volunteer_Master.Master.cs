@@ -18,7 +18,7 @@ namespace Project
         {
             switch (Request.Url.LocalPath.ToLower())
             {
-                case "/volunteer/cvolunteer_vragen.aspx":
+                case "/volunteer/volunteer_vragen.aspx":
                     link_Questions.Style.Add(HtmlTextWriterStyle.Color, "white");
                     break;
                 case "/volunteer/volunteer_afspraken.aspx":

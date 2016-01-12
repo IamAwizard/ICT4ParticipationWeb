@@ -38,7 +38,7 @@
         <br />
         <br />
         <div class="row">
-            <div class="large-12 column secondary callout">
+            <div class="large-12 column callout">
                 <h2>Welkom,
         <asp:Label ID="lbl_Username" runat="server" Text="Administrator"></asp:Label>
                 </h2>

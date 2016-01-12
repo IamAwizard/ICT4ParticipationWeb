@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
         <div class="row">
-        <div class="large-12 column secondary callout">
+        <div class="large-12 column callout">
         <div class="row" id="Questions">
   
         <div class="text-center">

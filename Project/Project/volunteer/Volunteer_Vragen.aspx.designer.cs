@@ -13,22 +13,13 @@ namespace Project {
     public partial class Volunteer_Vragen {
         
         /// <summary>
-        /// btn_Profiel control.
+        /// lbl_Questions control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Profiel;
-        
-        /// <summary>
-        /// lbl_Vragen control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Vragen;
+        protected global::System.Web.UI.WebControls.Label lbl_Questions;
         
         /// <summary>
         /// lbox_Questions control.
@@ -40,75 +31,66 @@ namespace Project {
         protected global::System.Web.UI.WebControls.ListBox lbox_Questions;
         
         /// <summary>
-        /// lbl_Afspraken control.
+        /// lbl_errormsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Afspraken;
+        protected global::System.Web.UI.WebControls.Label lbl_errormsg;
         
         /// <summary>
-        /// btn_Reageer control.
+        /// btn_LoadQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Reageer;
+        protected global::System.Web.UI.WebControls.Button btn_LoadQuestion;
         
         /// <summary>
-        /// lbl_beoordelingen control.
+        /// btn_AnswerQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_beoordelingen;
+        protected global::System.Web.UI.WebControls.Button btn_AnswerQuestion;
         
         /// <summary>
-        /// lbl_Reviews control.
+        /// lbox_getquestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Reviews;
+        protected global::System.Web.UI.WebControls.ListBox lbox_getquestion;
         
         /// <summary>
-        /// lbox_Appointments control.
+        /// lbl_Date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Appointments;
+        protected global::System.Web.UI.WebControls.Label lbl_Date;
         
         /// <summary>
-        /// lbox_Reviews control.
+        /// lbl_Location control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Reviews;
+        protected global::System.Web.UI.WebControls.Label lbl_Location;
         
         /// <summary>
-        /// lbl_chats control.
+        /// lbl_VolunteersNeeder control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_chats;
-        
-        /// <summary>
-        /// lbox_Clients control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Clients;
+        protected global::System.Web.UI.WebControls.Label lbl_VolunteersNeeder;
     }
 }

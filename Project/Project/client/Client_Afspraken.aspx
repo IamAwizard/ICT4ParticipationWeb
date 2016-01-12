@@ -6,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <form runat="server">
         <div class="row" id="Questions">
-            <div class="large-12 column secondary callout">
+            <div class="large-12 column callout">
                 <div class="large-8 columns">
                     <asp:Label ID="lbl_Afspraken" runat="server" Text="Mijn Afspraken:"></asp:Label>
                     <asp:ListBox ID="lbox_Afspraak" runat="server" Height="100%" Rows="10"></asp:ListBox>
