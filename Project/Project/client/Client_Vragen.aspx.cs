@@ -43,10 +43,7 @@ namespace Project
                     string content = tbox_AddQuestion.Text;
                     int id = currentuser.ClientID;
                     Question question = new Question(id, content, DateTime.Now, 1);
-
-                    lbl_errormsg.ForeColor = System.Drawing.Color.Green;
                     questionhandler.AddQuestion(question);
-                    lbl_errormsg.Text = "Vraag gemaakt";
                     Response.Redirect("Client_vragen.aspx");
              
                 }
@@ -61,6 +58,11 @@ namespace Project
         }
 
         protected void btn_LoadQuestion_Click(object sender, EventArgs e)
+        {
+         
+        }
+
+        protected void lbox_getquestion_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
