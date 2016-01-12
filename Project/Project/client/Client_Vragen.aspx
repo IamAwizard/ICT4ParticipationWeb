@@ -12,13 +12,14 @@
                     <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="10"></asp:ListBox>
                     <hr />
                     <asp:Label ID="lbl_AddQuestion" runat="server" Text="Vraag toevoegen:"></asp:Label>
-                    <asp:TextBox ID="tbox_AddQuestion" runat="server" TextMode="MultiLine"></asp:TextBox>
-                    <asp:Button ID="btn_AddQuestion" runat="server" Text="Vraag versturen" CssClass="expanded button" />
+                    <asp:TextBox ID="tbox_AddQuestion" runat="server" Rows="2" TextMode="MultiLine"></asp:TextBox>
+                    <asp:Button ID="btn_AddQuestion" runat="server" Text="Vraag versturen" CssClass="button" />
                 </div>
                 <div class="large-4 columns">
                     <div class="text-center">
+                        <br />
                         <asp:Button ID="btn_LoadQuestion" runat="server" Text="Vraag bekijken" CssClass="expanded button" />
-                        <asp:TextBox ID="tbox_Question" runat="server"></asp:TextBox>
+                        <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getquestion"></asp:ListBox>
                     </div>
                 </div>
             </div>
