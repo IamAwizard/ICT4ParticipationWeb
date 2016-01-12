@@ -512,6 +512,8 @@ namespace Project
             }
 
         }
+
+       
         public bool AuthenticateUser(string Email, string Pass)
         {
             try

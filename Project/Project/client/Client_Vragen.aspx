@@ -19,7 +19,7 @@
                 <div class="large-4 columns">
                     <div class="text-center">
                         <br />
-                        <asp:Button ID="btn_LoadQuestion" runat="server" Text="Vraag bekijken" CssClass="expanded button" />
+                        <asp:Button ID="btn_LoadQuestion" runat="server" OnClick="btn_LoadQuestion_Click" Text="Vraag bekijken" CssClass="expanded button" />
                         <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getquestion"></asp:ListBox>
                     </div>
                 </div>

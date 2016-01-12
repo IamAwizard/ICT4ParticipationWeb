@@ -17,7 +17,7 @@ namespace Project
 
         protected void btn_AddQuestion_Click(object sender, EventArgs e)
         {
-            if(tbox_AddQuestion.Text.Length > 50)
+            if(tbox_AddQuestion.Text.Length > 10)
             {
                 string content = tbox_AddQuestion.Text;
                 int id = Convert.ToInt32(Session["currentUser"]);
@@ -32,6 +32,11 @@ namespace Project
             }
             
   
+        }
+
+        protected void btn_LoadQuestion_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
