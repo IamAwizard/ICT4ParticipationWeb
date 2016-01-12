@@ -1648,7 +1648,8 @@ h6 {
 }
 
 a {
-    color: #2199e8;
+    /*color: #2199e8;*/
+    color: #75c2f5;
     text-decoration: none;
     line-height: inherit;
     cursor: pointer;

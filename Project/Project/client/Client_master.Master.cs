@@ -11,7 +11,28 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            UpdateTitleBarLinks();
+        }
 
+        private void UpdateTitleBarLinks()
+        {
+            switch(Request.Url.LocalPath.ToLower())
+            {
+                case "/client/client_vragen.aspx":
+                    link_Questions.Style.Add(HtmlTextWriterStyle.Color, "white");
+                    break;
+                case "/client/client_afspraken.aspx":
+                    link_Meetings.Style.Add(HtmlTextWriterStyle.Color, "white");
+                    break;
+                case "/client/client_beoordelingen.aspx":
+                    link_Reviews.Style.Add(HtmlTextWriterStyle.Color, "white");
+                    break;
+                case "/client/client_chats.aspx":
+                    link_Chats.Style.Add(HtmlTextWriterStyle.Color, "white");
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

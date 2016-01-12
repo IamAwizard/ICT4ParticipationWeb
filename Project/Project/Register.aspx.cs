@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.IO;
+using System.Web.UI;
 
 namespace Project
 {
@@ -286,7 +287,7 @@ namespace Project
                 {
                     if (FU_UploadPhoto.PostedFile.ContentType == "image/jpeg" || FU_UploadPhoto.PostedFile.ContentType == "image/png")
                     {
-                        if (FU_UploadPhoto.PostedFile.ContentLength < (MaxPhotoFileSize*1000))
+                        if (FU_UploadPhoto.PostedFile.ContentLength < (MaxPhotoFileSize * 1000))
                         {
                             lbl_UploadPhotoError.Visible = false;
                         }
@@ -324,7 +325,7 @@ namespace Project
                 {
                     if (FU_UploadVog.PostedFile.ContentType == "application/pdf")
                     {
-                        if (FU_UploadVog.PostedFile.ContentLength < (MaxVOGFileSize*1000))
+                        if (FU_UploadVog.PostedFile.ContentLength < (MaxVOGFileSize * 1000))
                         {
                             lbl_UploadVogError.Visible = false;
                         }

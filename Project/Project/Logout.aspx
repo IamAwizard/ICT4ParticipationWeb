@@ -12,18 +12,38 @@
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
-    <div class="title-bar">
-        <span class="title-bar-title"><a href="Login.aspx" style="color:white">ICT4Partipation</a></span>
-        <span class="title-bar-right">
-            <asp:HyperLink ID="link_Register" href="Register.aspx" runat="server">Registreren</asp:HyperLink></span>
-    </div>
-    <br />
-    <div class="row">
-        <div class="large-4 large-centered columns callout">
-            <form id="FormLogin" runat="server">
+    <div data-sticky-container="">
+        <div class="sticky" data-sticky="" data-margin-top="0" style="width: 100%; z-index: 100">
+            <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+                <button class="menu-icon" type="button" data-toggle="data-toggle"></button>
+                <div class="title-bar-title">Menu</div>
+            </div>
+            <div class="top-bar" id="main-menu">
+                <div class="top-bar-left">
+                    <ul class="dropdown menu" data-dropdown-menu="data-dropdown-menu">
+                        <li class="menu-text">ICT 4 Participation</li>
+                    </ul>
+                </div>
+                <div class="top-bar-right">
+                    <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
+                        <li>
+                            <asp:HyperLink ID="link_Login" runat="server" NavigateUrl="~/Login.aspx">Inloggen</asp:HyperLink></li>
+                        <li>
+                            <asp:HyperLink ID="link_Register" runat="server" NavigateUrl="~/Register.aspx">Registreren</asp:HyperLink></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <div class="large-4 large-centered columns callout">
+                <form id="FormLogin" runat="server">
                     <h4 class="text-center">U wordt uitgelogd.</h4>
-                <asp:Label ID="lbl_Error" runat="server" Text="Er is niemand om uit te loggen!" Visible="False" CssClass="warning button expanded label"></asp:Label>
-            </form>
+                    <asp:Label ID="lbl_Error" runat="server" Text="Er is niemand om uit te loggen!" Visible="False" CssClass="alert button expanded label"></asp:Label>
+                </form>
+            </div>
         </div>
     </div>
     <script src="js/vendor/jquery.min.js"></script>
