@@ -31,7 +31,7 @@ namespace Project
         /// <summary>
         /// Connect to the database...
         /// </summary>
-        public static void Connect()
+        public void Connect()
         {
             con = new OracleConnection();
             con.ConnectionString = connectionstring;
@@ -43,7 +43,7 @@ namespace Project
         /// <summary>
         /// Disconnect from the database...
         /// </summary>
-        public static void Disconnect()
+        public void Disconnect()
         {
             con.Close();
             con.Dispose();
@@ -54,7 +54,7 @@ namespace Project
         ///  not in use as of 5-11-2015
         /// </summary>
         /// <param name="cmd"></param>
-        static void PopulateNullParameters(OracleCommand cmd)
+         void PopulateNullParameters(OracleCommand cmd)
         {
             foreach (OracleParameter p in cmd.Parameters)
             {
@@ -71,7 +71,7 @@ namespace Project
         /// <param name="odr"></param>
         /// <param name="ColIndex"></param>
         /// <returns></returns>
-        static string SafeReadString(OracleDataReader odr, int ColIndex)
+         string SafeReadString(OracleDataReader odr, int ColIndex)
         {
             {
                 if (!odr.IsDBNull(ColIndex))
@@ -81,7 +81,7 @@ namespace Project
             }
         }
 
-        static int SafeReadInt(OracleDataReader odr, int ColIndex)
+         int SafeReadInt(OracleDataReader odr, int ColIndex)
         {
             {
                 if (!odr.IsDBNull(ColIndex))
@@ -91,7 +91,7 @@ namespace Project
             }
         }
 
-        static decimal SafeReadDecimal(OracleDataReader odr, int ColIndex)
+         decimal SafeReadDecimal(OracleDataReader odr, int ColIndex)
         {
             {
                 if (!odr.IsDBNull(ColIndex))
@@ -243,7 +243,8 @@ namespace Project
         //    }
         //}
 
-        static User GetUserNoConnect(int ids)
+
+        public User GetUserNoConnect(int ids)
         {
             User toadd = null;
             try
@@ -312,7 +313,7 @@ namespace Project
             }
         }
 
-        public static List<User> GetAllUsers()
+        public List<User> GetAllUsers()
         {
 
             List<User> userList = new List<User>();
@@ -387,7 +388,7 @@ namespace Project
             }
         }
 
-        static void Read(string sql)
+        public void Read(string sql)
         {
             try
             {
@@ -443,12 +444,12 @@ namespace Project
         //    }
         //}
 
-        public static void AddAvatar()
+        public void AddAvatar()
         {
 
         }
 
-        public static bool AddQuestion(Question newquestion)
+        public bool AddQuestion(Question newquestion)
         {
             try
             {
@@ -467,6 +468,36 @@ namespace Project
                 cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.VolunteersNeeded;
                 cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Transport;
 
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+        }
+
+        public bool AddNewQuestion(Question newquestion)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                    "Insert into THULPVRAAG(OMSCHRIJVING,auteur,startdatum,aantalvrijwilligers) VALUES (:NewOMSCHRIJVING,:NewAuteur,:NewStartdatum,:NewAantalvrijwilligers)";
+
+              
+                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
+                cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = newquestion.AuthorID;
+                cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = DateTime.Now;
+                cmd.Parameters.Add("NewAantalvrijwilligers", OracleDbType.Int32).Value = newquestion.VolunteersNeeded;
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -549,7 +580,7 @@ namespace Project
             }
         }
 
-        public static bool UpdateQuestion(Question question)
+        public bool UpdateQuestion(Question question)
         {
             try
             {
@@ -579,7 +610,7 @@ namespace Project
             }
         }
 
-        public static bool AddReview(Review newreview)
+        public bool AddReview(Review newreview)
         {
             try
             {
@@ -608,7 +639,7 @@ namespace Project
             }
         }
 
-        public static bool DeleteUser(User usertodelete)
+        public bool DeleteUser(User usertodelete)
         {
             try
             {
@@ -695,7 +726,7 @@ namespace Project
         }
 
 
-        public static bool SendChatMessage(Client client, Volunteer volunteer, string message)
+        public bool SendChatMessage(Client client, Volunteer volunteer, string message)
         {
             try
             {
@@ -722,7 +753,7 @@ namespace Project
             }
         }
 
-        public static List<Chat> GetChat(Client client, Volunteer volunteer)
+        public List<Chat> GetChat(Client client, Volunteer volunteer)
         {
             List<Chat> chatmessages = new List<Chat>();
             try
@@ -756,7 +787,7 @@ namespace Project
         }
 
 
-        public static List<Review> GetAllReviews()
+        public List<Review> GetAllReviews()
         {
             List<Review> returnlist = new List<Review>();
             try
@@ -793,7 +824,7 @@ namespace Project
             }
         }
 
-        public static bool DeleteReview(int reviewID)
+        public bool DeleteReview(int reviewID)
         {
             try
             {
@@ -817,7 +848,7 @@ namespace Project
             }
          }
 
-        public static bool DeleteQuestion(int QuestionID)
+        public bool DeleteQuestion(int QuestionID)
         {
             try
             {
@@ -841,7 +872,7 @@ namespace Project
             }
         }
 
-        static int GetUserID(string email)
+        public int GetUserID(string email)
         {
             int returnvalue = -1;
             try
@@ -866,7 +897,7 @@ namespace Project
             }
         }
 
-        public static int GetUserIDbyMail(string email)
+        public int GetUserIDbyMail(string email)
         {
             int returnvalue = -1;
             try
@@ -896,7 +927,7 @@ namespace Project
             }
         }
 
-        static bool ExtendVolunteer(int volun)
+        public bool ExtendVolunteer(int volun)
         {
             try
             {
@@ -926,7 +957,7 @@ namespace Project
             }
         }
 
-        public static Volunteer GetVolunteerDetails(Volunteer volun)
+        public Volunteer GetVolunteerDetails(Volunteer volun)
         {
           
             try
@@ -1013,7 +1044,7 @@ namespace Project
         //    }
         //}
 
-        public static bool AddAppointment(Meeting meeting)
+        public bool AddAppointment(Meeting meeting)
         {
             try
             {
@@ -1042,7 +1073,7 @@ namespace Project
             }
         }
 
-        public static bool UpdateVOG(string vogpath, int userid)
+        public bool UpdateVOG(string vogpath, int userid)
         {
             try
             {
@@ -1067,7 +1098,7 @@ namespace Project
             }
         }
 
-        public static bool UpdatePhoto(string imgpath, int userid)
+        public bool UpdatePhoto(string imgpath, int userid)
         {
             try
             {
@@ -1092,7 +1123,7 @@ namespace Project
             }
         }
 
-        public static List<Meeting> GetMyAppointments(Client client)
+        public List<Meeting> GetMyAppointments(Client client)
         {
             List<Meeting> returnlist = new List<Meeting>();
             try
@@ -1125,7 +1156,7 @@ namespace Project
             }
         }
 
-        public static List<Meeting> GetMyAppointments(Volunteer volun)
+        public List<Meeting> GetMyAppointments(Volunteer volun)
         {
             List<Meeting> returnlist = new List<Meeting>();
             try
@@ -1158,7 +1189,7 @@ namespace Project
             }
         }
 
-        public static List<Review> GetMyReviews(Client client)
+        public List<Review> GetMyReviews(Client client)
         {
             List<Review> returnlist = new List<Review>();
             try
@@ -1193,7 +1224,7 @@ namespace Project
 
 
         //WERKT NOG NIET GOED
-        public static List<Review> GetMyReviews(Volunteer volun)
+        public List<Review> GetMyReviews(Volunteer volun)
         {
             List<Review> returnlist = new List<Review>();
             try

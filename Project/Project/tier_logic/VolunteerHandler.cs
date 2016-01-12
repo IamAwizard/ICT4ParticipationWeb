@@ -9,7 +9,7 @@ namespace Project
     {
         // Fields
         Volunteer currentuser;
-
+        DatabaseHandler databasehandler;
         ChatHandler chathandler;
         QuestionHandler questions;
         AccountHandler accounthandler;
@@ -19,6 +19,7 @@ namespace Project
         // Constructor
         public VolunteerHandler()
         {
+            databasehandler = new DatabaseHandler();
             questions = new QuestionHandler();
             accounthandler = new AccountHandler();
         }
@@ -82,12 +83,13 @@ namespace Project
 
         public List<Meeting> GetMyAppointments(Volunteer volunteer)
         {
-            return DatabaseHandler.GetMyAppointments(volunteer);
+            return databasehandler.GetMyAppointments(volunteer);
         }
 
         public List<Review> GetMyReviews(Volunteer volunteer)
         {
-            return DatabaseHandler.GetMyReviews(volunteer);
+            
+            return databasehandler.GetMyReviews(volunteer);
         }
     }
 }

@@ -7,7 +7,7 @@
     <form runat="server">
         <div class="row" id="chat">
             <div class="large-12 column secondary callout">
-
+                <br />
                 <div class="large-4 columns">
                     <div class="text-center">
                         <asp:TextBox ID="TextBox1" TextMode="MultiLine" Rows="10" Columns="20" runat="server"></asp:TextBox>

@@ -14,14 +14,14 @@ namespace Project
             this.Critical = critical;
             this.VolunteersNeeded = volunteersneeded;
         }
-        public Question(int id, string description, DateTime datebegin, bool critical, int volunteersneeded)
+        public Question(int id, string description, DateTime datebegin,int volunteersneeded)
         {
             this.ID = id;
             this.Description = description;
             this.DateBegin = datebegin;
-            this.Critical = critical;
             this.VolunteersNeeded = volunteersneeded;
         }
+
         public int ID { get; set; }
         public string Description { get; set; }
         public string Location { get; set; }
@@ -30,6 +30,7 @@ namespace Project
         public DateTime DateEnd { get; set; }
         public bool Critical { get; set; }
         public int VolunteersNeeded { get; set; }
+        public int AuthorID { get; set; }
         public Transport Transport { get; set; }
     }
 }

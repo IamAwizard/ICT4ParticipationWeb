@@ -32,7 +32,6 @@
                     <asp:Label ID="Label2" runat="server" Text="Heeft gereageerd"></asp:Label>
                     <br />
                     <br />
-
                         <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getquestion"></asp:ListBox>
                         <div class="row">
                                             <div  style="float:left; padding-left:20px;">

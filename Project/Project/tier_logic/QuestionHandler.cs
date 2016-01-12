@@ -8,12 +8,13 @@ namespace Project
     class QuestionHandler
     {
         // Fields
+        DatabaseHandler databasehandler;
         private List<Question> questions;
 
         // Constructor   
         public QuestionHandler()
         {
-
+            databasehandler = new DatabaseHandler();
         }
 
         // Properties
@@ -32,7 +33,8 @@ namespace Project
 
         public bool AddQuestion(Question question)
         {
-            if (DatabaseHandler.AddQuestion(question))
+            
+            if (databasehandler.AddNewQuestion(question))
                 return true;
             else
                 return false;
@@ -40,7 +42,7 @@ namespace Project
 
         public bool DeleteQuestion(Question question)
         {
-            if (DatabaseHandler.DeleteQuestion(question.ID))
+            if (databasehandler.DeleteQuestion(question.ID))
                 return true;
             else
                 return false;
@@ -48,7 +50,7 @@ namespace Project
 
         public bool UpdateQuestion(Question questiontoupdate)
         {
-            if (DatabaseHandler.UpdateQuestion(questiontoupdate))
+            if (databasehandler.UpdateQuestion(questiontoupdate))
                 return true;
             else
                 return false;

@@ -8,18 +8,18 @@ namespace Project
     class ReviewHandler
     {
         // Fields
-
+        DatabaseHandler databasehandler;
         // Constructor
         public ReviewHandler()
         {
-
+            databasehandler = new DatabaseHandler();
         }
         // Properties
         public List<Review> ReviewList { get; set; }
         // Methodes
         public bool AddReview(Review review)
         {
-            if (DatabaseHandler.AddReview(review))
+            if (databasehandler.AddReview(review))
                 return true;
             else
                 return false;
@@ -27,7 +27,7 @@ namespace Project
 
         public bool DeleteReview(Review review)
         {
-            if (DatabaseHandler.DeleteReview(review.ID))
+            if (databasehandler.DeleteReview(review.ID))
                 return true;
             else
                 return false;
@@ -41,7 +41,7 @@ namespace Project
 
         private void Synchronize()
         {
-            ReviewList = DatabaseHandler.GetAllReviews();
+            ReviewList = databasehandler.GetAllReviews();
         }
     }
 }
