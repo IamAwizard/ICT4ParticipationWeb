@@ -13,10 +13,9 @@ namespace Project
             this.ClientID = clientid;
             this.OVpossible = ovpossible;
         }
-        public Client(string username, string password, string email, string name, string adress, string location, string phonenumber, string license, string hascar, int clientid, string ovpossible)
+        public Client(string username, string password, string email, string name, string adress, string location, string phonenumber, string license, string hascar, string ovpossible)
             : base(username, password, email, name, adress, location, phonenumber, license, hascar)
         {
-            this.ClientID = clientid;
             this.OVpossible = ovpossible;
         }
         public int ClientID { get; set; }

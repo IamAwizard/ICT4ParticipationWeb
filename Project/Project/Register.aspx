@@ -21,67 +21,74 @@
         <br />
         <div class="row">
             <div class="large-4 large-centered columns callout">
-                <asp:TextBox ID="tb_GebruikersNaam" runat="server" placeholder="GebruikersNaam" required="required"></asp:TextBox>
-                <asp:TextBox ID="tb_Wachtwoord" runat="server" placeholder="Wachtwoord" TextMode="Password" required="required"></asp:TextBox>
-                <asp:TextBox ID="tb_Email" runat="server" placeholder="Email" required="required"></asp:TextBox>
-                <asp:TextBox ID="tb_Naam" runat="server" placeholder="Naam" required="required"></asp:TextBox>
-                <asp:TextBox ID="tb_Adres" runat="server" placeholder="Adres" required="required"></asp:TextBox>
-                <asp:TextBox ID="tb_Woonplaats" runat="server" placeholder="Woonplaats" required="required"></asp:TextBox>
-                <asp:TextBox ID="tb_Telefoonnummer" runat="server" placeholder="Telefoonnummer" required="required"></asp:TextBox>
-                <ul>
-                    <li class="no-bullet">
-                        <asp:CheckBox ID="cb_HeeftRijbewijs" runat="server" />
-                        <asp:Label ID="Label2" runat="server" Text="Heeft Rijbewijs"></asp:Label></li>
-                    <li class="no-bullet">
-                        <asp:CheckBox ID="cb_HeeftAuto" runat="server" />
-                        <asp:Label ID="Label3" runat="server" Text="Heeft Auto"></asp:Label>
-                    </li>
-                </ul>
-                <asp:RadioButton ID="rb_Client" runat="server" GroupName="AccountType" AutoPostBack="true" OnCheckedChanged="rb_Client_CheckedChanged" />
-                <asp:Label ID="lbl_Client" runat="server" Text="Hulpbehoevende"></asp:Label>
-                <br />
-                <asp:RadioButton ID="rb_Volunteer" runat="server" GroupName="AccountType" OnCheckedChanged="rb_Volunteer_CheckedChanged" AutoPostBack="true" />
-                <asp:Label ID="lbl_Volunteer" runat="server" Text="Vrijwilliger"></asp:Label>
-            </div>
-        </div>
-        <div class="row" id="Register_Client" runat="server">
-            <div class="medium-6 medium-centered large-4 large-centered columns callout">
+                <h4 class="text-center">Registreren</h4>
+                
                 <div class="text-center">
-                    <div class="medium-centered">
-                        <asp:Label ID="lbl_Vrijwilliger" runat="server" Text="Vrijwilliger" CssClass="medium-text-center" Font-Size="X-Large" Font-Bold="true">
-                        </asp:Label>
-                        <br />
-                        <br />
-                        <br />
-                        <asp:Label ID="lbl_BirthDate" runat="server" Text="GeboorteDatum"></asp:Label>
-                        <asp:Calendar ID="c_BirthDate" runat="server"></asp:Calendar>
-                        <asp:Label ID="lbl_UploadFoto" runat="server" Text="Upload Foto"></asp:Label>
-                        <asp:FileUpload ID="FU_UploadFoto" runat="server" CssClass="button expanded" />
-                        <br />
-                        <asp:Label ID="lbl_UploadVog" runat="server" Text="Upload VOG"></asp:Label>
-                        <asp:FileUpload ID="FU_UploadVOG" runat="server" CssClass="button expanded" />
-                        <hr />
-                        <asp:Button ID="btn_Register_Client" runat="server" Text="Register" class="button expanded"/>
+                    <div class="large-12 large-centered column">
+                        <h6>Registreren als:</h6>
+                <asp:RadioButton ID="rbtn_Client" runat="server" GroupName="AccountType" AutoPostBack="True" OnCheckedChanged="rb_Client_CheckedChanged" Style="display: none" />
+                        <asp:Label ID="lbl_Client" runat="server" Text="Hulpbehoevende" AssociatedControlID="rbtn_Client" CssClass="expanded secondary button"></asp:Label>
+                        <asp:RadioButton ID="rbtn_Volunteer" runat="server" GroupName="AccountType" AutoPostBack="True" OnCheckedChanged="rb_Volunteer_CheckedChanged" Style="display: none" />
+                        <asp:Label ID="lbl_Volunteer" runat="server" Text="Vrijwilliger" AssociatedControlID="rbtn_Volunteer" CssClass="expanded secondary button"></asp:Label>
                     </div>
                 </div>
-            </div>
-        </div>
-        <div class="row" id="Register_Volunteer" runat="server">
-            <div class="medium-6 medium-centered large-4 large-centered columns callout">
-                <div class="text-center">
-                    <asp:Label ID="lbl_Hulpbehoevende" runat="server" Text="Hulpbehoevende" CssClass="medium-text-center" Font-Size="X-Large" Font-Bold="true">
-                    </asp:Label>
-                    <br />
-                    <br />
-                    <br />
 
-                    <asp:Label ID="lbl_OVMogelijk" runat="server" Text="OVMogelijk"></asp:Label>
-                    <asp:CheckBox ID="cb_OVMogelijk" runat="server" />
+                <div id="div_UserInformation" runat="server">
+                    <asp:Label ID="lbl_RegisteringAs" runat="server" Text="onbekend"></asp:Label>
+                    <asp:Label ID="lbl_UsernameError" runat="server" Text="Gebruikersnaam te kort of te lang" Visible="false" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_Username" runat="server" placeholder="Gebruikersnaam" required="required"></asp:TextBox>
+
+                    <asp:Label ID="lbl_PasswordError" runat="server" Text="Wachtwoorden komen niet overeen of zijn te kort/lang" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_Password" runat="server" placeholder="Wachtwoord" TextMode="Password" required="required"></asp:TextBox>
+                    <asp:TextBox ID="tbox_PasswordConfirm" runat="server" placeholder="Wachtwoord Herhalen" TextMode="Password" required="required"></asp:TextBox>
+
+                    <asp:Label ID="lbl_EmailError" runat="server" Text="Ongeldige Email opgegeven of te lang" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_Email" runat="server" placeholder="Email" required="required"></asp:TextBox>
+
+                    <asp:Label ID="lbl_GivenNameError" runat="server" Text="Naam te kort of te lang" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_GivenName" runat="server" placeholder="Naam" required="required"></asp:TextBox>
+
+                    <asp:Label ID="lbl_AdressError" runat="server" Text="Adres te kort of the lang" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_Adress" runat="server" placeholder="Adres" required="required"></asp:TextBox>
+
+                    <asp:Label ID="lbl_LocationError" runat="server" Text="Woonplaats te kort of te lang" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_Location" runat="server" placeholder="Woonplaats" required="required"></asp:TextBox>
+
+                    <asp:Label ID="lbl_PhoneNumerError" runat="server" Text="Telefoonnummer bestaat niet uit 10 tekens" Visible="False" CssClass="warning label"></asp:Label>
+                    <asp:TextBox ID="tbox_PhoneNumber" runat="server" placeholder="Telefoonnummer (10 tekens)" required="required" MaxLength="10"></asp:TextBox>
+
+                    <ul class="no-bullet">
+                        <li>
+                            <asp:CheckBox ID="cbox_HasLicense" runat="server" />
+                            <asp:Label ID="lbl__HasLicense" runat="server" Text="In bezit van rijbewijs" AssociatedControlID="cbox_HasLicense"></asp:Label></li>
+                        <li>
+                            <asp:CheckBox ID="cbox_HasCar" runat="server" />
+                            <asp:Label ID="lbl_HasCar" runat="server" Text="In bezit van auto" AssociatedControlID="cbox_HasCar"></asp:Label>
+                        </li>
+                    </ul>
+                </div>
+                <div id="div_Register_Client" runat="server">
+                    <asp:CheckBox ID="cbox_OVPossible" runat="server" />
+                    <asp:Label ID="lbl_OVPossible" runat="server" Text="Reizen met ov mogelijk" AssociatedControlID="cbox_OVPossible"></asp:Label>
                     <hr />
-                    <asp:Button ID="btn_Register_Volunteer" runat="server" Text="Register" class="button expanded"/>
+                    <asp:Button ID="btn_Register_Client" runat="server" Text="Registeren" class="expanded success button" OnClick="btn_Register_Client_Click" />
+                </div>
+                <div id="div_Register_Volunteer" runat="server">
+                    <asp:Label ID="lbl_BirthDate" runat="server" Text="Geboortedatum:"></asp:Label>
+                    <asp:Calendar ID="calendar_BirthDate" runat="server" Style="margin-left: auto; margin-right: auto;">
+                        <TodayDayStyle BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="1px" />
+                    </asp:Calendar>
+                    <asp:Label ID="lbl_UploadPhoto" runat="server" Text="Profielfoto uploaden" AssociatedControlID="FU_UploadFoto"></asp:Label>
+                    <asp:FileUpload ID="FU_UploadFoto" runat="server" CssClass="" />
+                    <br />
+                    <asp:Label ID="lbl_UploadVog" runat="server" Text="V.O.G. Uploaden (?)" AssociatedControlID="FU_UploadVOG" ToolTip="Verklaring Omtrent Gedrag"></asp:Label>
+                    <asp:FileUpload ID="FU_UploadVOG" runat="server" CssClass="" />
+                    <hr />
+                    <asp:Button ID="btn_Register_Volunteer" runat="server" Text="Registreren" class="expanded success button" OnClick="btn_Register_Volunteer_Click" />
                 </div>
             </div>
         </div>
+
         <script src="js/vendor/jquery.min.js"></script>
         <script src="js/vendor/what-input.min.js"></script>
         <script src="js/foundation.min.js"></script>
