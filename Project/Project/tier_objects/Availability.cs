@@ -12,9 +12,16 @@ namespace Project
             this.Day = day;
             this.TimeOfDay = timeofday;
         }
-        public Availability(int id, string day, string timeofday,int volunid)
+        public Availability(int id,string day, string timeofday,int volunid)
         {
             this.ID = id;
+            this.Day = day;
+            this.TimeOfDay = timeofday;
+            this.volunid = volunid;
+        }
+
+        public Availability(string day, string timeofday, int volunid)
+        {
             this.Day = day;
             this.TimeOfDay = timeofday;
             this.volunid = volunid;

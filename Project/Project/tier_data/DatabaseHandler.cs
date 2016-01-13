@@ -1787,12 +1787,9 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET ID=:NewID , dagnaam=:NewDagnaam, dagdeel=:NewDagdeel, vrijwilligerid=:NewVrijwilligerid";
+                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET dagdeel=:NewDagdeel where dagnaam='"+available.Day+"' AND vrijwilligersid='"+available.volunid+"'";
                 cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add("NewID", OracleDbType.Int32).Value = available.ID;
-                cmd.Parameters.Add("NewDagnaam", OracleDbType.Varchar2).Value = available.Day;
                 cmd.Parameters.Add("NewDagdeel", OracleDbType.Varchar2).Value = available.TimeOfDay;
-                cmd.Parameters.Add("NewVrijwilligerid", OracleDbType.Int32).Value = available.volunid;
                 cmd.ExecuteNonQuery();
                 return true;
             }
