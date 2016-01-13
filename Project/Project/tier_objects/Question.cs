@@ -49,6 +49,7 @@ namespace Project
         public int AuthorID { get; set; }
         public Client Author { get; set; }
         public Transport Transport { get; set; }
+        public List<Volunteer> AcceptedBy { get; set; }
 
         public string FormattedForVolunteer
         {

@@ -24,11 +24,12 @@ namespace Project
                 lbl_Client.Text = $"Vroeg {q.Author.Name}";
                 lbl_Critical.Visible = q.Critical;
                 lbl_Date.Text = $"op {q.DateBegin.ToShortDateString()}";
+                
                 tbox_Location.Text = q.Location;
                 tbox_Traveltime.Text = q.TravelTime;
                 tbox_Transport.Text = q.Transport.Description;
                 tbox_VolunteerCount.Text = q.VolunteersNeeded.ToString();
-                tbox_Question.Text = q.Description;
+                lbox_Question.Text = q.Description;
             }
             else
             {

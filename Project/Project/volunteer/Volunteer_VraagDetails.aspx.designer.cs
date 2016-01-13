@@ -49,13 +49,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Client;
         
         /// <summary>
-        /// tbox_Question control.
+        /// lbox_Question control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Question;
+        protected global::System.Web.UI.WebControls.TextBox lbox_Question;
         
         /// <summary>
         /// lbl_Location control.
@@ -148,13 +148,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Commented;
         
         /// <summary>
-        /// lbox_getquestion control.
+        /// lbox_getaccepted control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_getquestion;
+        protected global::System.Web.UI.WebControls.ListBox lbox_getaccepted;
         
         /// <summary>
         /// btn_Answer control.

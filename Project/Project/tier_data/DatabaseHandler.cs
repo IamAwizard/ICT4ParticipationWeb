@@ -1655,6 +1655,30 @@ namespace Project
             }
         }
 
+        public bool UpdateProfiel(string imgpath, int userid)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                   "UPDATE TVOLUNTEER SET FOTO = :newFOTO WHERE USERID = :someID";
+                cmd.Parameters.Add("newVOG", OracleDbType.Varchar2).Value = imgpath;
+                cmd.Parameters.Add("someID", OracleDbType.Int32).Value = userid;
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
         public List<Meeting> GetMyAppointments(Client client)
         {
             List<Meeting> returnlist = new List<Meeting>();

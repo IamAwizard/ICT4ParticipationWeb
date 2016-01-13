@@ -21,7 +21,7 @@
                             <asp:Button ID="btn_AnswerQuestion" runat="server" Text="Reageren" CssClass="expanded button" OnClick="btn_AnswerQuestion_Click" />
                         </div>
                         <div class="large-8 columns">
-                            <asp:TextBox ID="tbox_GetQuestion" runat="server" Height="100%" MaxLength="3000" Rows="5" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="tbox_GetQuestion" runat="server" Height="100%" ReadOnly="true" MaxLength="3000" Rows="4" TextMode="MultiLine"></asp:TextBox>
                         </div>
                         <div class="large-4 columns">
                             <asp:Label ID="lbl_Date" runat="server" Text="Datum: "></asp:Label><br />
