@@ -1756,19 +1756,35 @@ namespace Project
             }
         }
 
-        public bool UpdateProfiel(string imgpath, int userid)
+        public bool UpdateLicense(int userid,bool yesno)
         {
             try
             {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "UPDATE TVOLUNTEER SET FOTO = :newFOTO WHERE USERID = :someID";
-                cmd.Parameters.Add("newVOG", OracleDbType.Varchar2).Value = imgpath;
-                cmd.Parameters.Add("someID", OracleDbType.Int32).Value = userid;
-                cmd.ExecuteNonQuery();
-                return true;
+                if(yesno == true)
+                {
+                    Connect();
+                    cmd = new OracleCommand();
+                    cmd.Connection = con;
+                    cmd.CommandText =
+                       "UPDATE TGEBRUIKER SET heeftrijbewijs = :newrijbewijs WHERE USERID = :someID";
+                    cmd.Parameters.Add("someID", OracleDbType.Int32).Value = userid;
+                    cmd.Parameters.Add("newrijbewijs", OracleDbType.Int32).Value = "true";
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+                else
+                {
+                    Connect();
+                    cmd = new OracleCommand();
+                    cmd.Connection = con;
+                    cmd.CommandText =
+                       "UPDATE TGEBRUIKER SET heeftrijbewijs = :newrijbewijs WHERE USERID = :someID";
+                    cmd.Parameters.Add("someID", OracleDbType.Int32).Value = userid;
+                    cmd.Parameters.Add("newrijbewijs", OracleDbType.Int32).Value = "false";
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+               
             }
             catch (Exception ex)
             {

@@ -125,5 +125,10 @@ namespace Project
                 return false;
             }
         }
+        public void SetLicense(int ID,bool yesno)
+        {
+
+            databasehandler.UpdateLicense(ID,yesno);
+        }
     }
 }
