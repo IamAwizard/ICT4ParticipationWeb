@@ -1779,6 +1779,67 @@ namespace Project
                 Disconnect();
             }
         }
+        public bool SetAvailability(Availability available)
+        {
+
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET ID=:NewID , dagnaam=:NewDagnaam, dagdeel=:NewDagdeel, vrijwilligerid=:NewVrijwilligerid";
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add("NewID", OracleDbType.Int32).Value = available.ID;
+                cmd.Parameters.Add("NewDagnaam", OracleDbType.Varchar2).Value = available.Day;
+                cmd.Parameters.Add("NewDagdeel", OracleDbType.Varchar2).Value = available.TimeOfDay;
+                cmd.Parameters.Add("NewVrijwilligerid", OracleDbType.Int32).Value = available.volunid;
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        public List<Availability> GetAvailability()
+        {
+            List<Availability> available = new List<Availability>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    var ID = dr.GetInt32(0);
+                    var dayname = dr.GetString(1);
+                    var daypart = dr.GetString(2);
+                    var volunid = dr.GetInt32(3);
+
+                    available.Add(new Availability(ID, dayname, daypart, volunid));
+                }
+                return available;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
         public List<Meeting> GetMyAppointments(Client client)
         {
             List<Meeting> returnlist = new List<Meeting>();
