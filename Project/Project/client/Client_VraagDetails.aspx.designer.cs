@@ -58,13 +58,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_user;
         
         /// <summary>
-        /// lbox_Questions control.
+        /// tbox_Question control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Questions;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Question;
         
         /// <summary>
         /// lbl_Location control.

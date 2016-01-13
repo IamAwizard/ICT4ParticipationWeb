@@ -48,6 +48,10 @@ namespace Project
                 {
                     Response.Redirect("~/client/Client_Vragen.aspx");
                 }
+                if (foo is Admin)
+                {
+                    Response.Redirect("~/admin/admin_main.aspx");
+                }
             }
             else
             {

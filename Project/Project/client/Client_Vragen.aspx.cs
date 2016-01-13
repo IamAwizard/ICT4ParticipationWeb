@@ -14,7 +14,7 @@ namespace Project
         {
             if (IsPostBack)
             {
-               
+
                 GetSelectedQuestionDetails();
             }
             else
@@ -66,14 +66,14 @@ namespace Project
                 string critical = "Urgent: ";
                 string volunteersneeded = "Aantal vrijwilligers: " + q.VolunteersNeeded.ToString();
                 string transport = "";
-              
-                if(q.Location != "")
+
+                if (q.Location != "")
                 {
-                     location = "Locatie: " + q.Location;
+                    location = "Locatie: " + q.Location;
                 }
                 else
                 {
-                     location = "Locatie: Niet opgegeven";
+                    location = "Locatie: Niet opgegeven";
                 }
                 if (q.TravelTime != "")
                 {
@@ -112,13 +112,17 @@ namespace Project
         private void LoadQuestions()
         {
             List<Question> allquestions;
-            allquestions = questionhandler.GetAllQuestions();
-            if (allquestions != null)
+            if (Session["currentUser"] != null)
             {
-                lbox_Questions.DataSource = allquestions;
-                lbox_Questions.DataValueField = "ID";
-                lbox_Questions.DataTextField = "FormattedForVolunteer";
-                lbox_Questions.DataBind();
+                Client currentuser = (Client)Session["currentUser"];
+                allquestions = questionhandler.GetQuestionsByAuthor(currentuser);
+                if (allquestions != null)
+                {
+                    lbox_Questions.DataSource = allquestions;
+                    lbox_Questions.DataValueField = "ID";
+                    lbox_Questions.DataTextField = "FormattedForVolunteer";
+                    lbox_Questions.DataBind();
+                }
             }
         }
     }

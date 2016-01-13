@@ -45,6 +45,10 @@ namespace Project
                 {
                     Response.Redirect("~/volunteer/Volunteer_Vragen.aspx");
                 }
+                if(foo is Admin)
+                {
+                    Response.Redirect("~/admin/admin_main.aspx");
+                }
             }
             else
             {

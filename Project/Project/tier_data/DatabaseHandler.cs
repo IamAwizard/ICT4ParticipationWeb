@@ -1032,7 +1032,8 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandText =
-                   "UPDATE THULPVRAAG SET LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE ID = :newIDvalue";
+                   "UPDATE THULPVRAAG SET OMSCHRIJVING = :NewOMSCHRIJVING, LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE ID = :newIDvalue";
+                cmd.Parameters.Add("NewOMSCHRIJVING", question.Description);
                 cmd.Parameters.Add("NewLOCATIE", question.Location);
                 cmd.Parameters.Add("NewREISTIJD", question.TravelTime);
                 cmd.Parameters.Add("newUrgent", question.Critical.ToString());

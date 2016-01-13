@@ -41,11 +41,11 @@ namespace Project
                 // Stel het selectedvalue (=transport.ID) in op het transport.id van de vraag (tostring!!!!)
                 selecttransport.SelectedValue = question.Transport.ID.ToString();
 
-                lbox_Questions.Items.Clear();
+                tbox_Question.Text = string.Empty;
                 string username = clienthandler.GetUsername(question.AuthorID);
                 lbl_date.Text = question.DateBegin.ToShortDateString();
                 lbl_user.Text = username;
-                lbox_Questions.Items.Add(question.Description);
+                tbox_Question.Text = question.Description;
                 cbox_Critical.Checked = question.Critical;
                 if (question.Location != "")
                 {
@@ -77,9 +77,9 @@ namespace Project
             if (IsPostBack)
             {
                 errormsg.Visible = false;
-                if (lbox_Questions.Text.Length < 3000)
+                if (tbox_Question.Text.Length < 3000)
                 {
-                    question.Description = lbox_Questions.Text;
+                    question.Description = tbox_Question.Text;
                     if (tbox_Location.Text.Length < 200)
                     {
                         question.Location = tbox_Location.Text;

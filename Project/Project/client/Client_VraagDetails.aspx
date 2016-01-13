@@ -24,7 +24,7 @@
                         <asp:Label ID="lbl_user" runat="server" Text="Vroeg Lorem Ipsum"></asp:Label>
                         <br />
                         <br />
-                        <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="11"></asp:ListBox>
+                        <asp:TextBox ID="tbox_Question" runat="server" TextMode="MultiLine" Rows="5" Height="100%" AutoPostBack="True"></asp:TextBox>
                         <div class="row">
                             <div class="large-12 column ">
                                 <div class="row">
