@@ -9,14 +9,36 @@ namespace Project
 {
     public partial class Volunteer_Vragen : System.Web.UI.Page
     {
+        private VolunteerHandler volunteerhandler = new VolunteerHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                LoadQuestions();
+            }
         }
 
-        protected void btn_Profiel_Click(object sender, EventArgs e)
+        private void LoadQuestions()
         {
+            List<Question> allquestions;
+            allquestions = volunteerhandler.GetQuestions();
+            if (allquestions != null)
+            {
+                foreach (Question q in allquestions)
+                {
+                    lbox_Questions.Items.Add(q.ToString());
+                }
+            }
+        }
 
+        protected void lbox_Questions_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lbox_GetQuestion.SelectedIndex != -1)
+            {
+                lbox_GetQuestion.Items.Clear();
+                var foo = lbox_Questions.SelectedItem;
+                lbox_GetQuestion.Items.Add(foo);
+            }
         }
     }
 }

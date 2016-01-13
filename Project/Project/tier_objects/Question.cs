@@ -7,6 +7,7 @@ namespace Project
 {
     public class Question
     {
+        // Constructor
         public Question(string description, DateTime datebegin, bool critical, int volunteersneeded)
         {
             this.Description = description;
@@ -35,8 +36,7 @@ namespace Project
             this.Transport = new Transport(transportid, transportdescription);
         }
 
-
-
+        // Properties
 
         public int ID { get; set; }
         public string Description { get; set; }
@@ -48,5 +48,21 @@ namespace Project
         public int VolunteersNeeded { get; set; }
         public int AuthorID { get; set; }
         public Transport Transport { get; set; }
+
+        // Methodes
+
+        public override string ToString()
+        {
+            string summary;
+            if(Description.Length < 60)
+            {
+                summary = Description;
+            }
+            else
+            {
+                summary = Description.Substring(0, 60) + "...";
+            }
+            return DateBegin.ToShortDateString() + ": " + summary;
+        }
     }
 }

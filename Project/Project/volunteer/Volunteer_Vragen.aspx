@@ -7,10 +7,10 @@
             <div class="large-12 column callout">
                 <div class="large-12 columns">
                     <asp:Label ID="lbl_Questions" runat="server" Text="Openstaande Vragen:"></asp:Label>
-                    <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="10"></asp:ListBox>
+                    <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="10" AutoPostBack="True" OnSelectedIndexChanged="lbox_Questions_SelectedIndexChanged"></asp:ListBox>
                      <asp:Label runat="server" ID="lbl_errormsg" Text="errormessage"></asp:Label>
                     <br />
-                    <asp:Button ID="btn_LoadQuestion" runat="server" Text="Vraag bekijken" CssClass="button" />
+                    <asp:Button ID="btn_LoadQuestion" runat="server" Text="Vraag bekijken" CssClass="button"/>
 
                 </div>
                 <div class="large-12 columns">
@@ -22,7 +22,7 @@
                             <asp:Button ID="btn_AnswerQuestion" runat="server" Text="Reageren" CssClass="expanded button" />
                         </div>
                         <div class="large-8 columns">
-                            <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getquestion"></asp:ListBox>
+                            <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_GetQuestion"></asp:ListBox>
                         </div>
                         <div class="large-4 columns">
                             <asp:Label ID="lbl_Date" runat="server" Text="Datum: "></asp:Label><br />

@@ -4429,3 +4429,7 @@ table.hover tr:nth-of-type(even):hover {
             content: "";
             padding: 0 0.4rem 0 0.8rem;
         }
+
+        .border-left-side{
+            border-left: 2px solid #cacaca;
+        }

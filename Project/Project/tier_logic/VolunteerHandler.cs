@@ -23,6 +23,8 @@ namespace Project
             questions = new QuestionHandler();
             accounthandler = new AccountHandler();
         }
+
+        // Methods
         public bool UpdateQuestion(Question questiontoupdate)
         {
             if (questions.UpdateQuestion(questiontoupdate))
@@ -31,7 +33,6 @@ namespace Project
                 return false;
         }
 
-        // Methods
         public bool AnswerQuestion(Question question, string answer)
         {
             throw new NotImplementedException();
