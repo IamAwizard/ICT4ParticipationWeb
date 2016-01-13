@@ -32,7 +32,7 @@
                                         <asp:Label ID="lbl_Location" runat="server" Text="Locatie:" CssClass="middle" AssociatedControlID="tbox_Location"></asp:Label>
                                     </div>
                                     <div class="large-8 columns">
-                                        <asp:TextBox ID="tbox_Location" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="tbox_Location" AutoPostBack="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -40,15 +40,15 @@
                                         <asp:Label ID="lbl_Traveltime" runat="server" Text="Reistijd:" CssClass="middle" AssociatedControlID="tbox_Traveltime"></asp:Label>
                                     </div>
                                     <div class="large-8 columns">
-                                        <asp:TextBox ID="tbox_Traveltime" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="tbox_Traveltime" AutoPostBack="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="large-4 columns">
-                                        <asp:Label ID="lbl_Transport" runat="server" Text="Vervoer:" CssClass="middle" AssociatedControlID="tbox_Transport"></asp:Label>
+                                        <asp:Label ID="lbl_Transport" runat="server" Text="Vervoer:" CssClass="middle" AssociatedControlID="selecttransport"></asp:Label>
                                     </div>
                                     <div class="large-8 columns">
-                                        <asp:TextBox ID="tbox_Transport" runat="server"></asp:TextBox>
+                                        <asp:DropDownList runat="server" AutoPostBack="true"  ID="selecttransport"></asp:DropDownList>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -56,8 +56,10 @@
                                         <asp:Label ID="lbl_VolunteerCount" runat="server" Text="Aantal Vrijwilligers:" CssClass="middle" AssociatedControlID="tbox_VolunteerCount"></asp:Label>
                                     </div>
                                     <div class="large-8 columns">
-                                        <asp:TextBox ID="tbox_VolunteerCount" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="tbox_VolunteerCount" AutoPostBack="true" runat="server"></asp:TextBox>
+                                        <asp:Label ID="errormsg" ForeColor="Red" Visible="false" runat="server"></asp:Label>
                                     </div>
+                                  
                                 </div>
                             </div>
                         </div>

@@ -284,6 +284,38 @@ namespace Project
             }
         }
 
+        public string GetClientUserName(int ID)
+        {
+            string gebruikersnaam = "";
+            try
+            {
+
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT G.naam FROM TGEBRUIKER G,THULPBEHOEVENDE H WHERE H.GEBRUIKERID = G.ID AND H.ID="+ID+"";
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        gebruikersnaam = dr.GetString(0);
+     
+                    }
+                    return gebruikersnaam;
+                
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+    
         /// <summary>
         /// Finds a client ID by email
         /// </summary>
@@ -676,6 +708,70 @@ namespace Project
             }
         }
 
+        public List<Transport> GetTransports()
+        {
+            List<Transport> transports = new List<Transport>();
+            try
+            {
+                Connect();
+                using (cmd = new OracleCommand())
+                {
+                    Question returnvalue = null;
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "select ID,Omschrijving from TVervoer";
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        int ID = SafeReadInt(dr, 0);
+                        var description = SafeReadString(dr, 1);
+                        transports.Add(new Transport(ID, description));
+                    }
+                    return transports;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        public int GetSingleTransport(string description)
+        {
+            int ID=0;
+            try
+            {
+                Connect();
+                using (cmd = new OracleCommand())
+                {
+                    Question returnvalue = null;
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "select ID from TVervoer where omschrijving='"+description+"'";
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                       ID = SafeReadInt(dr, 0);
+                    }
+                    return ID;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return 0;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
         /// <summary>
         /// Gets all users from the database
         /// </summary>
@@ -836,8 +932,7 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandText =
-                   "UPDATE THULPVRAAG SET OMSCHRIJVING = :NewOMSCHRIJVING, LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE ID = :newIDvalue";
-                cmd.Parameters.Add("NewOMSCHRIJVING", question.Description);
+                   "UPDATE THULPVRAAG SET LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE ID = :newIDvalue";
                 cmd.Parameters.Add("NewLOCATIE", question.Location);
                 cmd.Parameters.Add("NewREISTIJD", question.TravelTime);
                 cmd.Parameters.Add("newUrgent", question.Critical.ToString());

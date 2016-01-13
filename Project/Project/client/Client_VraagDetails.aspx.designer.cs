@@ -103,13 +103,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Transport;
         
         /// <summary>
-        /// tbox_Transport control.
+        /// selecttransport control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Transport;
+        protected global::System.Web.UI.WebControls.DropDownList selecttransport;
         
         /// <summary>
         /// lbl_VolunteerCount control.
@@ -128,6 +128,15 @@ namespace Project {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbox_VolunteerCount;
+        
+        /// <summary>
+        /// errormsg control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label errormsg;
         
         /// <summary>
         /// lbl_Volunteer control.

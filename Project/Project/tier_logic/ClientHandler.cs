@@ -12,6 +12,7 @@ namespace Project
         QuestionHandler questionhandler;
         ReviewHandler reviewhandler;
         AccountHandler accounthandler;
+        DatabaseHandler databasehandler = new DatabaseHandler();
 
         // Constructor   
         public ClientHandler(Client activeuser)
@@ -19,7 +20,12 @@ namespace Project
             questionhandler = new QuestionHandler();
             reviewhandler = new ReviewHandler();
             accounthandler = new AccountHandler();
+      
             CurrentUser = activeuser;
+        }
+
+        public ClientHandler()
+        {
         }
 
         // Properties
@@ -79,6 +85,47 @@ namespace Project
         public List<Review> GetReviews()
         {
             throw new NotImplementedException();
+        }
+        public string GetUsername(int ID)
+        {
+            try
+            {
+                string username = databasehandler.GetClientUserName(ID);
+                return username;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+        public List<Transport> GetTransports()
+        {
+            List<Transport> transports = new List<Transport>();
+            try
+            {
+                transports = databasehandler.GetTransports();
+                return transports;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+        }
+            public int GetTransportID(string description)
+        {
+            int ID =0;
+            try
+            {
+                ID = databasehandler.GetSingleTransport(description);
+                return ID;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return 0;
+            }
         }
     }
 }
