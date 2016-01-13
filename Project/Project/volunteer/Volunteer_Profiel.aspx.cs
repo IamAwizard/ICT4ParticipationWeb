@@ -12,7 +12,7 @@ namespace Project
         protected void Page_Load(object sender, EventArgs e)
         {
             List<Availability> available = new List<Availability>();
-            available =
+            available = 
         }
     }
 }

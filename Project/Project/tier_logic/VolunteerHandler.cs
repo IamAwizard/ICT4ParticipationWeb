@@ -107,5 +107,23 @@ namespace Project
 
             return databasehandler.GetMyReviews(volunteer);
         }
+
+        public List<Availability> GetAvailability(int ID)
+        {
+
+            return databasehandler.GetAvailability(ID);
+        }
+        public bool SetAvailablilty(Availability available)
+        {
+            try
+            {
+                 databasehandler.SetAvailability(available);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
     }
 }

@@ -1808,7 +1808,7 @@ namespace Project
             }
         }
 
-        public List<Availability> GetAvailability()
+        public List<Availability> GetAvailability(int volunID)
         {
             List<Availability> available = new List<Availability>();
             try
@@ -1816,7 +1816,7 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID";
+                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID WHERE vrijwilligersID="+volunID+"";
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
