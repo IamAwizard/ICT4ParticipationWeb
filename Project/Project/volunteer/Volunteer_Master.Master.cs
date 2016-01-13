@@ -52,6 +52,11 @@ namespace Project
                 {
                     Response.Redirect("~/admin/admin_main.aspx");
                 }
+                else
+                {
+                    Volunteer bar = foo as Volunteer;
+                    lbl_Username.Text = bar.Name;
+                }
             }
             else
             {

@@ -49,6 +49,11 @@ namespace Project
                 {
                     Response.Redirect("~/admin/admin_main.aspx");
                 }
+                else
+                {
+                    Client bar = foo as Client;
+                    lbl_Username.Text = bar.Name;
+                }
             }
             else
             {
