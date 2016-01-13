@@ -16,6 +16,14 @@ namespace Project
             {
                 LoadQuestions();
             }
+            else
+            {
+                if (lbox_Questions.SelectedItem != null)
+                {
+                    lbox_GetQuestion.Items.Clear();
+                    lbox_GetQuestion.Items.Add(lbox_Questions.SelectedItem);
+                }
+            }
         }
 
         private void LoadQuestions()
@@ -24,21 +32,16 @@ namespace Project
             allquestions = volunteerhandler.GetQuestions();
             if (allquestions != null)
             {
-                foreach (Question q in allquestions)
-                {
-                    lbox_Questions.Items.Add(q.ToString());
-                }
+                lbox_Questions.DataSource = allquestions;
+                lbox_Questions.DataValueField = "ID";
+                lbox_Questions.DataTextField = "FormattedForVolunteer";
+                lbox_Questions.DataBind();
             }
         }
 
         protected void lbox_Questions_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (lbox_GetQuestion.SelectedIndex != -1)
-            {
-                lbox_GetQuestion.Items.Clear();
-                var foo = lbox_Questions.SelectedItem;
-                lbox_GetQuestion.Items.Add(foo);
-            }
+
         }
     }
 }

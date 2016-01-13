@@ -15,7 +15,7 @@ namespace Project
             this.Critical = critical;
             this.VolunteersNeeded = volunteersneeded;
         }
-        public Question(int authorid, string description, DateTime datebegin,int volunteersneeded)
+        public Question(int authorid, string description, DateTime datebegin, int volunteersneeded)
         {
             this.AuthorID = authorid;
             this.Description = description;
@@ -49,12 +49,29 @@ namespace Project
         public int AuthorID { get; set; }
         public Transport Transport { get; set; }
 
+        public string FormattedForVolunteer
+        {
+            get
+            {
+                string summary;
+                if (Description.Length < 60)
+                {
+                    summary = Description;
+                }
+                else
+                {
+                    summary = Description.Substring(0, 60) + "...";
+                }
+                return $"{DateBegin.ToShortDateString()}: {summary}";
+            }
+        }
+
         // Methodes
 
         public override string ToString()
         {
             string summary;
-            if(Description.Length < 60)
+            if (Description.Length < 60)
             {
                 summary = Description;
             }

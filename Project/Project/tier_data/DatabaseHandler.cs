@@ -518,6 +518,54 @@ namespace Project
 
         }
 
+        /// <summary>
+        /// Gets a question from the database
+        /// </summary>
+        /// <param name="questionid">question id of question to get</param>
+        /// <returns>question if found otherwise null</returns>
+        public Question GetQuestionByID(int questionid)
+        {
+            try
+            {
+                Connect();
+                using (cmd = new OracleCommand())
+                {
+                    Question returnvalue = null;
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "select * from THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.ID = :questionID";
+                    cmd.Parameters.Add("questionID", questionid);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var id = SafeReadInt(dr, 0);
+                        var description = SafeReadString(dr, 1);
+                        var location = SafeReadString(dr, 2);
+                        var traveltime = SafeReadString(dr, 3);
+                        var startdate = SafeReadDateTime(dr, 4);
+                        var enddate = SafeReadDateTime(dr, 5);
+                        var critical = SafeReadString(dr, 6);
+                        var volunteers = SafeReadInt(dr, 7);
+                        var clientid = SafeReadInt(dr, 8);
+                        var trash = SafeReadInt(dr, 9);
+                        var transportid = SafeReadInt(dr, 10);
+                        var transportdescription = SafeReadString(dr, 11);
+
+                        returnvalue = new Question(id, description, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription);
+                    }
+                    return returnvalue;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
 
         // KLOPT NIET
 
