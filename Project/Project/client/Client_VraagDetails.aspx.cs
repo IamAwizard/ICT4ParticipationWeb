@@ -12,6 +12,10 @@ namespace Project
         protected void Page_Load(object sender, EventArgs e)
         {
             MaintainScrollPositionOnPostBack = true;
+
+            string questionid = Session["Question"].ToString();
+            int id = Convert.ToInt32(questionid);
+
         }
     }
 }

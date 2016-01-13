@@ -12,7 +12,6 @@ namespace Project
         QuestionHandler questionhandler = new QuestionHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
-  
             if (lbox_Questions.SelectedItem != null)
             {
                 Client currentuser = (Client)Session["currentUser"];
@@ -22,17 +21,18 @@ namespace Project
                 int id = currentuser.ClientID;
                 question = questionhandler.GetSingleQuestion(id, discription);
                 lbox_getquestion.Items.Clear();
-                foreach(Question Q in question)
+                foreach (Question Q in question)
                 {
+                    
                     string location = "";
-                    string traveltime ="";
+                    string traveltime = "";
                     string startdate = "Datum: " + Q.DateBegin.ToShortDateString();
                     string critical = "Urgent: ";
                     string volunteersneeded = "Aantal vrijwilligers: " + Q.VolunteersNeeded.ToString();
                     string transport = "";
                     if (Q.Location != "")
                     {
-                        location = "Locatie: "  + Q.Location;
+                        location = "Locatie: " + Q.Location;
                     }
                     else
                     {
@@ -40,7 +40,7 @@ namespace Project
                     }
                     if (Q.TravelTime != "")
                     {
-                        traveltime = "Reistijd: "+ Q.TravelTime;
+                        traveltime = "Reistijd: " + Q.TravelTime;
                     }
                     else
                     {
@@ -48,15 +48,15 @@ namespace Project
                     }
                     if (Q.Transport.Description.Length != 0)
                     {
-                         transport = "Vervoer: " + Q.Transport.Description;
+                        transport = "Vervoer: " + Q.Transport.Description;
                     }
                     else
                     {
                         transport = "Vervoer: Nog geen vervoer opgegeven";
                     }
-                    if(Q.Critical == true)
+                    if (Q.Critical == true)
                     {
-                         critical += "JA";
+                        critical += "JA";
                     }
                     else
                     {
@@ -68,9 +68,10 @@ namespace Project
                     lbox_getquestion.Items.Add(critical);
                     lbox_getquestion.Items.Add(volunteersneeded);
                     lbox_getquestion.Items.Add(transport);
+                    Session["Question"] = Q.ID;
                 }
             }
-           
+
 
 
             if (Session["currentUser"] != null)
@@ -79,20 +80,20 @@ namespace Project
                 Client currentuser = (Client)Session["currentUser"];
                 List<Question> questions = new List<Question>();
                 questions = questionhandler.GetQuestionsByAuthor(currentuser);
-                if(questions.Count != 0)
+                if (questions.Count != 0)
                 {
                     foreach (Question Q in questions)
                     {
                         string discriptionanddate = Q.DateBegin.ToShortDateString() + " " + Q.Description;
                         lbox_Questions.Items.Add(discriptionanddate);
                     }
-                }     
+                }
             }
         }
 
         protected void btn_AddQuestion_Click(object sender, EventArgs e)
         {
-           
+
             if (tbox_AddQuestion.Text.Length > 10 && tbox_AddQuestion.Text.Length < 255)
             {
                 if (Session["currentUser"] != null)
@@ -103,28 +104,25 @@ namespace Project
                     Question question = new Question(id, content, DateTime.Now, 1);
                     questionhandler.AddQuestion(question);
                     Response.Redirect("Client_vragen.aspx");
-             
+
                 }
-                
+
             }
             else
             {
                 lbl_errormsg.ForeColor = System.Drawing.Color.Red;
                 lbl_errormsg.Text = "Inhoud van de vraag is tekort of te lang";
             }
-         
+
         }
 
         protected void btn_LoadQuestion_Click(object sender, EventArgs e)
         {
+
          
+                    Response.Redirect("Client_VraagDetails.aspx?Question=" + Session["Question"] + "");
+
+            
         }
-
-       
-
-
-        //Client currentuser = (Client)Session["currentUser"];
-        //List<Question> questiondetails = new List<Question>();
-        //questiondetails = questionhandler.GetQuestionsByAuthor(currentuser);
     }
 }
