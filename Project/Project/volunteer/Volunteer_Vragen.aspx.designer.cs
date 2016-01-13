@@ -58,13 +58,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Button btn_AnswerQuestion;
         
         /// <summary>
-        /// lbox_GetQuestion control.
+        /// tbox_GetQuestion control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_GetQuestion;
+        protected global::System.Web.UI.WebControls.TextBox tbox_GetQuestion;
         
         /// <summary>
         /// lbl_Date control.
@@ -85,12 +85,12 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Location;
         
         /// <summary>
-        /// lbl_VolunteersNeeder control.
+        /// lbl_VolunteersNeeded control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_VolunteersNeeder;
+        protected global::System.Web.UI.WebControls.Label lbl_VolunteersNeeded;
     }
 }

@@ -12,17 +12,13 @@ namespace Project
         private VolunteerHandler volunteerhandler = new VolunteerHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            if (IsPostBack)
             {
-                LoadQuestions();
+                GetSelectedQuestionDetails();
             }
             else
             {
-                if (lbox_Questions.SelectedItem != null)
-                {
-                    lbox_GetQuestion.Items.Clear();
-                    lbox_GetQuestion.Items.Add(lbox_Questions.SelectedItem);
-                }
+                LoadQuestions();
             }
         }
 
@@ -36,6 +32,19 @@ namespace Project
                 lbox_Questions.DataValueField = "ID";
                 lbox_Questions.DataTextField = "FormattedForVolunteer";
                 lbox_Questions.DataBind();
+            }
+        }
+
+        private void GetSelectedQuestionDetails()
+        {
+            if (lbox_Questions.SelectedItem != null)
+            {
+                int questionid = Convert.ToInt32(lbox_Questions.SelectedItem.Value);
+                Question q = volunteerhandler.GetQuestionByIDfromCache(questionid);
+                tbox_GetQuestion.Text = q.Description;
+                lbl_Date.Text = $"Datum: {q.DateBegin.ToShortDateString()}";
+                lbl_Location.Text = $"Locatie: {q.Location}";
+                lbl_VolunteersNeeded.Text = $"Vrijwilligers nodig: {q.VolunteersNeeded}";
             }
         }
 

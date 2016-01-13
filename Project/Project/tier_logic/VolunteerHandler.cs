@@ -43,6 +43,7 @@ namespace Project
             throw new NotImplementedException();
         }
 
+
         public Volunteer GetUserInfo()
         {
             return currentuser;
@@ -54,6 +55,10 @@ namespace Project
             return questions.GetAllQuestions();
         }
 
+        public Question GetQuestionByIDfromCache(int questionid)
+        {
+            return questions.GetQuestionByIDCached(questionid);
+        }
         public List<Account> GetClients()
         {
             throw new NotImplementedException();

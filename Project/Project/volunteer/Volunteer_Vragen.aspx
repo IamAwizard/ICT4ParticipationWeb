@@ -22,12 +22,12 @@
                             <asp:Button ID="btn_AnswerQuestion" runat="server" Text="Reageren" CssClass="expanded button" />
                         </div>
                         <div class="large-8 columns">
-                            <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_GetQuestion"></asp:ListBox>
+                            <asp:TextBox ID="tbox_GetQuestion" runat="server" Height="100%" MaxLength="3000" Rows="10" TextMode="MultiLine"></asp:TextBox>
                         </div>
                         <div class="large-4 columns">
                             <asp:Label ID="lbl_Date" runat="server" Text="Datum: "></asp:Label><br />
                             <asp:Label ID="lbl_Location" runat="server" Text="Locatie:"></asp:Label><br />
-                            <asp:Label ID="lbl_VolunteersNeeder" runat="server" Text="Vrijwilligers nodig:"></asp:Label>
+                            <asp:Label ID="lbl_VolunteersNeeded" runat="server" Text="Vrijwilligers nodig:"></asp:Label>
                         </div>
                     </div>
                 </div>
