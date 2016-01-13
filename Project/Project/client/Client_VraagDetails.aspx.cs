@@ -19,17 +19,24 @@ namespace Project
             List<Transport> transport = new List<Transport>();
             transport = clienthandler.GetTransports();
             selecttransport.Items.Clear();
-            foreach (Transport T in transport)
-            {
-                
-                selecttransport.Items.Add(T.Description);
 
-            }
+            // DATABIND
+            selecttransport.DataSource = transport;
+            // Property van transport die word weergeven als tekst
+            selecttransport.DataTextField = "Description";
+            // Property van transport die gebruikt wordt als value (niet getoond)
+            selecttransport.DataValueField = "ID";
+            selecttransport.DataBind();
+
+
             MaintainScrollPositionOnPostBack = true;
             string questionid = Session["Question"].ToString();
             int id = Convert.ToInt32(questionid);
             Question question;
+            // De vraag wordt geladen
             question = databasehandler.GetQuestionByID(id);
+            // Stel het selectedvalue (=transport.ID) in op het transport.id van de vraag (tostring!!!!)
+            selecttransport.SelectedValue = question.Transport.ID.ToString();
             if (IsPostBack)
             {
                 errormsg.Visible = false;
