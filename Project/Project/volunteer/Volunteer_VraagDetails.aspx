@@ -71,7 +71,7 @@
                         <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_AcceptedVolunteers"></asp:ListBox>
                         <div class="row">
                             <div class="large-12 columns">
-                                <asp:Button ID="btn_Answer" runat="server" Text="Beantwoorden!" CssClass="expanded button" />
+                                <asp:Button ID="btn_Answer" runat="server" Text="Beantwoorden!" CssClass="expanded button" OnClick="btn_Answer_Click" />
                             </div>
                         </div>
                     </div>

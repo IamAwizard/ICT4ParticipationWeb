@@ -7,10 +7,11 @@ using System.Web.UI.WebControls;
 
 namespace Project
 {
-	public partial class Volunteer_Master : System.Web.UI.MasterPage
-	{
+    public partial class Volunteer_Master : System.Web.UI.MasterPage
+    {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckIfUserAllowed();
             UpdateTitleBarLinks();
         }
 
@@ -35,6 +36,22 @@ namespace Project
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void CheckIfUserAllowed()
+        {
+            if (Session["isLoggedIn"] != null)
+            {
+                Account foo = (Account)Session["currentUser"];
+                if (foo is Client)
+                {
+                    Response.Redirect("~/client/Client_Vragen.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
             }
         }
     }

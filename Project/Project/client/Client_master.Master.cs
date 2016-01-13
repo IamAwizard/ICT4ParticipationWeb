@@ -11,12 +11,13 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckIfUserAllowed();
             UpdateTitleBarLinks();
         }
 
         private void UpdateTitleBarLinks()
         {
-            switch(Request.Url.LocalPath.ToLower())
+            switch (Request.Url.LocalPath.ToLower())
             {
                 case "/client/client_vragen.aspx":
                     link_Questions.Style.Add(HtmlTextWriterStyle.Color, "white");
@@ -32,6 +33,22 @@ namespace Project
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void CheckIfUserAllowed()
+        {
+            if (Session["isLoggedIn"] != null)
+            {
+                Account foo = (Account)Session["currentUser"];
+                if (foo is Volunteer)
+                {
+                    Response.Redirect("~/volunteer/Volunteer_Vragen.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
             }
         }
     }

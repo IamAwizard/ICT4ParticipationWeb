@@ -9,6 +9,7 @@ namespace Project
 {
     public partial class Volunteer_VraagDetails : System.Web.UI.Page
     {
+        private VolunteerHandler volunteerhandler = new VolunteerHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
             LoadQuestion();
@@ -17,7 +18,7 @@ namespace Project
 
         private void LoadQuestion()
         {
-            if(Session["Question"] != null)
+            if (Session["Question"] != null)
             {
                 Question q = (Question)Session["Question"];
 
@@ -28,7 +29,7 @@ namespace Project
                 tbox_Traveltime.Text = q.TravelTime;
                 tbox_Transport.Text = q.Transport.Description;
                 string grammar = "vrijwilligers hebben";
-                if(q.AcceptedBy.Count == 1)
+                if (q.AcceptedBy.Count == 1)
                 {
                     grammar = "vrijwilliger heeft";
                 }
@@ -50,5 +51,21 @@ namespace Project
                 Response.Redirect("~/volunteer/volunteer_vragen.aspx");
             }
         }
+
+        protected void btn_Answer_Click(object sender, EventArgs e)
+        {
+            if (Session["Question"] != null)
+            {
+                if (Session["currentUser"] != null)
+                {
+                    Volunteer user = (Volunteer)Session["currentUser"];
+                    Question question = (Question)Session["Question"];
+                    question.AcceptedBy.Add(user);
+                    Session["Question"] = question;
+                    volunteerhandler.AnswerQuestion(question, user);
+                }
+            }
+        }
+
     }
 }

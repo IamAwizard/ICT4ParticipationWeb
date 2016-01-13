@@ -11,7 +11,27 @@ namespace Project
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            CheckIfUserAllowed();
+        }
 
+        private void CheckIfUserAllowed()
+        {
+            if (Session["isLoggedIn"] != null)
+            {
+                Account foo = (Account)Session["currentUser"];
+                if (foo is Volunteer)
+                {
+                    Response.Redirect("~/volunteer/Volunteer_Vragen.aspx");
+                }
+                if (foo is Client)
+                {
+                    Response.Redirect("~/client/Client_Vragen.aspx");
+                }
+            }
+            else
+            {
+                Response.Redirect("~/Login.aspx");
+            }
         }
     }
 }
