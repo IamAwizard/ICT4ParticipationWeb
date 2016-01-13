@@ -12,6 +12,66 @@ namespace Project
         QuestionHandler questionhandler = new QuestionHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
+  
+            if (lbox_Questions.SelectedItem != null)
+            {
+                Client currentuser = (Client)Session["currentUser"];
+                List<Question> question = new List<Question>();
+                string discription = lbox_Questions.Text;
+                discription = discription.Substring(10);
+                int id = currentuser.ClientID;
+                question = questionhandler.GetSingleQuestion(id, discription);
+                lbox_getquestion.Items.Clear();
+                foreach(Question Q in question)
+                {
+                    string location = "";
+                    string traveltime ="";
+                    string startdate = "Datum: " + Q.DateBegin.ToShortDateString();
+                    string critical = "Urgent: ";
+                    string volunteersneeded = "Aantal vrijwilligers: " + Q.VolunteersNeeded.ToString();
+                    string transport = "";
+                    if (Q.Location != "")
+                    {
+                        location = "Locatie: "  + Q.Location;
+                    }
+                    else
+                    {
+                        location = "Locatie: Nog geen locatie opgegeven";
+                    }
+                    if (Q.TravelTime != "")
+                    {
+                        traveltime = "Reistijd: "+ Q.TravelTime;
+                    }
+                    else
+                    {
+                        traveltime = "Reistijd: Nog geen reistijd opgegeven";
+                    }
+                    if (Q.Transport.Description.Length != 0)
+                    {
+                         transport = "Vervoer: " + Q.Transport.Description;
+                    }
+                    else
+                    {
+                        transport = "Vervoer: Nog geen vervoer opgegeven";
+                    }
+                    if(Q.Critical == true)
+                    {
+                         critical += "JA";
+                    }
+                    else
+                    {
+                        critical += "NEE";
+                    }
+                    lbox_getquestion.Items.Add(location);
+                    lbox_getquestion.Items.Add(traveltime);
+                    lbox_getquestion.Items.Add(startdate);
+                    lbox_getquestion.Items.Add(critical);
+                    lbox_getquestion.Items.Add(volunteersneeded);
+                    lbox_getquestion.Items.Add(transport);
+                }
+            }
+           
+
 
             if (Session["currentUser"] != null)
             {
@@ -23,10 +83,8 @@ namespace Project
                 {
                     foreach (Question Q in questions)
                     {
-                        string date = Q.DateBegin.ToShortDateString();
-                        string discription = Q.Description;
-                        lbox_Questions.Items.Add(date);
-                        lbox_Questions.Items.Add(discription);
+                        string discriptionanddate = Q.DateBegin.ToShortDateString() + " " + Q.Description;
+                        lbox_Questions.Items.Add(discriptionanddate);
                     }
                 }     
             }
@@ -35,7 +93,7 @@ namespace Project
         protected void btn_AddQuestion_Click(object sender, EventArgs e)
         {
            
-            if (tbox_AddQuestion.Text.Length > 10)
+            if (tbox_AddQuestion.Text.Length > 10 && tbox_AddQuestion.Text.Length < 255)
             {
                 if (Session["currentUser"] != null)
                 {
@@ -52,7 +110,7 @@ namespace Project
             else
             {
                 lbl_errormsg.ForeColor = System.Drawing.Color.Red;
-                lbl_errormsg.Text = "Inhoud van de vraag is tekort";
+                lbl_errormsg.Text = "Inhoud van de vraag is tekort of te lang";
             }
          
         }
@@ -62,9 +120,11 @@ namespace Project
          
         }
 
-        protected void lbox_getquestion_SelectedIndexChanged(object sender, EventArgs e)
-        {
+       
 
-        }
+
+        //Client currentuser = (Client)Session["currentUser"];
+        //List<Question> questiondetails = new List<Question>();
+        //questiondetails = questionhandler.GetQuestionsByAuthor(currentuser);
     }
 }

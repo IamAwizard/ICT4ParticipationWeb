@@ -30,6 +30,8 @@ namespace Project
             questions = databasehandler.getquestions();
         }
 
+
+
         public bool AddQuestion(Question question)
         {
             
@@ -61,6 +63,20 @@ namespace Project
             try
             {
                 return questions.FindAll(x => x.AuthorID == ((Client)author).ClientID);
+            }
+            catch (NullReferenceException ex)
+            {
+                return null;
+            }
+        }
+
+
+        public List<Question> GetSingleQuestion(int id,string Discription)
+        {
+  
+            try
+            {
+                return questions = databasehandler.getsinglequestion(id, Discription);
             }
             catch (NullReferenceException ex)
             {

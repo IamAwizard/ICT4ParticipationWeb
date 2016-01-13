@@ -962,6 +962,52 @@ namespace Project
             }
         }
 
+        public List<Question> getsinglequestion(int userid, string discription)
+        {
+
+            List<Question> question = new List<Question>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.omschrijving='" + discription+"' AND H.auteur='"+userid+"'";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    var questionid = SafeReadInt(dr, 0);
+                    var description = SafeReadString(dr, 1);
+                    var location = SafeReadString(dr, 2);
+                    var traveltime = SafeReadString(dr, 3);
+                    var startdate = SafeReadDateTime(dr, 4);
+                    var enddate = SafeReadDateTime(dr, 5);
+                    var critical = SafeReadString(dr, 6);
+                    var volunteers = SafeReadInt(dr, 7);
+                    var clientid = SafeReadInt(dr, 8);
+                    var trash = SafeReadInt(dr, 9);
+                    var transportid = SafeReadInt(dr, 10);
+                    var transportdescription = SafeReadString(dr, 11);
+
+
+                    question.Add(new Question(questionid, description, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription));
+                }
+
+                return question;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+       
+
         public bool AddReview(Review newreview)
         {
             try
