@@ -65,11 +65,10 @@
                 </div>
                 <div class="large-4 columns">
                     <div class="large-12 columns secondary callout">
-                        <asp:Label ID="lbl_Volunteer" runat="server" Text="nog niemand"></asp:Label>
+                        <asp:Label ID="lbl_Volunteers" runat="server" Text="nog niemand"></asp:Label>
                         <br />
-                        <asp:Label ID="lbl_Commented" runat="server" Text="Heeft gereageerd"></asp:Label>
                         <br />
-                        <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getaccepted"></asp:ListBox>
+                        <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_AcceptedVolunteers"></asp:ListBox>
                         <div class="row">
                             <div class="large-12 columns">
                                 <asp:Button ID="btn_Answer" runat="server" Text="Beantwoorden!" CssClass="expanded button" />

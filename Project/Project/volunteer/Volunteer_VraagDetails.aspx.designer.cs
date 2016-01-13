@@ -130,31 +130,22 @@ namespace Project {
         protected global::System.Web.UI.WebControls.TextBox tbox_VolunteerCount;
         
         /// <summary>
-        /// lbl_Volunteer control.
+        /// lbl_Volunteers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Volunteer;
+        protected global::System.Web.UI.WebControls.Label lbl_Volunteers;
         
         /// <summary>
-        /// lbl_Commented control.
+        /// lbox_AcceptedVolunteers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Commented;
-        
-        /// <summary>
-        /// lbox_getaccepted control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_getaccepted;
+        protected global::System.Web.UI.WebControls.ListBox lbox_AcceptedVolunteers;
         
         /// <summary>
         /// btn_Answer control.

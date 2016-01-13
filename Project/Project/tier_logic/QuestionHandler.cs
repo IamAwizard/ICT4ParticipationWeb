@@ -44,11 +44,31 @@ namespace Project
         /// </summary>
         /// <param name="question"></param>
         /// <returns></returns>
-        public Question AddClientToQuestion(Question question)
+        public Question ExpandQuestionWithClient(Question question)
         {
             return databasehandler.AddClientToQuestion(question);
         }
 
+        /// <summary>
+        /// Fills the AcceptedBy property of a question
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
+        public Question ExpandQuestionWithVolunteers(Question q)
+        {
+            return databasehandler.ExpandQuestionWithVolunteers(q);
+        }
+
+        /// <summary>
+        /// Adds a volunteer to the answered list of a question
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public bool AnswerQuestion(Question q, Volunteer v)
+        {
+            return databasehandler.AnswerQuestion(q, v);
+        }
         public bool DeleteQuestion(Question question)
         {
             if (databasehandler.DeleteQuestion(question.ID))

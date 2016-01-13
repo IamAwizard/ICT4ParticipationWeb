@@ -52,7 +52,8 @@ namespace Project
         {
             int questionid = Convert.ToInt32(lbox_Questions.SelectedItem.Value);
             Question q = volunteerhandler.GetQuestionByIDfromCache(questionid);
-            q = volunteerhandler.AddClientToQuestion(q);
+            q = volunteerhandler.ExpandQuestionsWithClient(q);
+            q = volunteerhandler.ExpandQuestionWithVolunteers(q);
             Session["Question"] = q; 
             Response.Redirect("~/volunteer/volunteer_vraagdetails.aspx");
         }

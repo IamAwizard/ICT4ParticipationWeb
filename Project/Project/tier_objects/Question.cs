@@ -14,6 +14,7 @@ namespace Project
             this.DateBegin = datebegin;
             this.Critical = critical;
             this.VolunteersNeeded = volunteersneeded;
+            this.AcceptedBy = new List<Volunteer>();
         }
         public Question(int authorid, string description, DateTime datebegin, int volunteersneeded)
         {
@@ -21,6 +22,7 @@ namespace Project
             this.Description = description;
             this.DateBegin = datebegin;
             this.VolunteersNeeded = volunteersneeded;
+            this.AcceptedBy = new List<Volunteer>();
         }
         public Question(int questionid, string description, string location, string traveltime, DateTime datebegin, DateTime enddate, string critical, int volunteersneeded, int authorid, int transportid, string transportdescription)
         {
@@ -34,6 +36,7 @@ namespace Project
             this.Location = location;
             this.TravelTime = traveltime;
             this.Transport = new Transport(transportid, transportdescription);
+            this.AcceptedBy = new List<Volunteer>();
         }
 
         // Properties

@@ -33,14 +33,19 @@ namespace Project
                 return false;
         }
 
-        public Question AddClientToQuestion(Question question)
+        public Question ExpandQuestionsWithClient(Question question)
         {
-            return questions.AddClientToQuestion(question);
+            return questions.ExpandQuestionWithClient(question);
         }
 
-        public bool AnswerQuestion(Question question, string answer)
+        public Question ExpandQuestionWithVolunteers(Question question)
         {
-            throw new NotImplementedException();
+            return questions.ExpandQuestionWithVolunteers(question);
+        }
+
+        public bool AnswerQuestion(Question question, Volunteer volunteer)
+        {
+            return questions.AnswerQuestion(question, volunteer);
         }
 
         public bool UpdateProfile(bool driverslisence, string biography, string pathtophoto)

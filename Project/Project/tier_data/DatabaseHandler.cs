@@ -284,6 +284,11 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Gets a client name by ID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public string GetClientUserName(int ID)
         {
             string gebruikersnaam = "";
@@ -294,15 +299,15 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "SELECT G.naam FROM TGEBRUIKER G,THULPBEHOEVENDE H WHERE H.GEBRUIKERID = G.ID AND H.ID="+ID+"";
-                    dr = cmd.ExecuteReader();
-                    while (dr.Read())
-                    {
-                        gebruikersnaam = dr.GetString(0);
-     
-                    }
-                    return gebruikersnaam;
-                
+                cmd.CommandText = "SELECT G.naam FROM TGEBRUIKER G,THULPBEHOEVENDE H WHERE H.GEBRUIKERID = G.ID AND H.ID=" + ID + "";
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    gebruikersnaam = dr.GetString(0);
+
+                }
+                return gebruikersnaam;
+
             }
             catch (Exception ex)
             {
@@ -315,7 +320,7 @@ namespace Project
             }
         }
 
-    
+
         /// <summary>
         /// Finds a client ID by email
         /// </summary>
@@ -708,6 +713,101 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Fills the AcceptedBy property of a question
+        /// </summary>
+        /// <param name="q"></param>
+        /// <returns></returns>
+        public Question ExpandQuestionWithVolunteers(Question q)
+        {
+            try
+            {
+                Connect();
+                Volunteer returnvolunteer = null;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM TACCOUNT A, TGEBRUIKER G, TVRIJWILLIGER V, THULPVRAAG_VRIJWILLIGER HV, THULPVRAAG H WHERE A.ID = G.ACCOUNTID AND G.ID = V.GEBRUIKERID AND V.ID = HV.VRIJWILLIGERID AND HV.HULPVRAAGID = H.ID AND H.ID = :questionid";
+                    cmd.Parameters.Add("questionid", q.ID);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var accountid = SafeReadInt(dr, 0);
+                        var username = SafeReadString(dr, 1);
+                        var password = SafeReadString(dr, 2);
+                        var volunteeremail = SafeReadString(dr, 3);
+                        var userid = SafeReadInt(dr, 4);
+                        var name = SafeReadString(dr, 5);
+                        var adress = SafeReadString(dr, 6);
+                        var location = SafeReadString(dr, 7);
+                        var phonenumber = SafeReadString(dr, 8);
+                        var haslicense = SafeReadString(dr, 9);
+                        var hascar = SafeReadString(dr, 10);
+                        var unsubscribedate = SafeReadDateTime(dr, 11);
+                        var trash1 = SafeReadInt(dr, 12);
+                        var volunteerid = SafeReadInt(dr, 13);
+                        var dateofbirth = SafeReadDateTime(dr, 14);
+                        var pathtophoto = SafeReadString(dr, 15);
+                        var pathtovog = SafeReadString(dr, 16);
+                        var thrash2 = SafeReadInt(dr, 17);
+
+                        // Create
+                        returnvolunteer = new Volunteer(accountid, username, password, volunteeremail, userid, name, adress, location, phonenumber, haslicense, hascar, unsubscribedate, volunteerid, dateofbirth, pathtophoto, pathtovog);
+                        q.AcceptedBy.Add(returnvolunteer);
+                    }
+                    return q;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Adds a volunteer to a question in the database
+        /// </summary>
+        /// <param name="q"></param>
+        /// <param name="v"></param>
+        /// <returns></returns>
+        public bool AnswerQuestion(Question q, Volunteer v)
+        {
+            try
+            {
+                Connect();
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "INSERT INTO THULPVRAAG_VRIJWILLIGER(HULPVRAAGID, VRIJWILLIGERID) VALUES(:questionid, :volunteerid)";
+                    cmd.Parameters.Add("questionid", q.ID);
+                    cmd.Parameters.Add("volunteerid", v.VolunteerID);
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Get all types of transport in the database
+        /// </summary>
+        /// <returns></returns>
         public List<Transport> GetTransports()
         {
             List<Transport> transports = new List<Transport>();
@@ -743,7 +843,7 @@ namespace Project
 
         public int GetSingleTransport(string description)
         {
-            int ID=0;
+            int ID = 0;
             try
             {
                 Connect();
@@ -752,11 +852,11 @@ namespace Project
                     Question returnvalue = null;
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.Text;
-                    cmd.CommandText = "select ID from TVervoer where omschrijving='"+description+"'";
+                    cmd.CommandText = "select ID from TVervoer where omschrijving='" + description + "'";
                     dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                       ID = SafeReadInt(dr, 0);
+                        ID = SafeReadInt(dr, 0);
                     }
                     return ID;
                 }
