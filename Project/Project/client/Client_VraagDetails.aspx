@@ -18,7 +18,7 @@
                     <div class="large-12 columns secondary callout">
                         <asp:Label ID="lbl_date" runat="server" Text="op 01-01-2016"></asp:Label>
                         <div style="float: right;">
-                            <asp:Label ID="lbl_Critical" runat="server" ForeColor="Red" Text="URGENT"></asp:Label>
+                            <asp:CheckBox ID="cbox_Critical" runat="server" AutoPostBack="True" /><asp:Label ID="lbl_Critical" runat="server" Text="URGENT" ForeColor="Red" AssociatedControlID="cbox_Critical"></asp:Label>
                         </div>
                         <br />
                         <asp:Label ID="lbl_user" runat="server" Text="Vroeg Lorem Ipsum"></asp:Label>
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="large-8 columns">
                                         <asp:TextBox ID="tbox_VolunteerCount" AutoPostBack="true" runat="server"></asp:TextBox>
-                                        <asp:Label ID="errormsg" ForeColor="Red" Visible="false" runat="server"></asp:Label>
+                                        <asp:Label ID="errormsg" ForeColor="Red" Visible="False" runat="server"></asp:Label>
                                     </div>
                                   
                                 </div>

@@ -31,6 +31,15 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_date;
         
         /// <summary>
+        /// cbox_Critical control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox cbox_Critical;
+        
+        /// <summary>
         /// lbl_Critical control.
         /// </summary>
         /// <remarks>
