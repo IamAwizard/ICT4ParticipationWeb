@@ -15,13 +15,13 @@ namespace Project
             if (lbox_Questions.SelectedItem != null)
             {
                 Client currentuser = (Client)Session["currentUser"];
-                List<Question> question = new List<Question>();
+                Question Q;
                 string discription = lbox_Questions.Text;
                 discription = discription.Substring(10);
                 int id = currentuser.ClientID;
-                question = questionhandler.GetSingleQuestion(id, discription);
+                Q = questionhandler.GetSingleQuestion(id, discription);
                 lbox_getquestion.Items.Clear();
-                foreach (Question Q in question)
+                if(Q != null)
                 {
                     
                     string location = "";
@@ -78,15 +78,13 @@ namespace Project
             {
                 lbox_Questions.Items.Clear();
                 Client currentuser = (Client)Session["currentUser"];
-                List<Question> questions = new List<Question>();
-                questions = questionhandler.GetQuestionsByAuthor(currentuser);
-                if (questions.Count != 0)
+                Question questions;
+                questions = questionhandler.GetQuestionByIDCached(currentuser.ClientID);
+                if (questions != null)
                 {
-                    foreach (Question Q in questions)
-                    {
-                        string discriptionanddate = Q.DateBegin.ToShortDateString() + " " + Q.Description;
+                    
+                        string discriptionanddate = questions.DateBegin.ToShortDateString() + " " + questions.Description;
                         lbox_Questions.Items.Add(discriptionanddate);
-                    }
                 }
             }
         }
