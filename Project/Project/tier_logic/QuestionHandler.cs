@@ -70,13 +70,25 @@ namespace Project
             }
         }
 
-
-        public List<Question> GetSingleQuestion(int id,string Discription)
+        public Question GetQuestionByIDCached(int questionid)
         {
-  
+            Synchronize();
             try
             {
-                return questions = databasehandler.getsinglequestion(id, Discription);
+                return questions.Find(x => x.ID == questionid);
+            }
+            catch (NullReferenceException ex)
+            {
+                return null;
+            }
+        }
+
+
+        public Question GetSingleQuestion(int id,string Discription)
+        {
+            try
+            {
+                return databasehandler.GetSingleQuestion(id, Discription);
             }
             catch (NullReferenceException ex)
             {

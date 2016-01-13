@@ -1010,22 +1010,29 @@ namespace Project
             }
         }
 
-        public List<Question> getsinglequestion(int userid, string discription)
+        /// <summary>
+        /// Gets a question from the database by authorid and description
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public Question GetSingleQuestion(int userid, string description)
         {
-
-            List<Question> question = new List<Question>();
+            Question question = null;
             try
             {
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.omschrijving='" + discription+"' AND H.auteur='"+userid+"'";
+                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.omschrijving :description AND H.auteur= :userid";
+                cmd.Parameters.Add("description", description);
+                cmd.Parameters.Add("userid", userid);
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
                     var questionid = SafeReadInt(dr, 0);
-                    var description = SafeReadString(dr, 1);
+                    var qdescription = SafeReadString(dr, 1);
                     var location = SafeReadString(dr, 2);
                     var traveltime = SafeReadString(dr, 3);
                     var startdate = SafeReadDateTime(dr, 4);
@@ -1038,14 +1045,13 @@ namespace Project
                     var transportdescription = SafeReadString(dr, 11);
 
 
-                    question.Add(new Question(questionid, description, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription));
+                   question = new Question(questionid, qdescription, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription);
                 }
 
                 return question;
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
                 return null;
             }
             finally
