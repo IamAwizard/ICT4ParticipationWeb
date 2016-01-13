@@ -35,12 +35,18 @@ namespace Project
                     Question question = new Question(id, content, DateTime.Now, 1);
                     questionhandler.AddQuestion(question);
                     Response.Redirect("Client_vragen.aspx");
+                    lbl_ErrorMsg.Visible = false;
+                }
+                else
+                {
+                    lbl_ErrorMsg.Text = "Niet ingelogd als gebruiker";
+                    lbl_ErrorMsg.Visible = true;
                 }
             }
             else
             {
-                lbl_errormsg.ForeColor = System.Drawing.Color.Red;
-                lbl_errormsg.Text = "Inhoud van de vraag is tekort of te lang";
+                lbl_ErrorMsg.Text = "Inhoud van de vraag is tekort of te lang";
+                lbl_ErrorMsg.Visible = true;
             }
 
         }

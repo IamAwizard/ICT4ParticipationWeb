@@ -58,13 +58,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Button btn_AddQuestion;
         
         /// <summary>
-        /// lbl_errormsg control.
+        /// lbl_ErrorMsg control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_errormsg;
+        protected global::System.Web.UI.WebControls.Label lbl_ErrorMsg;
         
         /// <summary>
         /// btn_LoadQuestion control.

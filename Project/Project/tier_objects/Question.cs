@@ -47,6 +47,7 @@ namespace Project
         public bool Critical { get; set; }
         public int VolunteersNeeded { get; set; }
         public int AuthorID { get; set; }
+        public Client Author { get; set; }
         public Transport Transport { get; set; }
 
         public string FormattedForVolunteer

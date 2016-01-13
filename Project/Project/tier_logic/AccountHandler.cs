@@ -46,19 +46,14 @@ namespace Project
         /// </summary>
         /// <param name="email">email of account to fetch</param>
         /// <returns>account, or null if none found</returns>
-        public Account GetAccount(string email)
+        public Account GetAccountByEmail(string email)
         {
             return dbm.GetAccount(email);
         }
 
-        public Account FindAccountByEmail(string email)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool DeleteAccount(Account account)
         {
-            throw new NotImplementedException();
+            return dbm.DeleteAccount(account);
         }
 
         public Volunteer ExtendVolunteer(Volunteer volun)

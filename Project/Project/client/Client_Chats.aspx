@@ -10,7 +10,7 @@
                 <br />
                 <div class="large-4 columns">
                     <div class="text-center">
-                        <asp:TextBox ID="TextBox1" TextMode="MultiLine" Rows="10" Columns="20" runat="server"></asp:TextBox>
+                        <asp:ListBox ID="lbox_Clients" runat="server" Height="100%" Rows="20"></asp:ListBox>
                     </div>
                 </div>
 

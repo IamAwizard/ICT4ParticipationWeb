@@ -27,10 +27,8 @@ namespace Project
         // Methods
         public void Synchronize()
         {
-            questions = databasehandler.getquestions();
+            questions = databasehandler.GetAllOpenQuestions();
         }
-
-
 
         public bool AddQuestion(Question question)
         {
@@ -39,6 +37,16 @@ namespace Project
                 return true;
             else
                 return false;
+        }
+
+        /// <summary>
+        ///  Fills the client property of a question
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
+        public Question AddClientToQuestion(Question question)
+        {
+            return databasehandler.AddClientToQuestion(question);
         }
 
         public bool DeleteQuestion(Question question)

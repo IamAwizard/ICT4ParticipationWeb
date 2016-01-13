@@ -7,10 +7,9 @@
             <div class="large-12 column callout">
                 <div class="large-12 columns">
                     <asp:Label ID="lbl_Questions" runat="server" Text="Openstaande Vragen:"></asp:Label>
-                    <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="10" AutoPostBack="True" OnSelectedIndexChanged="lbox_Questions_SelectedIndexChanged"></asp:ListBox>
-                     <asp:Label runat="server" ID="lbl_errormsg" Text="errormessage"></asp:Label>
+                    <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="10" AutoPostBack="True"></asp:ListBox>
+                     <asp:Label runat="server" ID="lbl_errormsg" Text="iets ging fout met bla bla bla bla bla x" Visible="False" CssClass="alert large button label"></asp:Label>
                     <br />
-                    <asp:Button ID="btn_LoadQuestion" runat="server" Text="Vraag bekijken" CssClass="button"/>
 
                 </div>
                 <div class="large-12 columns">
@@ -19,10 +18,10 @@
                             Vraag van hulpbehoevende:
                         </div>
                         <div class="large-2 columns">
-                            <asp:Button ID="btn_AnswerQuestion" runat="server" Text="Reageren" CssClass="expanded button" />
+                            <asp:Button ID="btn_AnswerQuestion" runat="server" Text="Reageren" CssClass="expanded button" OnClick="btn_AnswerQuestion_Click" />
                         </div>
                         <div class="large-8 columns">
-                            <asp:TextBox ID="tbox_GetQuestion" runat="server" Height="100%" MaxLength="3000" Rows="10" TextMode="MultiLine"></asp:TextBox>
+                            <asp:TextBox ID="tbox_GetQuestion" runat="server" Height="100%" MaxLength="3000" Rows="5" TextMode="MultiLine"></asp:TextBox>
                         </div>
                         <div class="large-4 columns">
                             <asp:Label ID="lbl_Date" runat="server" Text="Datum: "></asp:Label><br />

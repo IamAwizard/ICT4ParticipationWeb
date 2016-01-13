@@ -433,7 +433,7 @@ namespace Project
                             var ovpossible = SafeReadString(dr, 14);
                             var thrash2 = SafeReadInt(dr, 15);
                             // Create
-                            returnclient = new Client(accountid, username, password, email, userid, name, adress, location, phonenumber, haslicense, hascar, clientid, ovpossible, unsubscribedate);
+                            returnclient = new Client(accountid, username, password, clientemail, userid, name, adress, location, phonenumber, haslicense, hascar, clientid, ovpossible, unsubscribedate);
                         }
                         return returnclient;
                     }
@@ -519,6 +519,115 @@ namespace Project
         }
 
         /// <summary>
+        /// Gets a client by ID
+        /// </summary>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public Client GetClientByID(int clientid)
+        {
+            try
+            {
+                Connect();
+                Client returnclient = null;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM TACCOUNT A, TGEBRUIKER G, THULPBEHOEVENDE H WHERE A.ID = G.ACCOUNTID AND H.GEBRUIKERID = G.ID AND H.ID = :clientid";
+                    cmd.Parameters.Add("clientid", clientid);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var accountid = SafeReadInt(dr, 0);
+                        var username = SafeReadString(dr, 1);
+                        var password = SafeReadString(dr, 2);
+                        var clientemail = SafeReadString(dr, 3);
+                        var userid = SafeReadInt(dr, 4);
+                        var name = SafeReadString(dr, 5);
+                        var adress = SafeReadString(dr, 6);
+                        var location = SafeReadString(dr, 7);
+                        var phonenumber = SafeReadString(dr, 8);
+                        var haslicense = SafeReadString(dr, 9);
+                        var hascar = SafeReadString(dr, 10);
+                        var unsubscribedate = SafeReadDateTime(dr, 11);
+                        var trash1 = SafeReadInt(dr, 12);
+                        var id = SafeReadInt(dr, 13);
+                        var ovpossible = SafeReadString(dr, 14);
+                        var thrash2 = SafeReadInt(dr, 15);
+                        // Create
+                        returnclient = new Client(accountid, username, password, clientemail, userid, name, adress, location, phonenumber, haslicense, hascar, id, ovpossible, unsubscribedate);
+                    }
+                    return returnclient;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+
+        /// <summary>
+        /// Gets a volunteer by ID
+        /// </summary>
+        /// <param name="clientid"></param>
+        /// <returns></returns>
+        public Volunteer GetVolunteerByID(int volunteerid)
+        {
+            try
+            {
+                Connect();
+                Volunteer returnvolunteer = null;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM TACCOUNT A, TGEBRUIKER G, TVRIJWILLIGER V WHERE A.ID = G.ACCOUNTID AND G.ID = V.GEBRUIKERID AND V.ID = :volunteerid";
+                    cmd.Parameters.Add("volunteerid", volunteerid);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var accountid = SafeReadInt(dr, 0);
+                        var username = SafeReadString(dr, 1);
+                        var password = SafeReadString(dr, 2);
+                        var volunteeremail = SafeReadString(dr, 3);
+                        var userid = SafeReadInt(dr, 4);
+                        var name = SafeReadString(dr, 5);
+                        var adress = SafeReadString(dr, 6);
+                        var location = SafeReadString(dr, 7);
+                        var phonenumber = SafeReadString(dr, 8);
+                        var haslicense = SafeReadString(dr, 9);
+                        var hascar = SafeReadString(dr, 10);
+                        var unsubscribedate = SafeReadDateTime(dr, 11);
+                        var trash1 = SafeReadInt(dr, 12);
+                        var id = SafeReadInt(dr, 13);
+                        var dateofbirth = SafeReadDateTime(dr, 14);
+                        var pathtophoto = SafeReadString(dr, 15);
+                        var pathtovog = SafeReadString(dr, 16);
+                        var thrash2 = SafeReadInt(dr, 17);
+                        // Create
+                        returnvolunteer = new Volunteer(accountid, username, password, volunteeremail, userid, name, adress, location, phonenumber, haslicense, hascar, unsubscribedate, id, dateofbirth, pathtophoto, pathtovog);
+                    }
+                    return returnvolunteer;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
         /// Gets a question from the database
         /// </summary>
         /// <param name="questionid">question id of question to get</param>
@@ -567,148 +676,425 @@ namespace Project
             }
         }
 
-        // KLOPT NIET
+        /// <summary>
+        /// Gets all users from the database
+        /// </summary>
+        /// <returns></returns>
+        public List<User> GetAllUsers()
+        {
 
-        //public static List<Question> GetAllQuestions()
-        //{
-        //    List<Question> questionlist = new List<Question>();
-        //    try
-        //    {
-        //        Connect();
-        //        cmd = new OracleCommand();
-        //        cmd.Connection = con;
-        //        cmd.CommandText = "SELECT H.ID, H.OMSCHRIJVING, H.LOCATIE , H.REISTIJD, H.STARTDATUM, H.EINDDATUM, H.URGENT, H.AANTALVRIJWILLIGERS, H.VERVOERTYPE, TVAARDIGHEID.ID as vaardigheidID, TVRIJWILLIGER.ID as vrijwilligerID FROM THULPVRAAG H, TVAARDIGHEID, TVRIJWILLIGER, THULPVRAAG_VAARDIGHEID, THULPVRAAG_VRIJWILLIGER WHERE (H.ID = THULPVRAAG_VRIJWILLIGER.hulpvraagID AND THULPVRAAG_VRIJWILLIGER.vrijwilligerid = TVRIJWILLIGER.id) AND (H.ID = THULPVRAAG_VAARDIGHEID.hulpvraagID AND THULPVRAAG_VAARDIGHEID.vaardigheidID = TVAARDIGHEID.id)"; // QUERY
-        //        cmd.CommandType = CommandType.Text;
-        //        dr = cmd.ExecuteReader();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.ToString());
-        //        Disconnect();
-        //        return null;
-        //    }
+            List<User> userList = new List<User>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT g.ID, NAAM, ADRES, WOONPLAATS, TELEFOONNUMMER, HEEFTRIJBEWIJS, HEEFTAUTO, UITSCHRIJVINGSDATUM, ACCOUNTID, GEBRUIKERSNAAM, WACHTWOORD, EMAIL FROM TGEBRUIKER g, TACCOUNT WHERE g.accountid = taccount.id"; // QUERY
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
 
-        //    try
-        //    {
-        //        while (dr.Read())
-        //        {
-        //            // Read from DB
-        //            int hulpvraagid = dr.GetInt32(0);
-        //            var omschrijving = dr.GetInt32(1);
-        //            var locatie = SafeReadString(dr, 2);
-        //            var reistijd = SafeReadString(dr, 3);
-        //            DateTime startdatum = dr.GetDateTime(4);
-        //            DateTime einddatum = dr.GetDateTime(5);
-        //            var urgentie = SafeReadString(dr, 6);
-        //            int aantalvrijwilligers = SafeReadInt(dr, 7);
-        //            int vervoertype = SafeReadInt(dr, 8);
-        //            int vaardigheidid = SafeReadInt(dr, 9);
-        //            int vrijwilligerid = SafeReadInt(dr, (10));
+                while (dr.Read())
+                {
+                    // Read from DB
+                    int id = dr.GetInt32(0);
+                    var naam = dr.GetString(1);
+                    var adres = dr.GetDateTime(2);
+                    var woonplaats = dr.GetString(3);
+                    var telefoonnummer = dr.GetString(4);
+                    bool heeftrijbewijs = (dr.GetString(5).ToUpper() == "TRUE");
+                    bool heeftauto = (dr.GetString(6).ToUpper() == "TRUE");
+                    DateTime uitschrijvingsdatum = dr.GetDateTime(7);
+                    int accountid = dr.GetInt32(8);
+                    var gebruikersnaam = dr.GetString(9);
+                    var wachtwoord = dr.GetString(10);
+                    var email = dr.GetString(11);
+                    /*
+                    User toadd;
+                    switch (type)
+                    {
+                        case "CLIENT":
+                            Client newClient = new Client(name, dateOfBirth, gender, city, adress, email, password);
+                            toadd = newClient;
+                            toadd.UserID = id;
+                            break;
+                        case "VOLUNTEER":
+                            toadd = null;
+                            Volunteer newUser = new Volunteer(name, dateOfBirth, gender, city, adress, email, password, false, "", "", "");
+                            toadd = newUser;
+                            toadd.UserID = id;
+                            break;
+                        case "ADMIN":
+                            Admin newAdmin = new Admin(name, dateOfBirth, gender, city, adress, email, password);
+                            toadd = newAdmin;
+                            toadd.UserID = id;
+                            break;
+                        default:
+                            toadd = null;
+                            break;
+                    }
 
-        //            //Question toadd;
-        //            //toadd = new Question(null, auteur, locatie, vervoer, afstand, bijzonderheid, vraag, datum, opgelost);
-        //            //toadd.ID = hulpvraagid;
-        //            //toadd.VolunteerID = vrijwilligerid;
-        //            //questionlist.Add(toadd);
-        //        }
-        //        foreach (Question q in questionlist)
-        //        {
+                    userList.Add(toadd);*/
+                }
+                Disconnect();
+                return userList;
+            }
+            catch (InvalidCastException ex)
+            {
+                Disconnect();
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
 
-        //            q.Client = (Client)GetUser(q.Auteur);
-        //        }
+        /// <summary>
+        /// Adds a complete question to the database
+        /// </summary>
+        /// <param name="newquestion"></param>
+        /// <returns></returns>
+        public bool AddQuestion(Question newquestion)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                    "Insert into THULPVRAAG(OMSCHRIJVING, LOCATIE, REISTIJD, STARTDATUM, EINDDATUM, URGENT, AANTALVRIJWILLIGERS, VERVOERTYPE, AUTEUR) VALUES (:NewOMSCHRIJVING, :NewLOCATIE, :NewREISTIJD, :NewSTARTDATUM, :NewEINDDATUM, :NewURGENT, :NewAANTALVRIJWILLIGERS, :NewVERVOERTYPE, :NewAUTEUR)";
 
-        //        foreach (Question q in questionlist)
-        //        {
-        //            if (q. != -1)
-        //            {
-        //                q.Volunteer = (Volunteer)GetUser(q.VolunteerID);
-        //            }
-        //        }
-        //        return questionlist;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //         MessageBox.Show(ex.Message);
-        //        return null;
-        //    }
+                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
+                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = newquestion.Location;
+                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = newquestion.TravelTime;
+                cmd.Parameters.Add("NewSTARTDATUM", OracleDbType.Date).Value = newquestion.DateBegin;
+                cmd.Parameters.Add("NewEINDDATUM", OracleDbType.Date).Value = newquestion.DateEnd;
+                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = newquestion.Critical;
+                cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.VolunteersNeeded;
+                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Transport;
+                cmd.Parameters.Add("NewAUTEUR", newquestion.AuthorID);
 
-        //}
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+        }
+
+        /// <summary>
+        /// Adds a basic new question to the DB without any extra information
+        /// </summary>
+        /// <param name="newquestion"></param>
+        /// <returns></returns>
+        public bool AddNewQuestion(Question newquestion)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "Insert into THULPVRAAG(OMSCHRIJVING,auteur,startdatum,aantalvrijwilligers) VALUES (:NewOMSCHRIJVING,:NewAuteur,:NewStartdatum,:NewAantalvrijwilligers)";
+
+                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
+                cmd.Parameters.Add("NewAuteur", OracleDbType.Int32).Value = newquestion.AuthorID;
+                cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = DateTime.Now;
+                cmd.Parameters.Add("NewAantalvrijwilligers", OracleDbType.Int32).Value = newquestion.VolunteersNeeded;
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+        }
+
+        /// <summary>
+        /// Updates a question
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
+        public bool UpdateQuestion(Question question)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                   "UPDATE THULPVRAAG SET OMSCHRIJVING = :NewOMSCHRIJVING, LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE ID = :newIDvalue";
+                cmd.Parameters.Add("NewOMSCHRIJVING", question.Description);
+                cmd.Parameters.Add("NewLOCATIE", question.Location);
+                cmd.Parameters.Add("NewREISTIJD", question.TravelTime);
+                cmd.Parameters.Add("newUrgent", question.Critical.ToString());
+                cmd.Parameters.Add("newAantalvrijwilligers", question.VolunteersNeeded);
+                cmd.Parameters.Add("newVervoertype", question.Transport.ID);
+                cmd.Parameters.Add("newIDvalue", question.ID);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Gets all questions which are not ended yet
+        /// Ordered by date created (oldest first)
+        /// </summary>
+        /// <returns></returns>
+        public List<Question> GetAllOpenQuestions()
+        {
+            List<Question> allquestions = new List<Question>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.EINDDATUM IS NULL ORDER BY STARTDATUM ASC";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    var questionid = SafeReadInt(dr, 0);
+                    var description = SafeReadString(dr, 1);
+                    var location = SafeReadString(dr, 2);
+                    var traveltime = SafeReadString(dr, 3);
+                    var startdate = SafeReadDateTime(dr, 4);
+                    var enddate = SafeReadDateTime(dr, 5);
+                    var critical = SafeReadString(dr, 6);
+                    var volunteers = SafeReadInt(dr, 7);
+                    var clientid = SafeReadInt(dr, 8);
+                    var trash = SafeReadInt(dr, 9);
+                    var transportid = SafeReadInt(dr, 10);
+                    var transportdescription = SafeReadString(dr, 11);
+
+                    allquestions.Add(new Question(questionid, description, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription));
+                }
+
+                return allquestions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        /// <summary>
+        /// Gets a question from the database by authorid and description
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="description"></param>
+        /// <returns></returns>
+        public Question GetSingleQuestion(int userid, string description)
+        {
+            Question question = null;
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.omschrijving :description AND H.auteur= :userid";
+                cmd.Parameters.Add("description", description);
+                cmd.Parameters.Add("userid", userid);
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    var questionid = SafeReadInt(dr, 0);
+                    var qdescription = SafeReadString(dr, 1);
+                    var location = SafeReadString(dr, 2);
+                    var traveltime = SafeReadString(dr, 3);
+                    var startdate = SafeReadDateTime(dr, 4);
+                    var enddate = SafeReadDateTime(dr, 5);
+                    var critical = SafeReadString(dr, 6);
+                    var volunteers = SafeReadInt(dr, 7);
+                    var clientid = SafeReadInt(dr, 8);
+                    var trash = SafeReadInt(dr, 9);
+                    var transportid = SafeReadInt(dr, 10);
+                    var transportdescription = SafeReadString(dr, 11);
 
 
-        // MOET OPNIEUW GEMAAKT WORDEN
+                    question = new Question(questionid, qdescription, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription);
+                }
 
-        //public static User GetUser(int ids)
-        //{
-        //    User toadd = null;
-        //    try
-        //    {
-        //        Connect();
-        //        cmd = new OracleCommand();
-        //        cmd.Connection = con;
-        //        cmd.CommandText = "SELECT USERID, NAAM, GEBOORTEDATUM, GESLACHT, WOONPLAATS, ADRES, EMAIL, WACHTWOORD, TYPE FROM TUSER WHERE USERID = " + ids; // QUERY
-        //        cmd.CommandType = CommandType.Text;
-        //        dr = cmd.ExecuteReader();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        MessageBox.Show(e.ToString());
-        //        Disconnect();
-        //        return null;
-        //    }
+                return question;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
 
-        //    try
-        //    {
-        //        while (dr.Read())
-        //        {
-        //            // Read from DB
-        //            var id = dr.GetInt32(0);
-        //            var name = dr.GetString(1);
-        //            var dateOfBirth = dr.GetDateTime(2);
-        //            var gender = dr.GetString(3);
-        //            var city = dr.GetString(4);
-        //            var adress = dr.GetString(5);
-        //            var email = dr.GetString(6);
-        //            var password = dr.GetString(7);
+        /// <summary>
+        /// Adds a review to the database
+        /// </summary>
+        /// <param name="newreview"></param>
+        /// <returns></returns>
+        public bool AddReview(Review newreview)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                    "Insert into TREVIEW(BEOORDELING, OPMERKINGEN, VRIJWILLIGERID, HULPVRAAGID) VALUES (:NewRating, :NewComments, :NewVolunteer, :NewQuestion)";
+                cmd.Parameters.Add("NewRating", newreview.Rating);
+                cmd.Parameters.Add("NewComments", newreview.Comments);
+                cmd.Parameters.Add("NewVolunteer", newreview.VolunteerID);
+                cmd.Parameters.Add("NewQuestion", newreview.QuestionID);
 
-        //            var type = dr.GetString(8);
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
 
+        /// <summary>
+        /// Deletes a user from the database
+        /// </summary>
+        /// <param name="usertodelete"></param>
+        /// <returns></returns>
+        public bool DeleteAccount(Account accounttodelete)
+        {
+            try
+            {
+                User foo;
+                if (accounttodelete is User)
+                {
+                    foo = accounttodelete as User;
+                    Connect();
 
-        //            switch (type)
-        //            {
-        //                case "CLIENT":
-        //                    Client newClient = new Client(name, dateOfBirth, gender, city, adress, email, password);
-        //                    toadd = newClient;
-        //                    toadd.UserID = id;
-        //                    break;
-        //                case "VOLUNTEER":
-        //                    toadd = null;
-        //                    Volunteer newUser = new Volunteer(name, dateOfBirth, gender, city, adress, email, password, false, "Niet Opgegeven", "ONBEKEND", "ONBEKEND");
-        //                    toadd = newUser;
-        //                    toadd.UserID = id;
-        //                    break;
-        //                case "ADMIN":
-        //                    Admin newAdmin = new Admin(name, dateOfBirth, gender, city, adress, email, password);
-        //                    toadd = newAdmin;
-        //                    toadd.UserID = id;
-        //                    break;
-        //                default:
-        //                    toadd = null;
-        //                    break;
-        //            }
+                    cmd = new OracleCommand();
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "UPDATE TGEBRUIKER SET UITSCHRIJVINGSDATUM = :newUnsubscribedDate where id= :newUserID";
+                    cmd.Parameters.Add("newUnsubscribedDate", DateTime.Now);
+                    cmd.Parameters.Add("newUserID", foo.UserID);
+                    cmd.ExecuteNonQuery();
 
-        //        }
-        //        Disconnect();
-        //        return toadd;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Disconnect();
-        //        MessageBox.Show(ex.ToString());
-        //        return null;
-        //    }
-        //}
+                    if (foo is Client)
+                    {
+                        cmd = new OracleCommand();
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "DELETE FROM THULPBEHOEVENDE WHERE GEBRUIKERID = :gebruikerid";
+                        cmd.Parameters.Add("gebruikerid", foo.UserID);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
 
+                    if (foo is Volunteer)
+                    {
+                        cmd = new OracleCommand();
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "DELETE FROM TVRIJWILLIGER WHERE GEBRUIKERID = :gebruikerid";
+                        cmd.Parameters.Add("gebruikerid", foo.UserID);
+                        cmd.ExecuteNonQuery();
+                        return true;
+                    }
+                }
+                return false;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
 
+        public Question AddClientToQuestion(Question question)
+        {
+            try
+            {
+                Connect();
+                Client c = null;
+                using (cmd = new OracleCommand())
+                {
+                    cmd.Connection = con;
+                    cmd.CommandType = CommandType.Text;
+                    cmd.CommandText = "SELECT * FROM TACCOUNT A, TGEBRUIKER G, THULPBEHOEVENDE H WHERE A.ID = G.ACCOUNTID AND H.GEBRUIKERID = G.ID AND H.ID = :clientid";
+                    cmd.Parameters.Add("clientid", question.AuthorID);
+                    dr = cmd.ExecuteReader();
+                    while (dr.Read())
+                    {
+                        var accountid = SafeReadInt(dr, 0);
+                        var username = SafeReadString(dr, 1);
+                        var password = SafeReadString(dr, 2);
+                        var clientemail = SafeReadString(dr, 3);
+                        var userid = SafeReadInt(dr, 4);
+                        var name = SafeReadString(dr, 5);
+                        var adress = SafeReadString(dr, 6);
+                        var location = SafeReadString(dr, 7);
+                        var phonenumber = SafeReadString(dr, 8);
+                        var haslicense = SafeReadString(dr, 9);
+                        var hascar = SafeReadString(dr, 10);
+                        var unsubscribedate = SafeReadDateTime(dr, 11);
+                        var trash1 = SafeReadInt(dr, 12);
+                        var id = SafeReadInt(dr, 13);
+                        var ovpossible = SafeReadString(dr, 14);
+                        var thrash2 = SafeReadInt(dr, 15);
+                        // Create
+                        c = new Client(accountid, username, password, clientemail, userid, name, adress, location, phonenumber, haslicense, hascar, id, ovpossible, unsubscribedate);
+                        question.Author = c;
+                    }
+                    return question;
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
         public User GetUserNoConnect(int ids)
         {
             User toadd = null;
@@ -778,364 +1164,6 @@ namespace Project
             }
         }
 
-        public List<User> GetAllUsers()
-        {
-
-            List<User> userList = new List<User>();
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT g.ID, NAAM, ADRES, WOONPLAATS, TELEFOONNUMMER, HEEFTRIJBEWIJS, HEEFTAUTO, UITSCHRIJVINGSDATUM, ACCOUNTID, GEBRUIKERSNAAM, WACHTWOORD, EMAIL FROM TGEBRUIKER g, TACCOUNT WHERE g.accountid = taccount.id"; // QUERY
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-            }
-            catch (Exception e)
-            {
-                MessageBox.Show(e.ToString());
-                Disconnect();
-                return null;
-            }
-
-            try
-            {
-                while (dr.Read())
-                {
-                    // Read from DB
-                    int id = dr.GetInt32(0);
-                    var naam = dr.GetString(1);
-                    var adres = dr.GetDateTime(2);
-                    var woonplaats = dr.GetString(3);
-                    var telefoonnummer = dr.GetString(4);
-                    bool heeftrijbewijs = (dr.GetString(5).ToUpper() == "TRUE");
-                    bool heeftauto = (dr.GetString(6).ToUpper() == "TRUE");
-                    DateTime uitschrijvingsdatum = dr.GetDateTime(7);
-                    int accountid = dr.GetInt32(8);
-                    var gebruikersnaam = dr.GetString(9);
-                    var wachtwoord = dr.GetString(10);
-                    var email = dr.GetString(11);
-                    /*
-                    User toadd;
-                    switch (type)
-                    {
-                        case "CLIENT":
-                            Client newClient = new Client(name, dateOfBirth, gender, city, adress, email, password);
-                            toadd = newClient;
-                            toadd.UserID = id;
-                            break;
-                        case "VOLUNTEER":
-                            toadd = null;
-                            Volunteer newUser = new Volunteer(name, dateOfBirth, gender, city, adress, email, password, false, "", "", "");
-                            toadd = newUser;
-                            toadd.UserID = id;
-                            break;
-                        case "ADMIN":
-                            Admin newAdmin = new Admin(name, dateOfBirth, gender, city, adress, email, password);
-                            toadd = newAdmin;
-                            toadd.UserID = id;
-                            break;
-                        default:
-                            toadd = null;
-                            break;
-                    }
-
-                    userList.Add(toadd);*/
-                }
-                Disconnect();
-                return userList;
-            }
-            catch (InvalidCastException ex)
-            {
-                Disconnect();
-                MessageBox.Show(ex.ToString());
-                return null;
-            }
-        }
-
-        public void Read(string sql)
-        {
-            try
-            {
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = sql;
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-        }
-
-        public void AddAvatar()
-        {
-
-        }
-
-        public bool AddQuestion(Question newquestion)
-        {
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                    "Insert into THULPVRAAG(OMSCHRIJVING, LOCATIE, REISTIJD, STARTDATUM, EINDDATUM, URGENT, AANTALVRIJWILLIGERS, VERVOERTYPE) VALUES (:NewOMSCHRIJVING, :NewLOCATIE, :NewREISTIJD, :NewSTARTDATUM, :NewEINDDATUM, :NewURGENT, :NewAANTALVRIJWILLIGERS, :NewVERVOERTYPE)";
-
-                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
-                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = newquestion.Location;
-                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = newquestion.TravelTime;
-                cmd.Parameters.Add("NewSTARTDATUM", OracleDbType.Date).Value = newquestion.DateBegin;
-                cmd.Parameters.Add("NewEINDDATUM", OracleDbType.Date).Value = newquestion.DateEnd;
-                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = newquestion.Critical;
-                cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.VolunteersNeeded;
-                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Transport;
-
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-
-        }
-
-        public bool AddNewQuestion(Question newquestion)
-        {
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                    "Insert into THULPVRAAG(OMSCHRIJVING,auteur,startdatum,aantalvrijwilligers) VALUES (:NewOMSCHRIJVING,:NewAuteur,:NewStartdatum,:NewAantalvrijwilligers)";
-
-
-                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = newquestion.Description;
-                cmd.Parameters.Add("NewAuteur", OracleDbType.Int32).Value = newquestion.AuthorID;
-                cmd.Parameters.Add("NewDatum", OracleDbType.Date).Value = DateTime.Now;
-                cmd.Parameters.Add("NewAantalvrijwilligers", OracleDbType.Int32).Value = newquestion.VolunteersNeeded;
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-
-        }
-
-        public bool UpdateQuestion(Question question)
-        {
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                   "UPDATE THULPVRAAG SET OMSCHRIJVING = :NewOMSCHRIJVING, LOCATIE = :NewLOCATIE, REISTIJD = :NewREISTIJD, URGENT = :newUrgent, AANTALVRIJWILLIGERS = :newAantalvrijwilligers, VERVOERTYPE = :newVervoertype WHERE id = :newIDvalue";
-
-                cmd.Parameters.Add("NewOMSCHRIJVING", OracleDbType.Varchar2).Value = question.Description;
-                cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = question.Location;
-                cmd.Parameters.Add("NewREISTIJD", OracleDbType.Varchar2).Value = question.TravelTime;
-                cmd.Parameters.Add("NewURGENT", OracleDbType.Varchar2).Value = question.Critical;
-                //cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = question.; wat is dit?
-                cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = question.Transport;
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
-
-        public List<Question> getquestions()
-        {
-            List<Question> allquestions = new List<Question>();
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID";
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    var questionid = SafeReadInt(dr, 0);
-                    var description = SafeReadString(dr, 1);
-                    var location = SafeReadString(dr, 2);
-                    var traveltime = SafeReadString(dr, 3);
-                    var startdate = SafeReadDateTime(dr, 4);
-                    var enddate = SafeReadDateTime(dr, 5);
-                    var critical = SafeReadString(dr, 6);
-                    var volunteers = SafeReadInt(dr, 7);
-                    var clientid = SafeReadInt(dr, 8);
-                    var trash = SafeReadInt(dr, 9);
-                    var transportid = SafeReadInt(dr, 10);
-                    var transportdescription = SafeReadString(dr, 11);
-
-                    allquestions.Add(new Question(questionid, description, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription));
-                }
-
-                return allquestions;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return null;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
-
-        /// <summary>
-        /// Gets a question from the database by authorid and description
-        /// </summary>
-        /// <param name="userid"></param>
-        /// <param name="description"></param>
-        /// <returns></returns>
-        public Question GetSingleQuestion(int userid, string description)
-        {
-            Question question = null;
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM THULPVRAAG H LEFT OUTER JOIN TVERVOER V ON H.VERVOERTYPE = V.ID WHERE H.omschrijving :description AND H.auteur= :userid";
-                cmd.Parameters.Add("description", description);
-                cmd.Parameters.Add("userid", userid);
-                cmd.CommandType = CommandType.Text;
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    var questionid = SafeReadInt(dr, 0);
-                    var qdescription = SafeReadString(dr, 1);
-                    var location = SafeReadString(dr, 2);
-                    var traveltime = SafeReadString(dr, 3);
-                    var startdate = SafeReadDateTime(dr, 4);
-                    var enddate = SafeReadDateTime(dr, 5);
-                    var critical = SafeReadString(dr, 6);
-                    var volunteers = SafeReadInt(dr, 7);
-                    var clientid = SafeReadInt(dr, 8);
-                    var trash = SafeReadInt(dr, 9);
-                    var transportid = SafeReadInt(dr, 10);
-                    var transportdescription = SafeReadString(dr, 11);
-
-
-                   question = new Question(questionid, qdescription, location, traveltime, startdate, enddate, critical, volunteers, clientid, transportid, transportdescription);
-                }
-
-                return question;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
-
-       
-
-        public bool AddReview(Review newreview)
-        {
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText =
-                    "Insert into TREVIEW(VOLUNTEER, CLIENT, RATING) VALUES ( :NewVOLUNTEER, :NewCLIENT, :NewRATING)";
-
-                cmd.Parameters.Add("NewVOLUNTEER", OracleDbType.Int32).Value = newreview.VolunteerID;
-                cmd.Parameters.Add("NewCLIENT", OracleDbType.Int32).Value = newreview.ClientID;
-                cmd.Parameters.Add("NewRATING", OracleDbType.Int32).Value = newreview.Rating;
-
-
-                cmd.ExecuteNonQuery();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
-
-        public bool DeleteUser(User usertodelete)
-        {
-            try
-            {
-             
-                Connect();
-                this.cmd = new OracleCommand();
-                this.cmd.Connection = con;
-                this.cmd.CommandText = "UPDATE TGEBRUIKER SET uitschrijvingsdatum=':newUnsubscribedDate'where id="+usertodelete.UserID+"";
-                this.cmd.CommandType = CommandType.Text;
-                dr = this.cmd.ExecuteReader();
-                cmd.Parameters.Add("newUnsubscribedDate", usertodelete.UnsubscribedDate);
-
-                this.cmd = new OracleCommand();
-                this.cmd.Connection = con;
-                this.cmd.CommandText = "DELETE FROM TAFSPRAAK WHERE auteur='" + usertodelete.UserID + "'";
-                this.cmd.CommandType = CommandType.Text;
-                dr = this.cmd.ExecuteReader();
-            
-
-                this.cmd = new OracleCommand();
-                this.cmd.Connection = con;
-                this.cmd.CommandText = "DELETE FROM TREVIEW WHERE auteur='" + usertodelete.UserID + "'";
-                this.cmd.CommandType = CommandType.Text;
-                dr = this.cmd.ExecuteReader();
-
-                if (usertodelete is Client)
-                {
-                    this.cmd = new OracleCommand();
-                    this.cmd.Connection = con;
-                    this.cmd.CommandText = "DELETE FROM THULPVRAAG WHERE auteur='" + usertodelete.UserID + "'";
-                    this.cmd.CommandType = CommandType.Text;
-                    dr = this.cmd.ExecuteReader();
-                }
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-
-            }
-        }
-
-
         public bool SendChatMessage(Client client, Volunteer volunteer, string message)
         {
             try
@@ -1195,7 +1223,6 @@ namespace Project
                 Disconnect();
             }
         }
-
 
         public List<Review> GetAllReviews()
         {
@@ -1631,7 +1658,6 @@ namespace Project
                 Disconnect();
             }
         }
-
 
         //WERKT NOG NIET GOED
         public List<Review> GetMyReviews(Volunteer volun)

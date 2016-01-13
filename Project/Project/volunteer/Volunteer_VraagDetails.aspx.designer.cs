@@ -22,13 +22,13 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_questiondetails;
         
         /// <summary>
-        /// lbl_date control.
+        /// lbl_Date control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_date;
+        protected global::System.Web.UI.WebControls.Label lbl_Date;
         
         /// <summary>
         /// lbl_Critical control.
@@ -40,22 +40,22 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Critical;
         
         /// <summary>
-        /// lbl_user control.
+        /// lbl_Client control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_user;
+        protected global::System.Web.UI.WebControls.Label lbl_Client;
         
         /// <summary>
-        /// lbox_Questions control.
+        /// tbox_Question control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Questions;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Question;
         
         /// <summary>
         /// lbl_Location control.

@@ -19,12 +19,12 @@ namespace Project
             this.Comments = comments;
         }
 
-        public Review(int id, int rating, string comments, int volunteerid, int clientid)
+        public Review(int id, int rating, string comments, int volunteerid, int questionid)
         {
             this.ID = id;
             this.Rating = rating;
             this.Comments = comments;
-            this.ClientID = clientid;
+            this.QuestionID = questionid;
             this.VolunteerID = volunteerid;
         }
 
@@ -33,7 +33,7 @@ namespace Project
         public int Rating { get; set; }
         public string Comments { get; set; }
         public int VolunteerID { get; set; }
-        public int ClientID { get; set; }
+        public int QuestionID { get; set; }
         
         
     }

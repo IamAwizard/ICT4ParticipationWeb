@@ -46,10 +46,10 @@
                     </div>
                     <div class="row">
                         <div class="large-6 columns">
-                            <asp:Button ID="btn_Cancel" runat="server" Text="Haal me hier vandaan!" CssClass="expanded button" />
+                            <asp:Button ID="btn_Cancel" runat="server" Text="Haal me hier vandaan!" CssClass="expanded button" OnClick="btn_Cancel_Click" />
                         </div>
                         <div class="large-6 columns">
-                            <asp:Button ID="btn_Ok" runat="server" Text="Ja, Uitschrijven" CssClass="expanded alert button" />
+                            <asp:Button ID="btn_Ok" runat="server" Text="Ja, Uitschrijven" CssClass="expanded alert button" OnClick="btn_Ok_Click" />
                         </div>
                     </div>
                 </div>

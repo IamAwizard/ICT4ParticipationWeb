@@ -48,9 +48,13 @@ namespace Project
             }
         }
 
-        protected void lbox_Questions_SelectedIndexChanged(object sender, EventArgs e)
+        protected void btn_AnswerQuestion_Click(object sender, EventArgs e)
         {
-
+            int questionid = Convert.ToInt32(lbox_Questions.SelectedItem.Value);
+            Question q = volunteerhandler.GetQuestionByIDfromCache(questionid);
+            q = volunteerhandler.AddClientToQuestion(q);
+            Session["Question"] = q; 
+            Response.Redirect("~/volunteer/volunteer_vraagdetails.aspx");
         }
     }
 }

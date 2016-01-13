@@ -16,15 +16,15 @@
                 </div>
                 <div class="large-8 columns">
                     <div class="large-12 columns secondary callout">
-                        <asp:Label ID="lbl_date" runat="server" Text="op 01-01-2016"></asp:Label>
+                        <asp:Label ID="lbl_Date" runat="server" Text="op 01-01-2016"></asp:Label>
                         <div style="float: right;">
                             <asp:Label ID="lbl_Critical" runat="server" ForeColor="Red" Text="URGENT"></asp:Label>
                         </div>
                         <br />
-                        <asp:Label ID="lbl_user" runat="server" Text="Vroeg Lorem Ipsum"></asp:Label>
+                        <asp:Label ID="lbl_Client" runat="server" Text="Vroeg Lorem Ipsum"></asp:Label>
                         <br />
                         <br />
-                        <asp:ListBox ID="lbox_Questions" runat="server" Height="100%" Rows="11"></asp:ListBox>
+                        <asp:TextBox ID="tbox_Question" runat="server" TextMode="MultiLine" Rows="5" Height="100%"></asp:TextBox>
                         <div class="row">
                             <div class="large-12 column ">
                                 <div class="row">

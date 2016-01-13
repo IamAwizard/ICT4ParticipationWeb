@@ -13,13 +13,13 @@ namespace Project {
     public partial class Client_Chats {
         
         /// <summary>
-        /// TextBox1 control.
+        /// lbox_Clients control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Clients;
         
         /// <summary>
         /// lbl_chatbox control.

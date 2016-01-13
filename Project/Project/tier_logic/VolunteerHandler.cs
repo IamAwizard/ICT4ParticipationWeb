@@ -33,6 +33,11 @@ namespace Project
                 return false;
         }
 
+        public Question AddClientToQuestion(Question question)
+        {
+            return questions.AddClientToQuestion(question);
+        }
+
         public bool AnswerQuestion(Question question, string answer)
         {
             throw new NotImplementedException();
@@ -59,7 +64,7 @@ namespace Project
         {
             return questions.GetQuestionByIDCached(questionid);
         }
-        public List<Account> GetClients()
+        public List<Client> GetClients()
         {
             throw new NotImplementedException();
         }
@@ -94,7 +99,7 @@ namespace Project
 
         public List<Review> GetMyReviews(Volunteer volunteer)
         {
-            
+
             return databasehandler.GetMyReviews(volunteer);
         }
     }

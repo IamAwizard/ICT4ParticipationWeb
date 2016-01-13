@@ -36,7 +36,7 @@ namespace Project
         /// <returns>account if found, otherwise null</returns>
         public Account GetAccount(string email)
         {
-            return accm.GetAccount(email);
+            return accm.GetAccountByEmail(email);
         }
 
         /// <summary>
@@ -47,6 +47,16 @@ namespace Project
         public bool AddAccount(Account newaccount)
         {
             return accm.AddAccount(newaccount);
+        }
+
+        /// <summary>
+        /// Deletes a account
+        /// </summary>
+        /// <param name="account"></param>
+        /// <returns></returns>
+        public bool DeleteAccount(Account account)
+        {
+            return accm.DeleteAccount(account);
         }
     }
 }
