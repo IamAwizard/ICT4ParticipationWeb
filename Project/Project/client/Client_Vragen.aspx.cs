@@ -106,7 +106,9 @@ namespace Project
                 lbox_getquestion.Items.Add(critical);
                 lbox_getquestion.Items.Add(volunteersneeded);
                 lbox_getquestion.Items.Add(transport);
-                Session["Question"] = q.ID;
+                q = questionhandler.ExpandQuestionWithClient(q);
+                q = questionhandler.ExpandQuestionWithVolunteers(q);
+                Session["Question"] = q;
             }
         }
         private void LoadQuestions()

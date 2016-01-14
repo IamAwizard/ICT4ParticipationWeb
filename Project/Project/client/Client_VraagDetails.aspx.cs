@@ -18,11 +18,7 @@ namespace Project
         {
             if (Session["Question"] != null)
             {
-                string questionid = Session["Question"].ToString();
-                int id = Convert.ToInt32(questionid);
-                Question question;
-                // De vraag wordt geladen
-                question = databasehandler.GetQuestionByID(id);
+                Question question = (Question)Session["Question"];
 
                 MaintainScrollPositionOnPostBack = true;
 
@@ -49,6 +45,10 @@ namespace Project
                     lbl_user.Text = username;
                     tbox_Question.Text = question.Description;
                     cbox_Critical.Checked = question.Critical;
+                    lbox_getquestion.DataSource = question.AcceptedBy;
+                    lbox_getquestion.DataTextField = "Username";
+                    lbox_getquestion.DataValueField = "VolunteerID";
+                    lbox_getquestion.DataBind();
                     if (question.Location != "")
                     {
                         tbox_Location.Text = question.Location;

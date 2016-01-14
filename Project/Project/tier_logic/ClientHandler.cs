@@ -20,7 +20,7 @@ namespace Project
             questionhandler = new QuestionHandler();
             reviewhandler = new ReviewHandler();
             accounthandler = new AccountHandler();
-      
+
             CurrentUser = activeuser;
         }
 
@@ -113,9 +113,9 @@ namespace Project
                 return null;
             }
         }
-            public int GetTransportID(string description)
+        public int GetTransportID(string description)
         {
-            int ID =0;
+            int ID = 0;
             try
             {
                 ID = databasehandler.GetSingleTransport(description);
@@ -126,6 +126,16 @@ namespace Project
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 return 0;
             }
+        }
+
+        public Question ExpandQuestionsWithClient(Question question)
+        {
+            return questionhandler.ExpandQuestionWithClient(question);
+        }
+
+        public Question ExpandQuestionWithVolunteers(Question question)
+        {
+            return questionhandler.ExpandQuestionWithVolunteers(question);
         }
     }
 }
