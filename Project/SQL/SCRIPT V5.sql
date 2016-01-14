@@ -152,8 +152,8 @@
 	vaardigheidid			number(7),
 	
 	constraint check_VRIJVAAR_pk primary key(vrijwilligerid, vaardigheidid),
-	constraint fk_VRIJVAAR_vrijwilligerid foreign key(vrijwilligerid) REFERENCES TVRIJWILLIGER(id),
-	constraint fk_VRIJVAAR_vaardigheidid foreign key(vaardigheidid) REFERENCES TVAARDIGHEID(id)
+	constraint fk_VRIJVAAR_vrijwilligerid foreign key(vrijwilligerid) REFERENCES TVRIJWILLIGER(id) on delete cascade,
+	constraint fk_VRIJVAAR_vaardigheidid foreign key(vaardigheidid) REFERENCES TVAARDIGHEID(id) on delete cascade
 	);
 	
 	
@@ -163,8 +163,8 @@
 	vaardigheidid			number(7),
 	
 	constraint check_HULPVAAR_pk primary key(hulpvraagid, vaardigheidid),
-	constraint fk_HULPVAAR_hulpvraagid foreign key(hulpvraagid) REFERENCES THULPVRAAG(id),
-	constraint fk_HULPVAAR_vaardigheidid foreign key(vaardigheidid) REFERENCES TVAARDIGHEID(id)
+	constraint fk_HULPVAAR_hulpvraagid foreign key(hulpvraagid) REFERENCES THULPVRAAG(id) on delete cascade,
+	constraint fk_HULPVAAR_vaardigheidid foreign key(vaardigheidid) REFERENCES TVAARDIGHEID(id) on delete cascade
 	);
 	
 	
@@ -174,8 +174,8 @@
 	vrijwilligerid			number(7),
 	
 	constraint check_HULPVRIJ_pk primary key(hulpvraagid, vrijwilligerid),
-	constraint fk_HULPVRIJ_hulpvraagid foreign key(hulpvraagid) REFERENCES THULPVRAAG(id),
-	constraint fk_HULPVRIJ_vrijwilligerid foreign key(vrijwilligerid) REFERENCES TVRIJWILLIGER(id)
+	constraint fk_HULPVRIJ_hulpvraagid foreign key(hulpvraagid) REFERENCES THULPVRAAG(id) on delete cascade,
+	constraint fk_HULPVRIJ_vrijwilligerid foreign key(vrijwilligerid) REFERENCES TVRIJWILLIGER(id) on delete cascade
 	);
 	
 
