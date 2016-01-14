@@ -48,5 +48,10 @@ namespace Project
         {
             return questionhandler.GetAllQuestions();
         }
+
+        public Question GetQuestionByID(int id)
+        {
+            return questionhandler.GetQuestionByIDCached(id);
+        }
     }
 }
