@@ -52,7 +52,7 @@ namespace Project
         }
         protected void btn_LoadQuestion_Click(object sender, EventArgs e)
         {
-            Response.Redirect("Client_VraagDetails.aspx?Question=" + Session["Question"] + "");
+            Response.Redirect("~/client/Client_VraagDetails.aspx");
         }
         private void GetSelectedQuestionDetails()
         {

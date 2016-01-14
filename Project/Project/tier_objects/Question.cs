@@ -67,7 +67,14 @@ namespace Project
                 {
                     summary = Description.Substring(0, 60) + "...";
                 }
-                return $"{DateBegin.ToShortDateString()}: {summary}";
+                if (Critical)
+                {
+                    return $"{DateBegin.ToShortDateString()} !!URGENT!!: {summary}";
+                }
+                else
+                {
+                    return $"{DateBegin.ToShortDateString()}: {summary}";
+                }
             }
         }
 

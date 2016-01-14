@@ -50,12 +50,15 @@ namespace Project
 
         protected void btn_AnswerQuestion_Click(object sender, EventArgs e)
         {
-            int questionid = Convert.ToInt32(lbox_Questions.SelectedItem.Value);
-            Question q = volunteerhandler.GetQuestionByIDfromCache(questionid);
-            q = volunteerhandler.ExpandQuestionsWithClient(q);
-            q = volunteerhandler.ExpandQuestionWithVolunteers(q);
-            Session["Question"] = q; 
-            Response.Redirect("~/volunteer/volunteer_vraagdetails.aspx");
+            if (lbox_Questions.SelectedItem != null)
+            {
+                int questionid = Convert.ToInt32(lbox_Questions.SelectedItem.Value);
+                Question q = volunteerhandler.GetQuestionByIDfromCache(questionid);
+                q = volunteerhandler.ExpandQuestionsWithClient(q);
+                q = volunteerhandler.ExpandQuestionWithVolunteers(q);
+                Session["Question"] = q;
+                Response.Redirect("~/volunteer/volunteer_vraagdetails.aspx");
+            }
         }
     }
 }

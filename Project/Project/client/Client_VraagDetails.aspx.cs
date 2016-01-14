@@ -16,110 +16,117 @@ namespace Project
         QuestionHandler questionhandler = new QuestionHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
-            string questionid = Session["Question"].ToString();
-            int id = Convert.ToInt32(questionid);
-            Question question;
-            // De vraag wordt geladen
-            question = databasehandler.GetQuestionByID(id);
-
-            MaintainScrollPositionOnPostBack = true;
-
-            if (!IsPostBack)
+            if (Session["Question"] != null)
             {
-                List<Transport> transport = new List<Transport>();
-                transport = clienthandler.GetTransports();
-                selecttransport.Items.Clear();
+                string questionid = Session["Question"].ToString();
+                int id = Convert.ToInt32(questionid);
+                Question question;
+                // De vraag wordt geladen
+                question = databasehandler.GetQuestionByID(id);
 
-                // DATABIND
-                selecttransport.DataSource = transport;
-                // Property van transport die word weergeven als tekst
-                selecttransport.DataTextField = "Description";
-                // Property van transport die gebruikt wordt als value (niet getoond)
-                selecttransport.DataValueField = "ID";
-                selecttransport.DataBind();
+                MaintainScrollPositionOnPostBack = true;
 
-                // Stel het selectedvalue (=transport.ID) in op het transport.id van de vraag (tostring!!!!)
-                selecttransport.SelectedValue = question.Transport.ID.ToString();
+                if (!IsPostBack)
+                {
+                    List<Transport> transport = new List<Transport>();
+                    transport = clienthandler.GetTransports();
+                    selecttransport.Items.Clear();
 
-                tbox_Question.Text = string.Empty;
-                string username = clienthandler.GetUsername(question.AuthorID);
-                lbl_date.Text = question.DateBegin.ToShortDateString();
-                lbl_user.Text = username;
-                tbox_Question.Text = question.Description;
-                cbox_Critical.Checked = question.Critical;
-                if (question.Location != "")
-                {
-                    tbox_Location.Text = question.Location;
-                }
-                else
-                {
+                    // DATABIND
+                    selecttransport.DataSource = transport;
+                    // Property van transport die word weergeven als tekst
+                    selecttransport.DataTextField = "Description";
+                    // Property van transport die gebruikt wordt als value (niet getoond)
+                    selecttransport.DataValueField = "ID";
+                    selecttransport.DataBind();
 
-                    tbox_Location.Text = "Geef een locatie mee";
-                }
-                if (question.TravelTime != "")
-                {
-                    tbox_Traveltime.Text = question.TravelTime;
-                }
-                else
-                {
-                    tbox_Traveltime.Text = "Geef een reistijd mee";
-                }
+                    // Stel het selectedvalue (=transport.ID) in op het transport.id van de vraag (tostring!!!!)
+                    selecttransport.SelectedValue = question.Transport.ID.ToString();
 
-                if (question.VolunteersNeeded != 1)
-                {
-                    tbox_VolunteerCount.Text = question.VolunteersNeeded.ToString();
-                }
-                else
-                {
-                    tbox_VolunteerCount.Text = "1";
-                }
-            }
-            if (IsPostBack)
-            {
-                errormsg.Visible = false;
-                if (tbox_Question.Text.Length < 3000)
-                {
-                    question.Description = tbox_Question.Text;
-                    if (tbox_Location.Text.Length < 200)
+                    tbox_Question.Text = string.Empty;
+                    string username = clienthandler.GetUsername(question.AuthorID);
+                    lbl_date.Text = question.DateBegin.ToShortDateString();
+                    lbl_user.Text = username;
+                    tbox_Question.Text = question.Description;
+                    cbox_Critical.Checked = question.Critical;
+                    if (question.Location != "")
                     {
-                        question.Location = tbox_Location.Text;
-                        if (tbox_Traveltime.Text.Length < 200)
+                        tbox_Location.Text = question.Location;
+                    }
+                    else
+                    {
+
+                        tbox_Location.Text = "Geef een locatie mee";
+                    }
+                    if (question.TravelTime != "")
+                    {
+                        tbox_Traveltime.Text = question.TravelTime;
+                    }
+                    else
+                    {
+                        tbox_Traveltime.Text = "Geef een reistijd mee";
+                    }
+
+                    if (question.VolunteersNeeded != 1)
+                    {
+                        tbox_VolunteerCount.Text = question.VolunteersNeeded.ToString();
+                    }
+                    else
+                    {
+                        tbox_VolunteerCount.Text = "1";
+                    }
+                }
+                if (IsPostBack)
+                {
+                    errormsg.Visible = false;
+                    if (tbox_Question.Text.Length < 3000)
+                    {
+                        question.Description = tbox_Question.Text;
+                        if (tbox_Location.Text.Length < 200)
                         {
-                            question.TravelTime = tbox_Traveltime.Text;
-
-
-                            if (Regex.IsMatch(tbox_VolunteerCount.Text, @"^\d+$") && tbox_VolunteerCount.Text.Length < 3)
+                            question.Location = tbox_Location.Text;
+                            if (tbox_Traveltime.Text.Length < 200)
                             {
-                                question.Transport.ID = Convert.ToInt32(selecttransport.SelectedValue);
-                                question.VolunteersNeeded = Convert.ToInt32(tbox_VolunteerCount.Text);
-                                question.Critical = cbox_Critical.Checked;
-                                questionhandler.UpdateQuestion(question);
+                                question.TravelTime = tbox_Traveltime.Text;
 
+
+                                if (Regex.IsMatch(tbox_VolunteerCount.Text, @"^\d+$") && tbox_VolunteerCount.Text.Length < 3)
+                                {
+                                    question.Transport.ID = Convert.ToInt32(selecttransport.SelectedValue);
+                                    question.VolunteersNeeded = Convert.ToInt32(tbox_VolunteerCount.Text);
+                                    question.Critical = cbox_Critical.Checked;
+                                    questionhandler.UpdateQuestion(question);
+
+                                }
+                                else
+                                {
+                                    errormsg.Text = "Geen geldige invoer bij vrijwilligers, kan alleen een getal zijn";
+                                    errormsg.Visible = true;
+                                }
                             }
+
                             else
                             {
-                                errormsg.Text = "Geen geldige invoer bij vrijwilligers, kan alleen een getal zijn";
+                                errormsg.Text = "Reistijd tekst is te lang";
                                 errormsg.Visible = true;
                             }
                         }
-
                         else
                         {
-                            errormsg.Text = "Reistijd tekst is te lang";
+                            errormsg.Text = "Locatie tekst is te lang";
                             errormsg.Visible = true;
                         }
                     }
                     else
                     {
-                        errormsg.Text = "Locatie tekst is te lang";
+                        errormsg.Text = "Vraag omschrijving tekst is te lang";
                         errormsg.Visible = true;
                     }
                 }
-                else
-                {
-                    errormsg.Text = "Vraag omschrijving tekst is te lang";
-                    errormsg.Visible = true;
-                }
+            }
+            else
+            {
+                Response.Redirect("~/client/client_vragen.aspx");
             }
         }
     }
