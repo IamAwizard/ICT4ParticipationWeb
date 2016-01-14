@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Windows.Forms;
 
 namespace Project
 {
     class AdminHandler
     {
         // Fields
+        private DatabaseHandler dbm;
         QuestionHandler questionhandler;
         ReviewHandler reviewhandler;
         // Constructor   
@@ -22,7 +24,14 @@ namespace Project
         // Methods
         public bool DeleteQuestion(Question helprequest)
         {
-            throw new NotImplementedException();
+            if (questionhandler.DeleteQuestion(helprequest))
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
+            
         }
 
         public bool DeleteReview(Review review)
@@ -37,7 +46,7 @@ namespace Project
 
         public List<Question> GetQuestions()
         {
-            throw new NotImplementedException();
+            return questionhandler.GetAllQuestions();
         }
     }
 }
