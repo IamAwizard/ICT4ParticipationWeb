@@ -12,21 +12,12 @@ namespace Project
         VolunteerHandler volunhandler = new VolunteerHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
-            Volunteer currentuser = (Volunteer)Session["currentUser"];
-            if(currentuser.License == "true")
-            {
-                cbox_HasLicense.Checked = true;
-            }
-            else
-            {
-                cbox_HasLicense.Checked = false;
-            }
             CheckIfUserAllowed();
             if (IsPostBack)
             {
                 UpdateAvailability();
             }
-            SetAvailability();
+            SetValues();
         }
 
         private int getIndex(string timeofday)
@@ -120,7 +111,7 @@ namespace Project
             volunhandler.SetAvailablilty(availablesunday);
         }
 
-        private void SetAvailability()
+        private void SetValues()
         {
             Volunteer currentuser = (Volunteer)Session["currentUser"];
             List<Availability> available = new List<Availability>();
@@ -153,6 +144,14 @@ namespace Project
                     default:
                         break;
                 }
+            }
+            if (currentuser.License.ToLower() == "true")
+            {
+                cbox_HasLicense.Checked = true;
+            }
+            else
+            {
+                cbox_HasLicense.Checked = false;
             }
         }
     }

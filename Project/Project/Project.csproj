@@ -92,6 +92,7 @@
     <Content Include="client\Client_Master.Master" />
     <Content Include="Uitschrijven.aspx" />
     <Content Include="volunteer\Volunteer_Master.Master" />
+    <None Include="Properties\PublishProfiles\ICT4ParticipationBeta.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

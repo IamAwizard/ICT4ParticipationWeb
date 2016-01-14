@@ -1489,8 +1489,8 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandText =
-                   "DELETE FROM TQUESTION WHERE QUESTIONID = " + QuestionID;
-
+                   "DELETE FROM THULPVRAAG WHERE ID = :NewID";
+                cmd.Parameters.Add("NewID", QuestionID);
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -1756,35 +1756,22 @@ namespace Project
             }
         }
 
-        public bool UpdateLicense(int userid,bool yesno)
+        public bool UpdateLicense(int userid, bool yesno)
         {
             try
             {
-                if(yesno == true)
-                {
-                    Connect();
-                    cmd = new OracleCommand();
-                    cmd.Connection = con;
-                    cmd.CommandText =
-                       "UPDATE TGEBRUIKER SET heeftrijbewijs =:NewRijbewijs WHERE id=:USERID";
-                    cmd.Parameters.Add("USERID", Convert.ToInt32(userid));
-                    cmd.Parameters.Add("NewRijbewijs", "True");
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                else
-                {
-                    Connect();
-                    cmd = new OracleCommand();
-                    cmd.Connection = con;
-                    cmd.CommandText = "UPDATE TGEBRUIKER SET heeftrijbewijs = :NewRijbewijs WHERE id=:USERID";
-                    cmd.Parameters.Add("USERID",Convert.ToInt32(userid));
-                    cmd.Parameters.Add("NewRijbewijs", "False");
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-               
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText =
+                   "UPDATE TGEBRUIKER SET heeftrijbewijs =:NewRijbewijs WHERE id=:UserId";
+                cmd.Parameters.Add("NewRijbewijs", yesno.ToString());
+                cmd.Parameters.Add("UserId", userid);
+                cmd.ExecuteNonQuery();
+                return true;
             }
+
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -1794,6 +1781,7 @@ namespace Project
             {
                 Disconnect();
             }
+
         }
         public bool SetAvailability(Availability available)
         {
@@ -1830,7 +1818,7 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID WHERE vrijwilligerID="+volunID+"";
+                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID WHERE vrijwilligerID=" + volunID + "";
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
