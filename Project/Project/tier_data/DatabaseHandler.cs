@@ -419,8 +419,9 @@ namespace Project
                         return false;
                 }
             }
-            catch
+            catch(Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return false;
             }
             finally
