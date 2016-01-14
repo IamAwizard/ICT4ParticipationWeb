@@ -12,6 +12,15 @@ namespace Project
         VolunteerHandler volunhandler = new VolunteerHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
+            Volunteer currentuser = (Volunteer)Session["currentUser"];
+            if(currentuser.License == "true")
+            {
+                cbox_HasLicense.Checked = true;
+            }
+            else
+            {
+                cbox_HasLicense.Checked = false;
+            }
             CheckIfUserAllowed();
             if (IsPostBack)
             {

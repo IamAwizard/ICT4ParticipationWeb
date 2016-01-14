@@ -1766,9 +1766,9 @@ namespace Project
                     cmd = new OracleCommand();
                     cmd.Connection = con;
                     cmd.CommandText =
-                       "UPDATE TGEBRUIKER SET heeftrijbewijs = :newrijbewijs WHERE USERID = :someID";
-                    cmd.Parameters.Add("someID", OracleDbType.Int32).Value = userid;
-                    cmd.Parameters.Add("newrijbewijs", OracleDbType.Int32).Value = "true";
+                       "UPDATE TGEBRUIKER SET heeftrijbewijs =:NewRijbewijs WHERE id=:USERID";
+                    cmd.Parameters.Add("USERID", Convert.ToInt32(userid));
+                    cmd.Parameters.Add("NewRijbewijs", "True");
                     cmd.ExecuteNonQuery();
                     return true;
                 }
@@ -1777,10 +1777,9 @@ namespace Project
                     Connect();
                     cmd = new OracleCommand();
                     cmd.Connection = con;
-                    cmd.CommandText =
-                       "UPDATE TGEBRUIKER SET heeftrijbewijs = :newrijbewijs WHERE USERID = :someID";
-                    cmd.Parameters.Add("someID", OracleDbType.Int32).Value = userid;
-                    cmd.Parameters.Add("newrijbewijs", OracleDbType.Int32).Value = "false";
+                    cmd.CommandText = "UPDATE TGEBRUIKER SET heeftrijbewijs = :NewRijbewijs WHERE id=:USERID";
+                    cmd.Parameters.Add("USERID",Convert.ToInt32(userid));
+                    cmd.Parameters.Add("NewRijbewijs", "False");
                     cmd.ExecuteNonQuery();
                     return true;
                 }
