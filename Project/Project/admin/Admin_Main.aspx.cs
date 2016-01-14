@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Project;
 
 namespace Project
 {
@@ -12,6 +13,17 @@ namespace Project
         protected void Page_Load(object sender, EventArgs e)
         {
 
+        }
+
+        void Delete_Click(Object sender,
+                          EventArgs e)
+        {
+           if(lbox_Questions.SelectedValue != null)
+            {
+               
+            }
+            
+           
         }
     }
 }

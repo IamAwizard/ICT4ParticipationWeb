@@ -13,7 +13,7 @@
                 </div>
                 <div class="large-4 columns">
                     <div class="text-center">
-                        <asp:Button ID="btn_DeleteQuestion" runat="server" Text="Verwijder vraag" CssClass="expanded alert button" />
+                        <asp:Button ID="btn_DeleteQuestion" runat="server" Text="Verwijder vraag" CssClass="expanded alert button" OnClick="Delete_Click" />
                     </div>
                 </div>
             </div>
