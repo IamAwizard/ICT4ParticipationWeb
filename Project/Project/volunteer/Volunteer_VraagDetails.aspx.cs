@@ -60,9 +60,12 @@ namespace Project
                 {
                     Volunteer user = (Volunteer)Session["currentUser"];
                     Question question = (Question)Session["Question"];
-                    question.AcceptedBy.Add(user);
-                    Session["Question"] = question;
                     volunteerhandler.AnswerQuestion(question, user);
+                    Question q = volunteerhandler.GetQuestionByIDfromCache(question.ID);
+                    q = volunteerhandler.ExpandQuestionsWithClient(q);
+                    q = volunteerhandler.ExpandQuestionWithVolunteers(q);
+                    Session["Question"] = q;
+                    Response.Redirect("~/volunteer/volunteer_vraagdetails.aspx");
                 }
             }
         }
