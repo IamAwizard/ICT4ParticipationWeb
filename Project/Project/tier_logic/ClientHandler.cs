@@ -8,7 +8,6 @@ namespace Project
     class ClientHandler
     {
         // Fields
-        ChatHandler chathandler;
         QuestionHandler questionhandler;
         ReviewHandler reviewhandler;
         AccountHandler accounthandler;

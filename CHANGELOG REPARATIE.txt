@@ -1,0 +1,10 @@
+> Account verwijderen werkt weer
+> Hulpvraag verwijderen werkt weer
+> Uploaden naar server werkt nu
+> Database opgezet op server
+>
+>
+>
+>
+>
+>

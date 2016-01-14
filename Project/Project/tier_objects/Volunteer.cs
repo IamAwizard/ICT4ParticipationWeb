@@ -28,5 +28,6 @@ namespace Project
         public string Photo { get; set; }
         public string VOG { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public decimal Rating { get; set; }
     }
 }

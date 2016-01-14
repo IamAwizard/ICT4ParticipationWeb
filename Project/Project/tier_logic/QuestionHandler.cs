@@ -94,6 +94,7 @@ namespace Project
             }
             catch (NullReferenceException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -107,6 +108,7 @@ namespace Project
             }
             catch (NullReferenceException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return null;
             }
         }
@@ -120,6 +122,7 @@ namespace Project
             }
             catch (NullReferenceException ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
                 return null;
             }
         }

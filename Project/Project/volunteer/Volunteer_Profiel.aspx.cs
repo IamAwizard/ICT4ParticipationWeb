@@ -55,10 +55,6 @@ namespace Project
                 {
                     Response.Redirect("~/admin/admin_main.aspx");
                 }
-                else
-                {
-                    Volunteer bar = foo as Volunteer;
-                }
             }
             else
             {
@@ -116,6 +112,9 @@ namespace Project
             Volunteer currentuser = (Volunteer)Session["currentUser"];
             List<Availability> available = new List<Availability>();
             available = volunhandler.GetAvailability(currentuser.VolunteerID);
+            lbl_GivenName.Text = currentuser.Username;
+            img_Photo.ImageUrl = Server.MapPath("~/profileimg/" + currentuser.Photo);
+            link_VoGDownload.PostBackUrl = Server.MapPath("~/vog/" + currentuser.VOG);
             foreach (Availability A in available)
             {
                 switch (A.Day.ToLower())

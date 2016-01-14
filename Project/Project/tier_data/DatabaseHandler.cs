@@ -816,7 +816,6 @@ namespace Project
                 Connect();
                 using (cmd = new OracleCommand())
                 {
-                    Question returnvalue = null;
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "select ID,Omschrijving from TVervoer";
@@ -849,7 +848,6 @@ namespace Project
                 Connect();
                 using (cmd = new OracleCommand())
                 {
-                    Question returnvalue = null;
                     cmd.Connection = con;
                     cmd.CommandType = CommandType.Text;
                     cmd.CommandText = "select ID from TVervoer where omschrijving='" + description + "'";

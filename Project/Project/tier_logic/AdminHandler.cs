@@ -9,7 +9,6 @@ namespace Project
     class AdminHandler
     {
         // Fields
-        private DatabaseHandler dbm;
         QuestionHandler questionhandler;
         ReviewHandler reviewhandler;
         // Constructor   

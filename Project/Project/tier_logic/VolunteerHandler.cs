@@ -8,7 +8,6 @@ namespace Project
     public class VolunteerHandler
     {
         // Fields
-        Volunteer currentuser;
         DatabaseHandler databasehandler;
         ChatHandler chathandler;
         QuestionHandler questions;
@@ -51,12 +50,6 @@ namespace Project
         public bool UpdateProfile(bool driverslisence, string biography, string pathtophoto)
         {
             throw new NotImplementedException();
-        }
-
-
-        public Volunteer GetUserInfo()
-        {
-            return currentuser;
         }
 
         public List<Question> GetQuestions()

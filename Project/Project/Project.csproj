@@ -78,7 +78,6 @@
     <Content Include="css\app.css" />
     <Content Include="css\foundation.css" />
     <Content Include="css\foundation.min.css" />
-    <Content Include="Foundation.html" />
     <Content Include="Default.aspx" />
     <Content Include="js\app.js" />
     <Content Include="js\foundation.js" />
@@ -93,6 +92,7 @@
     <Content Include="Uitschrijven.aspx" />
     <Content Include="volunteer\Volunteer_Master.Master" />
     <None Include="Properties\PublishProfiles\ICT4ParticipationBeta.pubxml" />
+    <None Include="Properties\PublishProfiles\Release.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
