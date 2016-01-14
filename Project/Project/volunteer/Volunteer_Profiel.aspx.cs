@@ -17,31 +17,31 @@ namespace Project
             if (IsPostBack)
             {
                 //Maandag
-                Availability availablemonday = new Availability("Mondag", ddl_Monday.SelectedValue, currentuser.VolunteerID);
+                Availability availablemonday = new Availability("Maandag", ddl_Monday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availablemonday);
 
                 //Dinsdag
-                Availability availabletuesday = new Availability("'Dinsdag", ddl_Tuesday.SelectedValue, currentuser.VolunteerID);
+                Availability availabletuesday = new Availability("'Dinsdag", ddl_Tuesday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availabletuesday);
 
                 //Woensdag
-                Availability availablewednesday = new Availability("Woensdag", ddl_Wednesday.SelectedValue, currentuser.VolunteerID);
+                Availability availablewednesday = new Availability("Woensdag", ddl_Wednesday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availablewednesday);
 
                 //Donderdag
-                Availability availablethursday = new Availability("Donderdag", ddl_Thursday.SelectedValue, currentuser.VolunteerID);
+                Availability availablethursday = new Availability("Donderdag", ddl_Thursday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availablethursday);
 
                 //Vrijdag
-                Availability availablefriday = new Availability("Vrijdag", ddl_Friday.SelectedValue, currentuser.VolunteerID);
+                Availability availablefriday = new Availability("Vrijdag", ddl_Friday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availablefriday);
 
                 //Zaterdag
-                Availability availablesaturday = new Availability("Zaterdag", ddl_Saturday.SelectedValue, currentuser.VolunteerID);
+                Availability availablesaturday = new Availability("Zaterdag", ddl_Saturday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availablesaturday);
 
                 //Zondag
-                Availability availablesunday = new Availability("Zondag", ddl_Sunday.SelectedValue, currentuser.VolunteerID);
+                Availability availablesunday = new Availability("Zondag", ddl_Sunday.SelectedItem.Text, currentuser.VolunteerID);
                 volunhandler.SetAvailablilty(availablesunday);
 
             }
@@ -52,35 +52,35 @@ namespace Project
                 {
                     if (A.Day == "Maandag")
                     {
-                        ddl_Monday.SelectedValue = A.TimeOfDay;
+                        ddl_Monday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Dinsdag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Woensdag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Woensdag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Donderdag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Vrijdag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Zaterdag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                     if (A.Day == "Zondag")
                     {
-                        ddl_Tuesday.SelectedValue = A.TimeOfDay;
+                        ddl_Tuesday.Text = A.TimeOfDay;
                     }
                 
             }

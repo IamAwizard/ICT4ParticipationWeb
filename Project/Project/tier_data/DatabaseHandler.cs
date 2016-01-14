@@ -1804,9 +1804,9 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET dagdeel=:NewDagdeel where dagnaam='"+available.Day+"' AND vrijwilligersid='"+available.volunid+"'";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add("NewDagdeel", OracleDbType.Varchar2).Value = available.TimeOfDay;
+                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET dagdeel=:NewDagdeel where dagnaam='"+available.Day+"' AND vrijwilligerid=:UserId";
+                cmd.Parameters.Add("NewDagdeel", available.TimeOfDay);
+                cmd.Parameters.Add("UserId", available.volunid);
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -1830,7 +1830,7 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID WHERE vrijwilligersID="+volunID+"";
+                cmd.CommandText = "SELECT * FROM TBESCHIKBAARHEID WHERE vrijwilligerID="+volunID+"";
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
