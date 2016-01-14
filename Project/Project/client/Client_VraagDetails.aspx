@@ -69,7 +69,6 @@
                     <div class="large-12 columns secondary callout">
                         <asp:Label ID="lbl_Volunteer" runat="server" Text="Jordy steenberg"></asp:Label>
                         <br />
-                        <asp:Label ID="lbl_Commented" runat="server" Text="Heeft gereageerd"></asp:Label>
                         <br />
                         <asp:ListBox runat="server" Height="100%" Rows="7" ID="lbox_getquestion"></asp:ListBox>
                         <div class="row">

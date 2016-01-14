@@ -49,6 +49,16 @@ namespace Project
                     lbox_getquestion.DataTextField = "Username";
                     lbox_getquestion.DataValueField = "VolunteerID";
                     lbox_getquestion.DataBind();
+                    string grammar = "vrijwilligers hebben";
+                    if (question.AcceptedBy.Count == 1)
+                    {
+                        grammar = "vrijwilliger heeft";
+                    }
+                    lbl_Volunteer.Text = $"{question.AcceptedBy.Count} {grammar}  gereageerd";
+                    if (question.AcceptedBy.Count == 0)
+                    {
+                        lbl_Volunteer.Text = "Nog niemand heeft gereageerd";
+                    }
                     if (question.Location != "")
                     {
                         tbox_Location.Text = question.Location;
