@@ -22,7 +22,9 @@
                 <div class="large-6 columns">
 
                     <div class="large-6 columns">
-                        <asp:Image ID="img_Photo" runat="server" ImageUrl="http://placehold.it/200x275" Height="275" Width="100%" />
+                        <asp:HyperLink ID="link_Photo" runat="server" Target="_blank">
+                            <asp:Image ID="img_Photo" runat="server" ImageUrl="http://placehold.it/200x275" Height="275" Width="100%" />
+                        </asp:HyperLink>
                         <br />
                         <br />
                         <asp:FileUpload ID="FU_UploadPhoto" runat="server" />
@@ -30,10 +32,13 @@
                     <div class="large-6 columns">
                         <h4>
                             <asp:Label ID="lbl_GivenName" runat="server" Text="Jan Janssen"></asp:Label></h4>
-                        <asp:Label ID="lbl_Rating" runat="server" Text="Rating: 0,0"></asp:Label><br /><br />
-                        <asp:Label ID="lbl_Age" runat="server" Text="Leeftijd: 22"></asp:Label><br /><br />
-                        <asp:CheckBox OnCheckedChanged="cbox_HasLicense_CheckedChanged"  AutoPostBack="true" ID="cbox_HasLicense" runat="server" Text="Rijbewijs" /><br /><br />
-                        <asp:LinkButton ID="link_VoGDownload" runat="server">VOG Downloaden</asp:LinkButton>
+                        <asp:Label ID="lbl_Rating" runat="server" Text="Rating: 0,0"></asp:Label><br />
+                        <br />
+                        <asp:Label ID="lbl_Age" runat="server" Text="Leeftijd: 22"></asp:Label><br />
+                        <br />
+                        <asp:CheckBox OnCheckedChanged="cbox_HasLicense_CheckedChanged" AutoPostBack="true" ID="cbox_HasLicense" runat="server" Text="Rijbewijs" /><br />
+                        <br />
+                        <asp:HyperLink ID="link_VoGDownload" runat="server" Target="_blank">VOG Downloaden</asp:HyperLink>
                     </div>
                 </div>
                 <div class="large-6 columns border-left-side">
@@ -60,7 +65,7 @@
                             <asp:Label ID="lbl_Tuesday" runat="server" Text="Dinsdag:" AssociatedControlID="ddl_Tuesday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList AutoPostBack="true" ID="ddl_Tuesday" runat="server" >
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Tuesday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
                                 <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>

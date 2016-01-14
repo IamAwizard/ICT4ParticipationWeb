@@ -31,6 +31,15 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_Availability;
         
         /// <summary>
+        /// link_Photo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink link_Photo;
+        
+        /// <summary>
         /// img_Photo control.
         /// </summary>
         /// <remarks>
@@ -91,7 +100,7 @@ namespace Project {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton link_VoGDownload;
+        protected global::System.Web.UI.WebControls.HyperLink link_VoGDownload;
         
         /// <summary>
         /// lbl_Monday control.

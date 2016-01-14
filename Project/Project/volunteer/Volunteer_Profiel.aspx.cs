@@ -113,8 +113,9 @@ namespace Project
             List<Availability> available = new List<Availability>();
             available = volunhandler.GetAvailability(currentuser.VolunteerID);
             lbl_GivenName.Text = currentuser.Username;
-            img_Photo.ImageUrl = Server.MapPath("~/profileimg/" + currentuser.Photo);
-            link_VoGDownload.PostBackUrl = Server.MapPath("~/vog/" + currentuser.VOG);
+            link_Photo.NavigateUrl = "~/profileimg/" + currentuser.Photo;
+            img_Photo.ImageUrl = "~/profileimg/" + currentuser.Photo;
+            link_VoGDownload.NavigateUrl = "~/vog/" + currentuser.VOG;
             foreach (Availability A in available)
             {
                 switch (A.Day.ToLower())
