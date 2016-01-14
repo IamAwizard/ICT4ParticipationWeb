@@ -46,7 +46,7 @@
                         <div class="large-8 column">
                             <asp:DropDownList AutoPostBack="true" ID="ddl_Monday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>
@@ -57,12 +57,12 @@
                     <div class="row">
 
                         <div class="large-4 column">
-                            <asp:Label ID="lbl_Tuesday" AutoPostBack="true" runat="server" Text="Dinsdag:" AssociatedControlID="ddl_Tuesday" CssClass="middle"></asp:Label>
+                            <asp:Label ID="lbl_Tuesday" runat="server" Text="Dinsdag:" AssociatedControlID="ddl_Tuesday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList ID="ddl_Tuesday" runat="server">
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Tuesday" runat="server" >
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>
@@ -73,12 +73,12 @@
                     <div class="row">
 
                         <div class="large-4 column">
-                            <asp:Label ID="lbl_Wednesday" AutoPostBack="true" runat="server" Text="Woensdag:" AssociatedControlID="ddl_Wednesday" CssClass="middle"></asp:Label>
+                            <asp:Label ID="lbl_Wednesday" runat="server" Text="Woensdag:" AssociatedControlID="ddl_Wednesday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList ID="ddl_Wednesday" runat="server">
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Wednesday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>
@@ -89,12 +89,12 @@
                     <div class="row">
 
                         <div class="large-4 column">
-                            <asp:Label ID="lbl_Thursday" AutoPostBack="true" runat="server" Text="Donderdag:" AssociatedControlID="ddl_Thursday" CssClass="middle"></asp:Label>
+                            <asp:Label ID="lbl_Thursday" runat="server" Text="Donderdag:" AssociatedControlID="ddl_Thursday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList ID="ddl_Thursday" runat="server">
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Thursday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>
@@ -105,12 +105,12 @@
                     <div class="row">
 
                         <div class="large-4 column">
-                            <asp:Label ID="lbl_Friday" AutoPostBack="true" runat="server" Text="Vrijdag:" AssociatedControlID="ddl_Friday" CssClass="middle"></asp:Label>
+                            <asp:Label ID="lbl_Friday" runat="server" Text="Vrijdag:" AssociatedControlID="ddl_Friday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList ID="ddl_Friday" runat="server">
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Friday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>
@@ -121,12 +121,12 @@
                     <div class="row">
 
                         <div class="large-4 column">
-                            <asp:Label ID="lbl_Saturday" AutoPostBack="true" runat="server" Text="Zaterdag:" AssociatedControlID="ddl_Saturday" CssClass="middle"></asp:Label>
+                            <asp:Label ID="lbl_Saturday" runat="server" Text="Zaterdag:" AssociatedControlID="ddl_Saturday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList ID="ddl_Saturday" runat="server">
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Saturday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>
@@ -137,12 +137,12 @@
                     <div class="row">
 
                         <div class="large-4 column">
-                            <asp:Label ID="lbl_Sunday" AutoPostBack="true" runat="server" Text="Zondag:" AssociatedControlID="ddl_Sunday" CssClass="middle"></asp:Label>
+                            <asp:Label ID="lbl_Sunday" runat="server" Text="Zondag:" AssociatedControlID="ddl_Sunday" CssClass="middle"></asp:Label>
                         </div>
                         <div class="large-8 column">
-                            <asp:DropDownList ID="ddl_Sunday" runat="server">
+                            <asp:DropDownList AutoPostBack="true" ID="ddl_Sunday" runat="server">
                                 <asp:ListItem Value="1">Niet beschikbaar</asp:ListItem>
-                                <asp:ListItem Value="1">Ochtend</asp:ListItem>
+                                <asp:ListItem Value="2">Ochtend</asp:ListItem>
                                 <asp:ListItem Value="3">Middag</asp:ListItem>
                                 <asp:ListItem Value="4">Namiddag</asp:ListItem>
                                 <asp:ListItem Value="5">Avond</asp:ListItem>

@@ -1804,9 +1804,10 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET dagdeel=:NewDagdeel where dagnaam='"+available.Day+"' AND vrijwilligerid=:UserId";
-                cmd.Parameters.Add("NewDagdeel", available.TimeOfDay);
-                cmd.Parameters.Add("UserId", available.volunid);
+                cmd.CommandText = "UPDATE TBESCHIKBAARHEID SET DAGDEEL = :newDagDeel WHERE DAGNAAM = :newDagNaam AND VRIJWILLIGERID = :newVrijwilligerid";
+                cmd.Parameters.Add("newDagDeel", available.TimeOfDay);
+                cmd.Parameters.Add("newDagNaam", available.Day);
+                cmd.Parameters.Add("newVrijwilligerid", available.volunid);
                 cmd.ExecuteNonQuery();
                 return true;
             }
