@@ -17,7 +17,7 @@ namespace Project
         // Fields
 
         // connectionstring = "User Id=loginname; Password=password;Data Source=localhost";
-        private string connectionstring = "User Id=dbi259530;Password=ZBEB4DKxvr;Data Source=192.168.15.50/fhictora";
+        private string connectionstring = "User Id=Participation;Password=Participation;Data Source=localhost:1521";
         private OracleConnection con;
         private OracleCommand cmd;
         private OracleDataReader dr;
@@ -1242,6 +1242,11 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Extends a question with additional information about the author
+        /// </summary>
+        /// <param name="question"></param>
+        /// <returns></returns>
         public Question AddClientToQuestion(Question question)
         {
             try
@@ -1290,6 +1295,42 @@ namespace Project
                 Disconnect();
             }
         }
+
+        /// <summary>
+        /// Gets the meetings of the given user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
+        public List<Meeting>  GetMeetings(User user)
+        {
+            try
+            {
+                List<Meeting> meetings = new List<Meeting>();
+                Connect();
+                return null;
+
+            }
+            catch(Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
         public User GetUserNoConnect(int ids)
         {
             User toadd = null;
