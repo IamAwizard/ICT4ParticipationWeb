@@ -137,6 +137,7 @@
     <Compile Include="tier_logic\ChatHandler.cs" />
     <Compile Include="tier_logic\Chats.cs" />
     <Compile Include="tier_logic\ClientHandler.cs" />
+    <Compile Include="tier_logic\MeetingHandler.cs" />
     <Compile Include="tier_objects\Account.cs" />
     <Compile Include="tier_objects\Admin.cs" />
     <Compile Include="admin\Admin_Master.Master.cs">
