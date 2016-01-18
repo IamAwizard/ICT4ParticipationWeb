@@ -50,6 +50,8 @@
                         </div>
                         <div class="large-6 columns">
                             <asp:Button ID="btn_Ok" runat="server" Text="Ja, Uitschrijven" CssClass="expanded alert button" OnClick="btn_Ok_Click" />
+                            <br />
+                            <asp:Label ID="lbl_ErrorMsg" runat="server" ForeColor="Red" Text="Het is niet gelukt om uw account te verwijderen!" Visible="False"></asp:Label>
                         </div>
                     </div>
                 </div>

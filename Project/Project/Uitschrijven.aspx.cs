@@ -47,6 +47,10 @@ namespace Project
                 {
                     Response.Redirect("~/logout.aspx");
                 }
+                else
+                {
+                    lbl_ErrorMsg.Visible = true;
+                }
             }
         }
     }
