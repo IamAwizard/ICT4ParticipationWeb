@@ -15,11 +15,11 @@ public class ADMethodsAccountManagement
 {
     #region Variables
 
-    private string sDomain = "test.com";
-    private string sDefaultOU = "OU=Test Users,OU=Test,DC=test,DC=com";
-    private string sDefaultRootOU = "DC=test,DC=com";
-    private string sServiceUser = @"ServiceUser";
-    private string sServicePassword = "ServicePassword";
+    private string sDomain = "bedrijfpts13.com";
+    private string sDefaultOU = "OU=Participation,DC=bedrijfpts13,DC=com";
+    private string sDefaultRootOU = "DC=bedrijfpts13,DC=com";
+    private string sServiceUser = @"ParticipationSA@bedrijfpts13.com";
+    private string sServicePassword = "test1234";
 
     #endregion
     #region Validate Methods
