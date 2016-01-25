@@ -1352,7 +1352,7 @@ namespace Project
                             var meetingid = SafeReadInt(dr, 0);
                             var clientid = SafeReadInt(dr, 1);
                             var volunteerid = SafeReadInt(dr, 2);
-                            var date = SafeReadDateTime(dr, 3);
+                            var date = SafeReadString(dr, 3);
                             var location = SafeReadString(dr, 4);
                             var trash = SafeReadInt(dr, 5);
                             var dateofbirth = SafeReadDateTime(dr, 6);
@@ -1374,7 +1374,7 @@ namespace Project
                             var email = SafeReadString(dr, 22);
 
                             Volunteer helper = new Volunteer(accountid, username, password, email, userid, givenname, address, city, phonenumber, haslicense, hascar, unsubscribedate, volunteerid, dateofbirth, profilephoto, vogpath);
-                            Meeting toadd = new Meeting(meetingid, actualuser, helper, date, location);
+                            Meeting toadd = new Meeting(meetingid, actualuser, helper,Convert.ToDateTime( date), location);
                             meetings.Add(toadd);
                         }
                         return meetings;
@@ -1395,7 +1395,7 @@ namespace Project
                             var meetingid = SafeReadInt(dr, 0);
                             var clientid = SafeReadInt(dr, 1);
                             var volunteerid = SafeReadInt(dr, 2);
-                            var date = SafeReadDateTime(dr, 3);
+                            var date = SafeReadString(dr, 3);
                             var location = SafeReadString(dr, 4);
                             var trash = SafeReadInt(dr, 5);
                             var ovpossible = SafeReadString(dr, 6);
@@ -1415,7 +1415,7 @@ namespace Project
                             var email = SafeReadString(dr, 20);
 
                             Client helper = new Client(accountid, username, password, email, userid, givenname, address, city, phonenumber, haslicense, hascar, clientid, ovpossible, unsubscribedate);
-                            Meeting toadd = new Meeting(meetingid, helper, actualuser, date, location);
+                            Meeting toadd = new Meeting(meetingid, helper, actualuser,Convert.ToDateTime( date), location);
                             meetings.Add(toadd);
                         }
                         return meetings;
