@@ -12,41 +12,40 @@
     <link rel="stylesheet" href="css/app.css" />
 </head>
 <body>
-    <div data-sticky-container="">
-        <div class="sticky" data-sticky="" data-margin-top="0" style="width: 100%; z-index: 100">
-            <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
-                <button class="menu-icon" type="button" data-toggle="data-toggle"></button>
-                <div class="title-bar-title">Menu</div>
-            </div>
-            <div class="top-bar" id="main-menu">
-                <div class="top-bar-left">
-                    <ul class="dropdown menu" data-dropdown-menu="data-dropdown-menu">
-                        <li class="menu-text">ICT 4 Participation</li>
-                    </ul>
+    <form id="FormLogin" runat="server">
+        <div data-sticky-container="">
+            <div class="sticky" data-sticky="" data-margin-top="0" style="width: 100%; z-index: 100">
+                <div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium">
+                    <button class="menu-icon" type="button" data-toggle="data-toggle"></button>
+                    <div class="title-bar-title">Menu</div>
                 </div>
-                <div class="top-bar-right">
-                    <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
-                        <li>
-                            <asp:HyperLink ID="link_Login" runat="server" NavigateUrl="~/Login.aspx" style="color:white;">Inloggen</asp:HyperLink></li>
-                        <li>
-                            <asp:HyperLink ID="link_Register" runat="server" NavigateUrl="~/Register.aspx">Registreren</asp:HyperLink></li>
-                    </ul>
+                <div class="top-bar" id="main-menu">
+                    <div class="top-bar-left">
+                        <ul class="dropdown menu" data-dropdown-menu="data-dropdown-menu">
+                            <li class="menu-text">ICT 4 Participation</li>
+                        </ul>
+                    </div>
+                    <div class="top-bar-right">
+                        <ul class="menu vertical medium-horizontal" data-responsive-menu="drilldown medium-dropdown">
+                            <li>
+                                <asp:HyperLink ID="link_Login" runat="server" NavigateUrl="~/Login.aspx" Style="color: white;">Inloggen</asp:HyperLink></li>
+                            <li>
+                                <asp:HyperLink ID="link_Register" runat="server" NavigateUrl="~/Register.aspx">Registreren</asp:HyperLink></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <br />
-        <br />
-        <br />
-        <div class="row">
-            <div class="large-4 large-centered columns callout">
-                <form id="FormLogin" runat="server">
+            <br />
+            <br />
+            <br />
+            <div class="row">
+                <div class="large-4 large-centered columns callout">
                     <div class="row column log-in-form">
                         <h4 class="text-center">Log in met uw e-mailadres</h4>
                         <label for="tbox_Email">
                             E-mail
                         </label>
                         <asp:TextBox ID="tbox_Email" runat="server" placeholder="somebody@example.com" required="required"></asp:TextBox>
-
                         <label for="tbox_Password">
                             Wachtwoord
                         </label>
@@ -59,10 +58,10 @@
                             <asp:HyperLink ID="link_ForgotPassword" runat="server">Wachtwoord vergeten?</asp:HyperLink>
                         </p>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
-    </div>
+    </form>
     <script src="js/vendor/jquery.min.js"></script>
     <script src="js/vendor/what-input.min.js"></script>
     <script src="js/foundation.min.js"></script>
