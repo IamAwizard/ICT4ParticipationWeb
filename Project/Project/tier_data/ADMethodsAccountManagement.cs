@@ -215,6 +215,37 @@ public class ADMethodsAccountManagement
     }
 
     /// <summary>
+    /// Creates a new user in the Default OU
+    /// </summary>
+    /// <param name="sUserName">The accountname of the user to create</param>
+    /// <param name="sPassword">The password of the user to create</param>
+    /// <param name="sGivenName">The (full) name of the user to create</param>
+    /// <param name="email">The email of the user to create</param>
+    /// <returns></returns>
+    public UserPrincipal CreateNewUser(string sUserName, string sPassword, string sGivenName, string email)
+    {
+        if (!IsUserExisiting(sUserName))
+        {
+            PrincipalContext oPrincipalContext = GetPrincipalContext();
+
+            UserPrincipal oUserPrincipal = new UserPrincipal
+               (oPrincipalContext, sUserName, sPassword, true /*Enabled or not*/);
+
+            //User Log on Name
+            oUserPrincipal.UserPrincipalName = sUserName;
+            oUserPrincipal.GivenName = sGivenName;
+            oUserPrincipal.EmailAddress = email;
+            oUserPrincipal.Save();
+
+            return oUserPrincipal;
+        }
+        else
+        {
+            return GetUser(sUserName);
+        }
+    }
+
+    /// <summary>
     /// Deletes a user in Active Directory
     /// </summary>
     /// <param name="sUserName">The username you want to delete</param>

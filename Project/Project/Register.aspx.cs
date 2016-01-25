@@ -95,10 +95,9 @@ namespace Project
                         lbl_UploadPhotoError.Text = "SUCCESS";
                         FU_UploadVog.SaveAs(Server.MapPath("~/vog/") + vogfilename);
                         lbl_UploadPhotoError.Text = "SUCCESS";
+
                         ADMethodsAccountManagement admng = new ADMethodsAccountManagement();
-                        System.DirectoryServices.AccountManagement.UserPrincipal user = admng.CreateNewUser("OU=Participation,DC=bedrijfpts13,DC=com", username, password, givenname, "");
-                        user.EmailAddress = email;
-                        user.Save();
+                        admng.CreateNewUser(username, password, givenname, email);
 
                         Response.Redirect("login.aspx");
                     }
@@ -135,9 +134,8 @@ namespace Project
                 if (loginhandler.AddAccount(newclient))
                 {
                     ADMethodsAccountManagement admng = new ADMethodsAccountManagement();
-                    System.DirectoryServices.AccountManagement.UserPrincipal user = admng.CreateNewUser("OU=Participation,DC=bedrijfpts13,DC=com", username, password, givenname, "");
-                    user.EmailAddress = email;
-                    user.Save();
+                    admng.CreateNewUser(username, password, givenname, email);
+
                     Response.Redirect("login.aspx");
                 }
             }
@@ -367,7 +365,10 @@ namespace Project
             return check;
         }
 
-        protected void btn_Test_Click(object sender, EventArgs e)
+        /// <summary>
+        ///  Not in use
+        /// </summary>
+        public void foobar()
         {
             ADMethodsAccountManagement admng = new ADMethodsAccountManagement();
             System.DirectoryServices.AccountManagement.UserPrincipal user = admng.CreateNewUser("OU=Participation,DC=bedrijfpts13,DC=com", "Testuser", "Testpassword", "Sjakie", "Test");
