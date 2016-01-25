@@ -17,7 +17,7 @@ namespace Project
         // Fields
 
         // connectionstring = "User Id=loginname; Password=password;Data Source=localhost";
-        private string connectionstring = "User Id=Participation;Password=Participation;Data Source=localhost:1521";
+        private string connectionstring = "User Id=Proftaak;Password=123;Data Source=localhost:1521";
         private OracleConnection con;
         private OracleCommand cmd;
         private OracleDataReader dr;
@@ -1387,7 +1387,7 @@ namespace Project
                     {
                         cmd.Connection = con;
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "select * from tafspraak a left join thulpbehoevende h on a.HULPBEHOEVENDEID = h.ID left join tgebruiker g on h.GEBRUIKERID = g.id left join taccount acc on g.ACCOUNTID = acc.ID where a.vrijwilligerid = :volunteerid";
+                        cmd.CommandText = "select * from tafspraak a left join thulpbehoevende h on a.HULPBEHOEVENDEID = h.ID left join tgebruiker g on h.GEBRUIKERID = g.id left join taccount acc on g.ACCOUNTID = acc.ID where a.hulpbehoevendeid = :volunteerid";
                         cmd.Parameters.Add("volunteerid", actualuser.VolunteerID);
                         dr = cmd.ExecuteReader();
                         while (dr.Read())
@@ -1548,16 +1548,15 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT CHATID, BERICHT,tijdstip FROM TCHAT WHERE HULPBEHOEVENDEID = " + client.UserID + " AND VRIJWILLIGERID = " + volunteer.UserID;
+                cmd.CommandText = "SELECT BERICHT,tijdstip,VANHULPBEHOEVENDE FROM TCHAT WHERE HULPBEHOEVENDEID = " + client.ClientID + " AND VRIJWILLIGERID = " + volunteer.VolunteerID;
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    var id = dr.GetInt32(0);
-                    var bericht = dr.GetString(1);
-                    var tijdstip = dr.GetDateTime(2);
-
-                    chatmessages.Add(new Chat(id, bericht, tijdstip, client, volunteer));
+                    var bericht = dr.GetString(0);
+                    var tijdstip = dr.GetDateTime(1);
+                    var sender = dr.GetInt32(2);
+                    chatmessages.Add(new Chat(bericht, tijdstip, sender));
                 }
 
                 return chatmessages;
@@ -1784,6 +1783,50 @@ namespace Project
             }
         }
 
+        public List<Volunteer> GetAllVolunteers()
+        {
+            List<Volunteer> volunteers = new List<Volunteer>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "	select G.ID,G.naam,G.adres,G.woonplaats,G.telefoonnummer,G.heeftrijbewijs,G.heeftauto,a.GEBRUIKERSNAAM,a.WACHTWOORD,a.EMAIL,V.id from TGEBRUIKER G,Tvrijwilliger V,TACCOUNT A where V.GEBRUIKERID = G.id AND G.accountID = A.ID";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    // Read from DB
+                    int id = dr.GetInt32(0);
+                    string naam = dr.GetString(1);
+                    string adres = dr.GetString(2);
+                    string woonplaats = dr.GetString(3);
+                    string telefoonnummer = dr.GetString(4);
+                    string heeftrijbewijs = dr.GetString(5);
+                    string heeftauto = dr.GetString(6);
+                    string username = dr.GetString(7);
+                    string password = dr.GetString(8);
+                    string email = dr.GetString(9);
+                    int volunid = dr.GetInt32(10);
+                    volunteers.Add(new Volunteer(id, naam, password, email, naam, adres, woonplaats, telefoonnummer, heeftrijbewijs, heeftauto,volunid));
+
+
+                }
+
+
+                return volunteers;
+            }
+            catch (InvalidCastException ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
         //NOG WAT VAAG
 
         //public static bool UpdateVolunteer(Volunteer volun)
@@ -1845,6 +1888,35 @@ namespace Project
                 cmd.Parameters.Add("NewDATUMTIJD", OracleDbType.Varchar2).Value = meeting.Date;
                 cmd.Parameters.Add("NewLOCATIE", OracleDbType.Varchar2).Value = meeting.Location;
 
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
+
+        public bool AddChatmessage(Chat message)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                    "Insert into TCHAT(TIJDSTIP, BERICHT, HULPBEHOEVENDEID, VRIJWILLIGERID,VANHULPBEHOEVENDE) VALUES (:NewTIJDSTIP, :NewBERICHT, :NewHULPBEHOEVENDEID, :NewVRIJWILLIGERID,:NewVANHULPBEHOEVENDE)";
+
+                cmd.Parameters.Add("NewTIJDSTIP", OracleDbType.Date).Value = DateTime.Now;
+                cmd.Parameters.Add("NewBERICHT", OracleDbType.Varchar2).Value = message.Message;
+                cmd.Parameters.Add("NewHULPBEHOEVENDEID", OracleDbType.Int32).Value = message.Client.ClientID;
+                cmd.Parameters.Add("NewVRIJWILLIGERID", OracleDbType.Int32).Value = message.Volunteer.VolunteerID;
+                cmd.Parameters.Add("NewVANHULPBEHOEVENDE", OracleDbType.Int32).Value = message.Sender;
                 cmd.ExecuteNonQuery();
                 return true;
             }

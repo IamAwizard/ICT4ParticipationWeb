@@ -24,6 +24,13 @@ namespace Project
             this.VOG = vog;
         }
 
+        public Volunteer(int id , string username,string password,string email,string name,string adress,string location,string phonenumber,string license,string hascar,int volunid) : base(username,password,email,name,adress,location,phonenumber,license,hascar)
+        {
+            this.UserID = id;
+            this.VolunteerID = volunid;
+        }
+
+
         public int VolunteerID { get; set; }
         public string Photo { get; set; }
         public string VOG { get; set; }

@@ -63,9 +63,9 @@ namespace Project
             throw new NotImplementedException();
         }
 
-        public List<User> GetVolunteers()
+        public List<Volunteer> GetVolunteers()
         {
-            throw new NotImplementedException();
+          return databasehandler.GetAllVolunteers();
         }
 
         public Volunteer ExtendVolunteer(Volunteer volunteer)
