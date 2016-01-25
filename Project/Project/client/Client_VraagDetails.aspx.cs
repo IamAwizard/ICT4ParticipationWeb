@@ -13,6 +13,8 @@ namespace Project
 
         DatabaseHandler databasehandler = new DatabaseHandler();
         ClientHandler clienthandler = new ClientHandler();
+        VolunteerHandler volunteerhandler = new VolunteerHandler();
+        MeetingHandler meetinghandler = new MeetingHandler();
         QuestionHandler questionhandler = new QuestionHandler();
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -88,6 +90,13 @@ namespace Project
                 }
                 if (IsPostBack)
                 {
+                 if(lbox_getquestion.SelectedItem != null)
+                    {
+                        locationdiv.Visible = true;
+                        datedivday.Visible = true;
+                        datedivyear.Visible = true;
+                        datedivmonth.Visible = true;
+                    }
                     errormsg.Visible = false;
                     if (tbox_Question.Text.Length < 3000)
                     {
@@ -137,6 +146,59 @@ namespace Project
             else
             {
                 Response.Redirect("~/client/client_vragen.aspx");
+            }
+        }
+
+        protected void btn_makeappointment_Click(object sender, EventArgs e)
+        {
+            if (lbox_getquestion.SelectedItem != null)
+            {
+                Question question = (Question)Session["Question"];
+                Client currentuser = (Client)Session["currentUser"];
+                Volunteer volun = volunteerhandler.getvolunteer(Convert.ToInt32(lbox_getquestion.SelectedItem.Value));
+                if(tbox_Day.Text != "" && Regex.IsMatch(tbox_Day.Text, @"^\d+$"))
+                {
+                    if(tbox_Year.Text != "" && Regex.IsMatch(tbox_Year.Text, @"^\d+$"))
+                    {
+                        if(tb_location.Text != "")
+                        {
+                            DateTime date = new DateTime(Convert.ToInt32(tbox_Year.Text), Convert.ToInt32(ddl_Month.Text), Convert.ToInt32(tbox_Day.Text));
+                            Meeting meeting = new Meeting(date, tb_location.Text, currentuser, volun);
+                            meetinghandler.addmeeting(meeting);
+                            tbox_Day.Text = "";
+                            tb_location.Text = "";
+                            tbox_Year.Text = "";
+                            datedivday.Visible = false;
+                            datedivmonth.Visible = false;
+                            datedivyear.Visible = false;
+                            locationdiv.Visible = false;
+                            lbox_getquestion.ClearSelection();
+                            errormsgmeeting.ForeColor = System.Drawing.Color.Green;
+                            errormsgmeeting.Text = "Afspraak aangemaakt";
+                            errormsgmeeting.Visible = true;
+                        }
+                        else
+                        {
+                            errormsgmeeting.ForeColor = System.Drawing.Color.Red;
+                            errormsgmeeting.Text = "Geen geldige locatie ingevuld";
+                            errormsgmeeting.Visible = true;
+                        }
+                   
+                    }
+                    else
+                    {
+                        errormsgmeeting.ForeColor = System.Drawing.Color.Red;
+                        errormsgmeeting.Text = "Geen geldige jaar ingevuld";
+                        errormsgmeeting.Visible = true;
+                    }
+                }
+                else
+                {
+                    errormsgmeeting.ForeColor = System.Drawing.Color.Red;
+                    errormsgmeeting.Text = "Geen geldige dag ingevuld";
+                    errormsgmeeting.Visible = true;
+                }
+            
             }
         }
     }

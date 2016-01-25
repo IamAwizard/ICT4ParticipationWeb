@@ -17,7 +17,7 @@ namespace Project
         // Fields
 
         // connectionstring = "User Id=loginname; Password=password;Data Source=localhost";
-        private string connectionstring = "User Id=Participation;Password=Participation;Data Source=localhost:1521";
+        private string connectionstring = "User Id=Proftaak;Password=123;Data Source=localhost:1521";
         private OracleConnection con;
         private OracleCommand cmd;
         private OracleDataReader dr;
@@ -969,6 +969,36 @@ namespace Project
                 cmd.Parameters.Add("NewAANTALVRIJWILLIGERS", OracleDbType.Varchar2).Value = newquestion.VolunteersNeeded;
                 cmd.Parameters.Add("NewVERVOERTYPE", OracleDbType.Varchar2).Value = newquestion.Transport;
                 cmd.Parameters.Add("NewAUTEUR", newquestion.AuthorID);
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+            finally
+            {
+                Disconnect();
+            }
+
+        }
+
+        public bool AddMeeting(Meeting meeting)
+        {
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText =
+                    "Insert into TAFSPRAAK(hulpbehoevendeid, vrijwilligerid, datum, locatie) VALUES (:Newhulpbehoevendeid, :Newvrijwilligerid, :Newdatum, :Newlocatie)";
+
+                cmd.Parameters.Add("Newhulpbehoevendeid", OracleDbType.Int32).Value = meeting.Client.ClientID;
+                cmd.Parameters.Add("Newvrijwilligerid", OracleDbType.Int32).Value = meeting.Volunteer.VolunteerID;
+                cmd.Parameters.Add("Newdatum", OracleDbType.Date).Value = meeting.Date;
+                cmd.Parameters.Add("Newlocatie", OracleDbType.Varchar2).Value = meeting.Location;
 
                 cmd.ExecuteNonQuery();
                 return true;

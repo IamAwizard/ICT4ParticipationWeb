@@ -22,5 +22,16 @@ namespace Project
         {
             return dbm.GetMeetings(client);
         }
+        public void addmeeting(Meeting meeting)
+        {
+            try
+            {
+                dbm.AddMeeting(meeting);
+            }
+            catch
+            {
+                
+            }
+        }
     }
 }

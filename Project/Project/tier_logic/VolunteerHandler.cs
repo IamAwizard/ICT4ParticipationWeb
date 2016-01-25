@@ -127,5 +127,17 @@ namespace Project
 
             databasehandler.UpdateLicense(ID,yesno);
         }
+        public Volunteer getvolunteer(int ID)
+        {
+            try
+            {
+               Volunteer volun = databasehandler.GetVolunteerByID(ID);
+                return volun;
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }
