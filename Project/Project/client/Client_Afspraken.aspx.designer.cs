@@ -13,39 +13,39 @@ namespace Project {
     public partial class Client_Afspraken {
         
         /// <summary>
-        /// lbl_Afspraken control.
+        /// lbl_Meetings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_Afspraken;
+        protected global::System.Web.UI.WebControls.Label lbl_Meetings;
         
         /// <summary>
-        /// lbox_Afspraak control.
+        /// lbox_Meetings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Afspraak;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Meetings;
         
         /// <summary>
-        /// btn_LoadAfspraak control.
+        /// btn_LoadMeeting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_LoadAfspraak;
+        protected global::System.Web.UI.WebControls.Button btn_LoadMeeting;
         
         /// <summary>
-        /// tbox_Afspraak control.
+        /// tbox_Meeting control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Afspraak;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Meeting;
     }
 }

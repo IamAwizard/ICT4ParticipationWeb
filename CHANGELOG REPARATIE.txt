@@ -2,8 +2,8 @@
 > Hulpvraag verwijderen werkt weer
 > Uploaden naar server werkt nu
 > Database opgezet op server
->
->
+> Database is nu lokaal
+> Kan nu gemaakte afspraken inzien
 >
 >
 >

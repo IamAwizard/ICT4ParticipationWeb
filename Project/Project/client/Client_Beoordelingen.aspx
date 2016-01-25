@@ -15,6 +15,7 @@
                 </div>
                 <div class="large-4 columns">
                     <div class="text-center">
+                        <br />
                         <asp:Button ID="btn_LoadBeoordeling" runat="server" Text="Beoordeling bekijken" CssClass="expanded button" />
                         <asp:TextBox ID="tbox_Beoordeling" runat="server"></asp:TextBox>
                     </div>

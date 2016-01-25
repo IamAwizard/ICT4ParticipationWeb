@@ -52,6 +52,10 @@ namespace Project
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the questions for this volunteer;
+        /// </summary>
+        /// <returns></returns>
         public List<Question> GetQuestions()
         {
 
@@ -90,9 +94,9 @@ namespace Project
             return accounthandler.UpdateVolunteer(volunteer);
         }
 
-        public List<Meeting> GetMyAppointments(Volunteer volunteer)
+        public List<Meeting> GetMeetings(Volunteer volunteer)
         {
-            return databasehandler.GetMyAppointments(volunteer);
+            return databasehandler.GetMeetings(volunteer);
         }
 
         public List<Review> GetMyReviews(Volunteer volunteer)

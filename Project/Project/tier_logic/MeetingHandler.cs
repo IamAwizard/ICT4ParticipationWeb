@@ -15,12 +15,12 @@ namespace Project
 
         public List<Meeting> GetVolunteerMeetings(Volunteer volunteer)
         {
-            return null;
+            return dbm.GetMeetings(volunteer);
         }
 
         public List<Meeting> GetClientMeetings(Client client)
         {
-            return null;
+            return dbm.GetMeetings(client);
         }
     }
 }

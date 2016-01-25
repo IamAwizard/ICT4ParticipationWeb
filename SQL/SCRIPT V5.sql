@@ -195,7 +195,7 @@
 	id						number(7)		primary key,
 	hulpbehoevendeid		number(7)		not null,
 	vrijwilligerid			number(7)		not null,
-	datum					varchar2(50)	not null,
+	datum					date			not null,
 	locatie					varchar2(150)	not null,
 	
 	constraint fk_TAFSPRAAK_hulpbehoevendeid foreign key(hulpbehoevendeid)REFERENCES THULPBEHOEVENDE(id) on delete cascade,

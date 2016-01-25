@@ -419,7 +419,7 @@ namespace Project
                         return false;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 return false;
@@ -1301,16 +1301,99 @@ namespace Project
         /// </summary>
         /// <param name="user"></param>
         /// <returns></returns>
-        public List<Meeting>  GetMeetings(User user)
+        public List<Meeting> GetMeetings(User user)
         {
             try
             {
                 List<Meeting> meetings = new List<Meeting>();
                 Connect();
-                return null;
+                if (user is Client)
+                {
+                    Client actualuser = user as Client;
+                    using (cmd = new OracleCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "select * from tafspraak a left join tvrijwilliger v on a.VRIJWILLIGERID = v.ID left join tgebruiker g on v.GEBRUIKERID = g.id left join taccount acc on g.ACCOUNTID = acc.ID where hulpbehoevendeid = :clientid";
+                        cmd.Parameters.Add("clientid", actualuser.ClientID);
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            var meetingid = SafeReadInt(dr, 0);
+                            var clientid = SafeReadInt(dr, 1);
+                            var volunteerid = SafeReadInt(dr, 2);
+                            var date = SafeReadDateTime(dr, 3);
+                            var location = SafeReadString(dr, 4);
+                            var trash = SafeReadInt(dr, 5);
+                            var dateofbirth = SafeReadDateTime(dr, 6);
+                            var profilephoto = SafeReadString(dr, 7);
+                            var vogpath = SafeReadString(dr, 8);
+                            var userid = SafeReadInt(dr, 9);
+                            var trash2 = SafeReadInt(dr, 10);
+                            var givenname = SafeReadString(dr, 11);
+                            var address = SafeReadString(dr, 12);
+                            var city = SafeReadString(dr, 13);
+                            var phonenumber = SafeReadString(dr, 14);
+                            var haslicense = SafeReadString(dr, 15);
+                            var hascar = SafeReadString(dr, 16);
+                            var unsubscribedate = SafeReadDateTime(dr, 17);
+                            var accountid = SafeReadInt(dr, 18);
+                            var thrash3 = SafeReadInt(dr, 19);
+                            var username = SafeReadString(dr, 20);
+                            var password = SafeReadString(dr, 21);
+                            var email = SafeReadString(dr, 22);
+
+                            Volunteer helper = new Volunteer(accountid, username, password, email, userid, givenname, address, city, phonenumber, haslicense, hascar, unsubscribedate, volunteerid, dateofbirth, profilephoto, vogpath);
+                            Meeting toadd = new Meeting(meetingid, actualuser, helper, date, location);
+                            meetings.Add(toadd);
+                        }
+                        return meetings;
+                    }
+                }
+                else
+                {
+                    Volunteer actualuser = user as Volunteer;
+                    using (cmd = new OracleCommand())
+                    {
+                        cmd.Connection = con;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = "select * from tafspraak a left join thulpbehoevende h on a.HULPBEHOEVENDEID = h.ID left join tgebruiker g on h.GEBRUIKERID = g.id left join taccount acc on g.ACCOUNTID = acc.ID where a.hulpbehoevendeid = :volunteerid";
+                        cmd.Parameters.Add("volunteerid", actualuser.VolunteerID);
+                        dr = cmd.ExecuteReader();
+                        while (dr.Read())
+                        {
+                            var meetingid = SafeReadInt(dr, 0);
+                            var clientid = SafeReadInt(dr, 1);
+                            var volunteerid = SafeReadInt(dr, 2);
+                            var date = SafeReadDateTime(dr, 3);
+                            var location = SafeReadString(dr, 4);
+                            var trash = SafeReadInt(dr, 5);
+                            var ovpossible = SafeReadString(dr, 6);
+                            var userid = SafeReadInt(dr, 7);
+                            var trash2 = SafeReadInt(dr, 8);
+                            var givenname = SafeReadString(dr, 9);
+                            var address = SafeReadString(dr, 10);
+                            var city = SafeReadString(dr, 11);
+                            var phonenumber = SafeReadString(dr, 12);
+                            var haslicense = SafeReadString(dr, 13);
+                            var hascar = SafeReadString(dr, 14);
+                            var unsubscribedate = SafeReadDateTime(dr, 15);
+                            var accountid = SafeReadInt(dr, 16);
+                            var thrash3 = SafeReadInt(dr, 17);
+                            var username = SafeReadString(dr, 18);
+                            var password = SafeReadString(dr, 19);
+                            var email = SafeReadString(dr, 20);
+
+                            Client helper = new Client(accountid, username, password, email, userid, givenname, address, city, phonenumber, haslicense, hascar, clientid, ovpossible, unsubscribedate);
+                            Meeting toadd = new Meeting(meetingid, helper, actualuser, date, location);
+                            meetings.Add(toadd);
+                        }
+                        return meetings;
+                    }
+                }
 
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 return null;
@@ -1901,39 +1984,6 @@ namespace Project
                     var location = dr.GetString(2);
 
                     returnlist.Add(new Meeting(client, GetUserNoConnect(volunid) as Volunteer, Convert.ToDateTime(datetime), location));
-                }
-                return returnlist;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return returnlist;
-            }
-            finally
-            {
-                Disconnect();
-            }
-        }
-
-        public List<Meeting> GetMyAppointments(Volunteer volun)
-        {
-            List<Meeting> returnlist = new List<Meeting>();
-            try
-            {
-                Connect();
-                cmd = new OracleCommand();
-                cmd.Connection = con;
-                cmd.CommandText = "SELECT CLIENT, DATUMTIJD, LOCATIE FROM TAFSPRAAK WHERE VOLUNTEER = :newUSERID";
-                cmd.CommandType = CommandType.Text;
-                cmd.Parameters.Add("newUSERID", OracleDbType.Varchar2).Value = volun.UserID;
-                dr = cmd.ExecuteReader();
-                while (dr.Read())
-                {
-                    var clientid = dr.GetInt32(0);
-                    var datetime = dr.GetString(1);
-                    var location = dr.GetString(2);
-
-                    returnlist.Add(new Meeting(GetUserNoConnect(clientid) as Client, volun as Volunteer, Convert.ToDateTime(datetime), location));
                 }
                 return returnlist;
             }

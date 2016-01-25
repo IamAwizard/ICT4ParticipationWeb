@@ -8,23 +8,20 @@ namespace Project
     class ClientHandler
     {
         // Fields
+        MeetingHandler meetinghandler;
         QuestionHandler questionhandler;
         ReviewHandler reviewhandler;
         AccountHandler accounthandler;
-        DatabaseHandler databasehandler = new DatabaseHandler();
+        DatabaseHandler databasehandler;
 
-        // Constructor   
-        public ClientHandler(Client activeuser)
+        // Constructor
+        public ClientHandler()
         {
+            meetinghandler = new MeetingHandler();
             questionhandler = new QuestionHandler();
             reviewhandler = new ReviewHandler();
             accounthandler = new AccountHandler();
-
-            CurrentUser = activeuser;
-        }
-
-        public ClientHandler()
-        {
+            databasehandler = new DatabaseHandler();
         }
 
         // Properties
@@ -76,9 +73,13 @@ namespace Project
             throw new NotImplementedException();
         }
 
-        public List<Meeting> GetMeetings()
+        /// <summary>
+        /// Gets the meetings for this client
+        /// </summary>
+        /// <returns></returns>
+        public List<Meeting> GetMeetings(Client client)
         {
-            throw new NotImplementedException();
+            return meetinghandler.GetClientMeetings(client);
         }
 
         public List<Review> GetReviews()

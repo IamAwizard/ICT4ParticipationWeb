@@ -52,6 +52,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Oracle.DataAccess, Version=2.112.2.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=AMD64" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -132,6 +134,7 @@
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="tier_data\ADMethodsAccountManagement.cs" />
     <Compile Include="tier_logic\AccountHandler.cs" />
     <Compile Include="tier_logic\AdminHandler.cs" />
     <Compile Include="tier_logic\ChatHandler.cs" />
