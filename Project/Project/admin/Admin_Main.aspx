@@ -25,7 +25,7 @@
                 </div>
                 <div class="large-4 columns">
                     <br />
-                    <asp:Button ID="btn_DeleteReview" runat="server" Text="Verwijder beoordeling" CssClass="expanded alert button" />
+                    <asp:Button ID="btn_DeleteReview" runat="server" Text="Verwijder beoordeling" CssClass="expanded alert button" OnClick="btn_DeleteReview_Click" />
                 </div>
             </div>
         </div>

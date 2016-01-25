@@ -35,12 +35,18 @@ namespace Project
 
         public bool DeleteReview(Review review)
         {
-            throw new NotImplementedException();
+            if (reviewhandler.DeleteReview(review))
+            {
+                return true;
+            }else
+            {
+                return false;
+            }
         }
 
         public List<Review> GetReviews()
         {
-            throw new NotImplementedException();
+            return reviewhandler.GetAllReviews();
         }
 
         public List<Question> GetQuestions()
@@ -51,6 +57,11 @@ namespace Project
         public Question GetQuestionByID(int id)
         {
             return questionhandler.GetQuestionByIDCached(id);
+        }
+
+        public Review GetReviewByID(int id)
+        {
+            return reviewhandler.GetReviewByIDCached(id);
         }
     }
 }

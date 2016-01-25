@@ -50,6 +50,11 @@ namespace Project
             lbox_Questions.DataTextField = "FormattedForVolunteer";
             lbox_Questions.DataValueField = "ID";
             lbox_Questions.DataBind();
+            lbox_Reviews.Items.Clear();
+            lbox_Reviews.DataSource = adminhandler.GetReviews();
+            lbox_Reviews.DataTextField = "Comments";
+            lbox_Reviews.DataValueField = "ID";
+            lbox_Reviews.DataBind();
           
         }
 
@@ -61,6 +66,24 @@ namespace Project
             {
                 int id = Convert.ToInt32(lbox_Questions.SelectedItem.Value);
                 Session["QuestionID"] = id;
+            }
+
+            if(lbox_Reviews.SelectedItem != null)
+            {
+                int id = Convert.ToInt32(lbox_Reviews.SelectedItem.Value);
+                Session["ReviewID"] = id;
+            }
+        }
+
+        protected void btn_DeleteReview_Click(object sender, EventArgs e)
+        {
+            if (Session["ReviewID"] != null)
+            {
+                int id = Convert.ToInt32(Session["ReviewID"]);
+                Review r = adminhandler.GetReviewByID(id);
+                adminhandler.DeleteReview(r);
+                Response.Redirect("~/admin/admin_Main.aspx");
+
             }
         }
     }

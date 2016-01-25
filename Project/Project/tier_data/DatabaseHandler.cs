@@ -17,7 +17,7 @@ namespace Project
         // Fields
 
         // connectionstring = "User Id=loginname; Password=password;Data Source=localhost";
-        private string connectionstring = "User Id=Proftaak;Password=123;Data Source=localhost:1521";
+        private string connectionstring = "User Id=System;Password=shadow;Data Source=localhost:1521";
         private OracleConnection con;
         private OracleCommand cmd;
         private OracleDataReader dr;
@@ -1618,8 +1618,8 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandText =
-                   "DELETE FROM TREVIEW WHERE REVIEWID = " + reviewID;
-
+                   "DELETE FROM TREVIEW WHERE REVIEWID = :newID";
+                cmd.Parameters.Add("newID", reviewID);
                 cmd.ExecuteNonQuery();
                 return true;
             }

@@ -9,13 +9,20 @@ namespace Project
     {
         // Fields
         DatabaseHandler databasehandler;
+        private List<Review> reviews; 
         // Constructor
         public ReviewHandler()
         {
             databasehandler = new DatabaseHandler();
         }
         // Properties
-        public List<Review> ReviewList { get; set; }
+        public List<Review> ReviewList
+        {
+            get
+            {
+                return reviews;
+            }
+        }
         // Methodes
         public bool AddReview(Review review)
         {
@@ -41,7 +48,21 @@ namespace Project
 
         private void Synchronize()
         {
-            ReviewList = databasehandler.GetAllReviews();
+            reviews = databasehandler.GetAllReviews();
+        }
+
+        public Review GetReviewByIDCached(int reviewid)
+        {
+            Synchronize();
+            try
+            {
+                return reviews.Find(x => x.ID == reviewid);
+            }
+            catch (NullReferenceException ex)
+            {
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                return null;
+            }
         }
     }
 }
