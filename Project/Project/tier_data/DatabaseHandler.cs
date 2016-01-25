@@ -1618,7 +1618,7 @@ namespace Project
                 cmd = new OracleCommand();
                 cmd.Connection = con;
                 cmd.CommandText =
-                   "DELETE FROM TREVIEW WHERE REVIEWID = :newID";
+                   "DELETE FROM TREVIEW WHERE ID = :newID";
                 cmd.Parameters.Add("newID", reviewID);
                 cmd.ExecuteNonQuery();
                 return true;
