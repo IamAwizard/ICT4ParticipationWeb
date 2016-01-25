@@ -163,7 +163,7 @@ namespace Project
                         if(tb_location.Text != "")
                         {
                             DateTime date = new DateTime(Convert.ToInt32(tbox_Year.Text), Convert.ToInt32(ddl_Month.Text), Convert.ToInt32(tbox_Day.Text));
-                            Meeting meeting = new Meeting(date, tb_location.Text, currentuser, volun);
+                            Meeting meeting = new Meeting(currentuser, volun, date, tb_location.Text);
                             meetinghandler.addmeeting(meeting);
                             tbox_Day.Text = "";
                             tb_location.Text = "";
