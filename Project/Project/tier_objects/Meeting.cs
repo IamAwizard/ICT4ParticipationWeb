@@ -11,10 +11,10 @@ namespace Project
 
         public Meeting(Client client, Volunteer volunteer, DateTime dateTime, string location)
         {
-            Client = client;
-            Volunteer = volunteer;
-            this.dateTime = dateTime;
-            Location = location;
+            this.Client = client;
+            this.Volunteer = volunteer;
+            this.Date = dateTime;
+            this.Location = location;
         }
 
         public Meeting(int id, Client client, Volunteer volunteer, DateTime dateTime, string location)

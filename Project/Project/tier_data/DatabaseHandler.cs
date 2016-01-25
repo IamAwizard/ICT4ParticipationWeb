@@ -1387,7 +1387,7 @@ namespace Project
                     {
                         cmd.Connection = con;
                         cmd.CommandType = CommandType.Text;
-                        cmd.CommandText = "select * from tafspraak a left join thulpbehoevende h on a.HULPBEHOEVENDEID = h.ID left join tgebruiker g on h.GEBRUIKERID = g.id left join taccount acc on g.ACCOUNTID = acc.ID where a.hulpbehoevendeid = :volunteerid";
+                        cmd.CommandText = "select * from tafspraak a left join thulpbehoevende h on a.HULPBEHOEVENDEID = h.ID left join tgebruiker g on h.GEBRUIKERID = g.id left join taccount acc on g.ACCOUNTID = acc.ID where a.vrijwilligerid = :volunteerid";
                         cmd.Parameters.Add("volunteerid", actualuser.VolunteerID);
                         dr = cmd.ExecuteReader();
                         while (dr.Read())
