@@ -66,9 +66,23 @@ namespace Project
         {
             return questions.GetQuestionByIDCached(questionid);
         }
+        /// <summary>
+        /// Gets all clients
+        /// </summary>
+        /// <returns></returns>
         public List<Client> GetClients()
         {
-            throw new NotImplementedException();
+            return databasehandler.GetAllClients();
+        }
+
+        /// <summary>
+        ///  Gets a single client
+        /// </summary>
+        /// <param name="ClientID"></param>
+        /// <returns></returns>
+        public Client GetClient(int clientid)
+        {
+            return databasehandler.GetClientByID(clientid);
         }
 
         public Availability GetSchedule()
@@ -127,7 +141,7 @@ namespace Project
 
             databasehandler.UpdateLicense(ID,yesno);
         }
-        public Volunteer getvolunteer(int ID)
+        public Volunteer GetVolunteer(int ID)
         {
             try
             {

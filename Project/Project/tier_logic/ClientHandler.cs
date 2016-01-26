@@ -90,8 +90,7 @@ namespace Project
         {
             try
             {
-                string username = databasehandler.GetClientUserName(ID);
-                return username;
+                return databasehandler.GetClientUserName(ID);
             }
             catch (Exception ex)
             {
@@ -104,8 +103,7 @@ namespace Project
             List<Transport> transports = new List<Transport>();
             try
             {
-                transports = databasehandler.GetTransports();
-                return transports;
+                return databasehandler.GetTransports();
             }
             catch (Exception ex)
             {
@@ -118,8 +116,7 @@ namespace Project
             int ID = 0;
             try
             {
-                ID = databasehandler.GetSingleTransport(description);
-                return ID;
+                return databasehandler.GetSingleTransport(description);
             }
             catch (Exception ex)
             {

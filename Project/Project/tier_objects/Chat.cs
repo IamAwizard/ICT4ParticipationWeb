@@ -38,7 +38,26 @@ namespace Project
 
         public override string ToString()
         {
-            return "Tijd: " + TimeStamp + " " + "Bericht: " + Message;
+            if (Sender == 1)
+            {
+                return $"{TimeStamp.ToShortTimeString()} - {Client.Username}: {Message}";
+                //return "Tijd: " + TimeStamp.ToShortTimeString() + " " + "Bericht: " + Message;
+            }
+            else
+            {
+                return $"{TimeStamp.ToShortTimeString()} - {Volunteer.Username}: {Message}";
+            }
+        }
+
+        public string FormattedForClients(Client client, Volunteer volun)
+        {
+            if(Sender == 1)
+            {
+                return $"{TimeStamp.ToShortTimeString()} - {client.Username}: {Message}";
+            }
+            {
+                return $"{TimeStamp.ToShortTimeString()} - {volun.Username}: {Message}";
+            }
         }
     }
 }

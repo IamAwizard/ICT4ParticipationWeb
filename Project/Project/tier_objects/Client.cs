@@ -18,6 +18,13 @@ namespace Project
         {
             this.OVpossible = ovpossible;
         }
+
+        public Client(int id, string username, string password, string email, string name, string adress, string location, string phonenumber, string license, string hascar, int clientid) : base(username,password,email,name,adress,location,phonenumber,license,hascar)
+        {
+            this.UserID = id;
+            this.ClientID = clientid;
+        }
+
         public int ClientID { get; set; }
         public string OVpossible { get; set; }
     }

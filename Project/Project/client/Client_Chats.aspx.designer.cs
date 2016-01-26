@@ -13,13 +13,13 @@ namespace Project {
     public partial class Client_Chats {
         
         /// <summary>
-        /// lbox_Clients control.
+        /// lbox_Volunteers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox lbox_Clients;
+        protected global::System.Web.UI.WebControls.ListBox lbox_Volunteers;
         
         /// <summary>
         /// lbl_chatbox control.
@@ -31,31 +31,31 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_chatbox;
         
         /// <summary>
-        /// ScriptManager2 control.
+        /// ScriptManager_Refresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager2;
+        protected global::System.Web.UI.ScriptManager ScriptManager_Refresh;
         
         /// <summary>
-        /// UpdatePanel1 control.
+        /// UpdatePanel_Refresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_Refresh;
         
         /// <summary>
-        /// Timer1 control.
+        /// Timer_Refresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.Timer Timer1;
+        protected global::System.Web.UI.Timer Timer_Refresh;
         
         /// <summary>
         /// lbox_chat control.
@@ -76,12 +76,12 @@ namespace Project {
         protected global::System.Web.UI.WebControls.TextBox tbox_Bericht;
         
         /// <summary>
-        /// btn_Loadbericht control.
+        /// btn_SendMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Loadbericht;
+        protected global::System.Web.UI.WebControls.Button btn_SendMessage;
     }
 }

@@ -33,7 +33,7 @@ namespace Project
 
         }
 
-        public List<Chat> getchat(Client client, Volunteer volunteer)
+        public List<Chat> GetChat(Client client, Volunteer volunteer)
         {
             return db.GetChat(client, volunteer);
         }

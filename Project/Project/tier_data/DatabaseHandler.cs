@@ -17,7 +17,7 @@ namespace Project
         // Fields
 
         // connectionstring = "User Id=loginname; Password=password;Data Source=localhost";
-        private string connectionstring = "User Id=Proftaak;Password=123;Data Source=localhost:1521";
+        private string connectionstring = "User Id=Participation;Password=Participation;Data Source=localhost:1521";
         private OracleConnection con;
         private OracleCommand cmd;
         private OracleDataReader dr;
@@ -1548,8 +1548,11 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "SELECT BERICHT,tijdstip,VANHULPBEHOEVENDE FROM TCHAT WHERE HULPBEHOEVENDEID = " + client.ClientID + " AND VRIJWILLIGERID = " + volunteer.VolunteerID;
-                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = "SELECT * FROM(SELECT BERICHT,tijdstip,VANHULPBEHOEVENDE FROM TCHAT WHERE HULPBEHOEVENDEID = :clientid AND VRIJWILLIGERID = :volunteerid ORDER BY TIJDSTIP DESC) WHERE ROWNUM <= 10 ORDER BY ROWNUM DESC";
+                cmd.Parameters.Add("clientid", client.ClientID);
+                cmd.Parameters.Add("volunteerid", volunteer.VolunteerID);
+
+               cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
@@ -1783,6 +1786,10 @@ namespace Project
             }
         }
 
+        /// <summary>
+        /// Gets all the volunteers
+        /// </summary>
+        /// <returns></returns>
         public List<Volunteer> GetAllVolunteers()
         {
             List<Volunteer> volunteers = new List<Volunteer>();
@@ -1791,7 +1798,7 @@ namespace Project
                 Connect();
                 cmd = new OracleCommand();
                 cmd.Connection = con;
-                cmd.CommandText = "	select G.ID,G.naam,G.adres,G.woonplaats,G.telefoonnummer,G.heeftrijbewijs,G.heeftauto,a.GEBRUIKERSNAAM,a.WACHTWOORD,a.EMAIL,V.id from TGEBRUIKER G,Tvrijwilliger V,TACCOUNT A where V.GEBRUIKERID = G.id AND G.accountID = A.ID";
+                cmd.CommandText = "select G.ID,G.naam,G.adres,G.woonplaats,G.telefoonnummer,G.heeftrijbewijs,G.heeftauto,a.GEBRUIKERSNAAM,a.WACHTWOORD,a.EMAIL,V.id from TGEBRUIKER G,Tvrijwilliger V,TACCOUNT A where V.GEBRUIKERID = G.id AND G.accountID = A.ID";
                 cmd.CommandType = CommandType.Text;
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
@@ -1809,11 +1816,7 @@ namespace Project
                     string email = dr.GetString(9);
                     int volunid = dr.GetInt32(10);
                     volunteers.Add(new Volunteer(id, naam, password, email, naam, adres, woonplaats, telefoonnummer, heeftrijbewijs, heeftauto,volunid));
-
-
                 }
-
-
                 return volunteers;
             }
             catch (InvalidCastException ex)
@@ -1827,51 +1830,49 @@ namespace Project
             }
         }
 
-        //NOG WAT VAAG
-
-        //public static bool UpdateVolunteer(Volunteer volun)
-        //{
-        //    try
-        //    {
-        //        Connect();
-        //        cmd = new OracleCommand();
-        //        cmd.Connection = con;
-        //        cmd.CommandText =
-        //           "UPDATE TVOLUNTEER SET RIJBEWIJS = :newRIJBEWIJS,  VOG = :newVOG, FOTO = :newFOTO WHERE USERID = " + volun.UserID;
-
-        //        if(volun.License == "true")
-        //            cmd.Parameters.Add("newRIJBEWIJS", OracleDbType.Varchar2).Value = "JA";
-        //        else
-        //            cmd.Parameters.Add("newRIJBEWIJS", OracleDbType.Varchar2).Value = "NEE";
-
-        //        cmd.Parameters.Add("newVOG", OracleDbType.Varchar2).Value = volun.VOG;
-        //        cmd.Parameters.Add("newFOTO", OracleDbType.Varchar2).Value = volun.Photo;
-        //        cmd.ExecuteNonQuery();
-
-        //        cmd = new OracleCommand();
-        //        cmd.Connection = con;
-        //        cmd.CommandText =
-        //           "INSERT INTO TBESCHIKBAARHEID (dagnaam,dagdeel,vrijwilligerid) VALUES(:Newdagnaam,:Newdagdeel,:Newvrijwilligerid)";
-
-        //        cmd.Parameters.Add("dagnaam", OracleDbType.Varchar2).Value = 
-        //        cmd.Parameters.Add("dagdeel", OracleDbType.Varchar2).Value = volun.
-        //        cmd.Parameters.Add("vrijwilligerid", OracleDbType.Int32).Value = volun.ID
-
-
-
-        //        cmd.ExecuteNonQuery();
-        //        return true;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        MessageBox.Show(ex.Message);
-        //        return false;
-        //    }
-        //    finally
-        //    {
-        //        Disconnect();
-        //    }
-        //}
+        /// <summary>
+        /// Gets all the clients
+        /// </summary>
+        /// <returns></returns>
+        public List<Client> GetAllClients()
+        {
+            List<Client> clients = new List<Client>();
+            try
+            {
+                Connect();
+                cmd = new OracleCommand();
+                cmd.Connection = con;
+                cmd.CommandText = "select G.ID, G.naam,G.adres,G.woonplaats,G.telefoonnummer,G.heeftrijbewijs,G.heeftauto,a.GEBRUIKERSNAAM,a.WACHTWOORD,a.EMAIL,H.id from TGEBRUIKER G,THULPBEHOEVENDE H,TACCOUNT A where H.GEBRUIKERID = G.id AND G.accountID = A.ID";
+                cmd.CommandType = CommandType.Text;
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    // Read from DB
+                    int id = dr.GetInt32(0);
+                    string naam = dr.GetString(1);
+                    string adres = dr.GetString(2);
+                    string woonplaats = dr.GetString(3);
+                    string telefoonnummer = dr.GetString(4);
+                    string heeftrijbewijs = dr.GetString(5);
+                    string heeftauto = dr.GetString(6);
+                    string username = dr.GetString(7);
+                    string password = dr.GetString(8);
+                    string email = dr.GetString(9);
+                    int clientid = dr.GetInt32(10);
+                    clients.Add(new Client(id, naam, password, email, naam, adres, woonplaats, telefoonnummer, heeftrijbewijs, heeftauto, clientid));
+                }
+                return clients;
+            }
+            catch (InvalidCastException ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return null;
+            }
+            finally
+            {
+                Disconnect();
+            }
+        }
 
         public bool AddAppointment(Meeting meeting)
         {

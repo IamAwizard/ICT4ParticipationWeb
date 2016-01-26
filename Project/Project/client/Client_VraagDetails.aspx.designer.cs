@@ -193,85 +193,22 @@ namespace Project {
         protected global::System.Web.UI.WebControls.TextBox tb_location;
         
         /// <summary>
-        /// datedivday control.
+        /// lbl_DatePicker control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datedivday;
+        protected global::System.Web.UI.WebControls.Label lbl_DatePicker;
         
         /// <summary>
-        /// lbl_dag control.
+        /// CalenderTest control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_dag;
-        
-        /// <summary>
-        /// tbox_Day control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Day;
-        
-        /// <summary>
-        /// datedivmonth control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datedivmonth;
-        
-        /// <summary>
-        /// lbl_month control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_month;
-        
-        /// <summary>
-        /// ddl_Month control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddl_Month;
-        
-        /// <summary>
-        /// datedivyear control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl datedivyear;
-        
-        /// <summary>
-        /// lbl_year control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lbl_year;
-        
-        /// <summary>
-        /// tbox_Year control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Year;
+        protected global::System.Web.UI.WebControls.Calendar CalenderTest;
         
         /// <summary>
         /// btn_makeappointment control.

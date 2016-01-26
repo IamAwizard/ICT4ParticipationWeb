@@ -31,6 +31,33 @@ namespace Project {
         protected global::System.Web.UI.WebControls.Label lbl_chatbox;
         
         /// <summary>
+        /// ScriptManager_Refresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.ScriptManager ScriptManager_Refresh;
+        
+        /// <summary>
+        /// UpdatePanel_Refresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel UpdatePanel_Refresh;
+        
+        /// <summary>
+        /// Timer_Refresh control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.Timer Timer_Refresh;
+        
+        /// <summary>
         /// lbox_chat control.
         /// </summary>
         /// <remarks>
@@ -40,21 +67,21 @@ namespace Project {
         protected global::System.Web.UI.WebControls.ListBox lbox_chat;
         
         /// <summary>
-        /// tbox_Bericht control.
+        /// tbox_Message control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox tbox_Bericht;
+        protected global::System.Web.UI.WebControls.TextBox tbox_Message;
         
         /// <summary>
-        /// btn_Loadbericht control.
+        /// btn_SendMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btn_Loadbericht;
+        protected global::System.Web.UI.WebControls.Button btn_SendMessage;
     }
 }

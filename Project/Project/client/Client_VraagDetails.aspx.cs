@@ -87,15 +87,13 @@ namespace Project
                     {
                         tbox_VolunteerCount.Text = "1";
                     }
+                    CalenderTest.SelectedDate = DateTime.Today;
                 }
                 if (IsPostBack)
                 {
-                 if(lbox_getquestion.SelectedItem != null)
+                    if (lbox_getquestion.SelectedItem != null)
                     {
                         locationdiv.Visible = true;
-                        datedivday.Visible = true;
-                        datedivyear.Visible = true;
-                        datedivmonth.Visible = true;
                     }
                     errormsg.Visible = false;
                     if (tbox_Question.Text.Length < 3000)
@@ -155,50 +153,26 @@ namespace Project
             {
                 Question question = (Question)Session["Question"];
                 Client currentuser = (Client)Session["currentUser"];
-                Volunteer volun = volunteerhandler.getvolunteer(Convert.ToInt32(lbox_getquestion.SelectedItem.Value));
-                if(tbox_Day.Text != "" && Regex.IsMatch(tbox_Day.Text, @"^\d+$"))
+                Volunteer volun = volunteerhandler.GetVolunteer(Convert.ToInt32(lbox_getquestion.SelectedItem.Value));
+                if (tb_location.Text != "")
                 {
-                    if(tbox_Year.Text != "" && Regex.IsMatch(tbox_Year.Text, @"^\d+$"))
-                    {
-                        if(tb_location.Text != "")
-                        {
-                            DateTime date = new DateTime(Convert.ToInt32(tbox_Year.Text), Convert.ToInt32(ddl_Month.Text), Convert.ToInt32(tbox_Day.Text));
-                            Meeting meeting = new Meeting(currentuser, volun, date, tb_location.Text);
-                            meetinghandler.addmeeting(meeting);
-                            tbox_Day.Text = "";
-                            tb_location.Text = "";
-                            tbox_Year.Text = "";
-                            datedivday.Visible = false;
-                            datedivmonth.Visible = false;
-                            datedivyear.Visible = false;
-                            locationdiv.Visible = false;
-                            lbox_getquestion.ClearSelection();
-                            errormsgmeeting.ForeColor = System.Drawing.Color.Green;
-                            errormsgmeeting.Text = "Afspraak aangemaakt";
-                            errormsgmeeting.Visible = true;
-                        }
-                        else
-                        {
-                            errormsgmeeting.ForeColor = System.Drawing.Color.Red;
-                            errormsgmeeting.Text = "Geen geldige locatie ingevuld";
-                            errormsgmeeting.Visible = true;
-                        }
-                   
-                    }
-                    else
-                    {
-                        errormsgmeeting.ForeColor = System.Drawing.Color.Red;
-                        errormsgmeeting.Text = "Geen geldige jaar ingevuld";
-                        errormsgmeeting.Visible = true;
-                    }
+                    DateTime testdate = CalenderTest.SelectedDate;
+                    Meeting meeting = new Meeting(currentuser, volun, testdate, tb_location.Text);
+                    meetinghandler.addmeeting(meeting);
+                    tb_location.Text = "";
+                    locationdiv.Visible = false;
+                    lbox_getquestion.ClearSelection();
+                    errormsgmeeting.ForeColor = System.Drawing.Color.Green;
+                    errormsgmeeting.Text = "Afspraak aangemaakt";
+                    errormsgmeeting.Visible = true;
                 }
                 else
                 {
                     errormsgmeeting.ForeColor = System.Drawing.Color.Red;
-                    errormsgmeeting.Text = "Geen geldige dag ingevuld";
+                    errormsgmeeting.Text = "Geen geldige locatie ingevuld";
                     errormsgmeeting.Visible = true;
                 }
-            
+
             }
         }
     }
