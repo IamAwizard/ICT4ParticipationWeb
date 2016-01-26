@@ -17,6 +17,7 @@ namespace Project
         {
             CheckIfUserAllowed();
             Page.MaintainScrollPositionOnPostBack = true;
+            ScriptManager_Refresh.RegisterAsyncPostBackControl(Timer_Refresh);
             if (!IsPostBack)
             {
                 LoadClients();

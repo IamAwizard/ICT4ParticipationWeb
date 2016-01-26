@@ -9,11 +9,11 @@ MUST>	(Lichte) Integratie met active directory
 	-	Wanneer je nu registreert, krijg je ook een account in active directory
 	-	Hiermee kun je inloggen op de workstations door gebruik van gebruikersnaam (dus niet email!) en wachtwoord.
 MUST>	Beoordelingenkunnen nu verwijderd worden
+MUST>	Chatten
 
 Overig:
 Infra>	Database opgezet op server tbv snelheid
 
 Niet Gemaakt:
 MUST> 	Beoordeling plaatsen
-MUST>	Chatten
 MUST>	Port Forwarding
