@@ -329,7 +329,7 @@ namespace Project
             {
                 try
                 {
-                    if (FU_UploadVog.PostedFile.ContentType == "application/pdf")
+                    if (FU_UploadVog.PostedFile.ContentType == "application/pdf" || FU_UploadVog.PostedFile.ContentType == "application/x-download")
                     {
                         if (FU_UploadVog.PostedFile.ContentLength < (MaxVOGFileSize * 1000))
                         {
